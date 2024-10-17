@@ -1,0 +1,9 @@
+﻿<Application x:Class="WPF_Koleje_Studenckie_project_Jakub_Bak.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:WPF_Koleje_Studenckie_project_Jakub_Bak"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>
