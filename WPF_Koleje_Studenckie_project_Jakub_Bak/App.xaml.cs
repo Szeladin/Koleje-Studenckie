@@ -7,6 +7,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
+    //comment
 
     public class Train
     {
