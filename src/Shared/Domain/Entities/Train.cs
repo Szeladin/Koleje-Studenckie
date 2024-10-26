@@ -1,32 +1,31 @@
-﻿using System.Configuration;
-using System.Data;
-using System.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace WPF_Koleje_Studenckie_project_Jakub_Bak
+namespace Domain.Entities
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    //comment nice
     public class Train
     {
+
         // Properties
         public string Name { get; set; }
         public int MaxSpeed { get; private set; }
-        public int CurrentSpeed { get; private set; }
+        public int CurrentSpeed { get; private set; } = 0;
         public int CarriageCount { get; private set; }
-        public bool IsMoving { get; private set; }
+        public bool IsMoving { get; private set; } = false;
+        public string Text { get; }
+        public int V1 { get; }
+        public int V2 { get; }
 
-        // Constructor
+        // Constructors
         public Train(string name, int maxSpeed, int carriageCount)
         {
             Name = name;
             MaxSpeed = maxSpeed;
             CarriageCount = carriageCount;
-            CurrentSpeed = 0;
-            IsMoving = false;
         }
-
         // Methods
         public void StartEngine()
         {
@@ -94,10 +93,4 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak
             Console.WriteLine($"Is Moving: {IsMoving}");
         }
     }
-
-    public partial class App : Application
-    {
-
-    }
-
 }
