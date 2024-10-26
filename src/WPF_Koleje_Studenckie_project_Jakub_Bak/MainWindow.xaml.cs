@@ -1,13 +1,4 @@
-﻿using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace WPF_Koleje_Studenckie_project_Jakub_Bak
 {
@@ -23,7 +14,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak
 
         private void Button_Click_Adm(object sender, RoutedEventArgs e)
         {
-            AdminWindow adminWindow = new AdminWindow();
+            AdminWindow adminWindow = new();
             adminWindow.Show();
         }
 
@@ -37,6 +28,4 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak
 
         }
     }
-    // 
-
 }
