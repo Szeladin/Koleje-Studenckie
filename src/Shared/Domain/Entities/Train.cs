@@ -1,32 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace Domain.Entities
 {
     public class Train
     {
-
-        // Properties
         public string Name { get; set; }
         public int MaxSpeed { get; private set; }
         public int CurrentSpeed { get; private set; } = 0;
         public int CarriageCount { get; private set; }
         public bool IsMoving { get; private set; } = false;
-        public string Text { get; }
-        public int V1 { get; }
-        public int V2 { get; }
 
-        // Constructors
+        [JsonConstructor]
         public Train(string name, int maxSpeed, int carriageCount)
         {
             Name = name;
             MaxSpeed = maxSpeed;
             CarriageCount = carriageCount;
+            CurrentSpeed = 0;
+            IsMoving = false;
         }
-        // Methods
         public void StartEngine()
         {
             Console.WriteLine($"{Name} engine started.");
