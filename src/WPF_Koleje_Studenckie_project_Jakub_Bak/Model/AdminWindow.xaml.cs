@@ -1,6 +1,8 @@
 using System.Windows;
 using System.Collections.ObjectModel;
 using Domain.Entities;
+using System.IO;
+using System.Text.Json;
 
 namespace WPF_Koleje_Studenckie_project_Jakub_Bak
 {
@@ -14,7 +16,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak
         public AdminWindow()
         {
             InitializeComponent();
-            trains = [];
+            trains = App.Trains;
             TrainListView.ItemsSource = trains;
         }
 
@@ -26,6 +28,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak
             if (addTrainWindow.NewTrain != null)
             {
                 trains.Add(addTrainWindow.NewTrain);
+                SaveTrains();
             }
         }
 
@@ -34,6 +37,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak
             if (TrainListView.SelectedItem is Train selectedTrain)
             {
                 trains.Remove(selectedTrain);
+                SaveTrains();
             }
             else
             {
@@ -43,17 +47,32 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak
 
         private void UpdateTrain_Click(object sender, RoutedEventArgs e)
         {
-            //UpdateTrainWindow updateTrainWndow = new UpdateTrainWindow();
-            //updateTrainWndow.ShowDialog();
-            //if (TrainListView.SelectedItem is Train selectedTrain)
-            //{
-                //selectedTrain.Name = $"Updated {selectedTrain.Name}";
-                //TrainListView.Items.Refresh();
-            //}
-            //else
-            //{
-                //MessageBox.Show("Please select a train to update.", "No Train Selected", MessageBoxButton.OK, MessageBoxImage.Warning);
-            //}
+            if (TrainListView.SelectedItem is Train selectedTrain)
+            {
+                AddTrainWindow addTrainWindow = new();
+                addTrainWindow.NameTextBox.Text = selectedTrain.Name;
+                addTrainWindow.MaxSpeedTextBox.Text = selectedTrain.MaxSpeed.ToString();
+                addTrainWindow.CarriageCountTextBox.Text = selectedTrain.CarriageCount.ToString();
+                addTrainWindow.ShowDialog();
+
+                if (addTrainWindow.NewTrain != null)
+                {
+                    int index = trains.IndexOf(selectedTrain);
+                    trains[index] = addTrainWindow.NewTrain;
+                    SaveTrains();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a train to update.", "No Train Selected", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
+
+        private void SaveTrains()
+        {
+            string json = JsonSerializer.Serialize(App.Trains, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(App.GetDataFilePath(), json);
+        }
+
     }
 }
