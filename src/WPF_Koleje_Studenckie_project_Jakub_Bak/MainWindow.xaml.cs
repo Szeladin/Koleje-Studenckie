@@ -14,8 +14,8 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak
 
         private void Button_Click_Adm(object sender, RoutedEventArgs e)
         {
-            AdminWindow adminWindow = new();
-            adminWindow.Show();
+            AdminPanelWindow adminPanelWindow = new AdminPanelWindow();
+            adminPanelWindow.Show();
         }
 
         private void Button_Click_Map(object sender, RoutedEventArgs e)

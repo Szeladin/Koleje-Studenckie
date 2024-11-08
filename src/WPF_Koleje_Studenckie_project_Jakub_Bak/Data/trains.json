@@ -1,12 +1,5 @@
 [
   {
-    "Name": "Pandora",
-    "MaxSpeed": 230,
-    "CurrentSpeed": 0,
-    "CarriageCount": 10,
-    "IsMoving": false
-  },
-  {
     "Name": "Speed",
     "MaxSpeed": 400,
     "CurrentSpeed": 0,
