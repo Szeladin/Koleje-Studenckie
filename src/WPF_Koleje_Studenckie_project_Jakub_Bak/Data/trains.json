@@ -3,7 +3,21 @@
     "Name": "Speed",
     "MaxSpeed": 400,
     "CurrentSpeed": 0,
+    "CarriageCount": 155,
+    "IsMoving": false
+  },
+  {
+    "Name": "Speed",
+    "MaxSpeed": 400,
+    "CurrentSpeed": 0,
     "CarriageCount": 15,
+    "IsMoving": false
+  },
+  {
+    "Name": "123312",
+    "MaxSpeed": 13231,
+    "CurrentSpeed": 0,
+    "CarriageCount": 3122312,
     "IsMoving": false
   }
 ]

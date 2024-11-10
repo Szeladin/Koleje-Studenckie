@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 {
-    class AdminModel
+    internal class AdminPanelModel
     {
     }
 }
