@@ -7,17 +7,24 @@
     "IsMoving": false
   },
   {
-    "Name": "Speed",
-    "MaxSpeed": 400,
-    "CurrentSpeed": 0,
-    "CarriageCount": 15,
-    "IsMoving": false
-  },
-  {
     "Name": "123312",
     "MaxSpeed": 13231,
     "CurrentSpeed": 0,
     "CarriageCount": 3122312,
+    "IsMoving": false
+  },
+  {
+    "Name": "324",
+    "MaxSpeed": 342,
+    "CurrentSpeed": 0,
+    "CarriageCount": 234,
+    "IsMoving": false
+  },
+  {
+    "Name": "DROP DATABASE",
+    "MaxSpeed": 420,
+    "CurrentSpeed": 0,
+    "CarriageCount": 69,
     "IsMoving": false
   }
 ]

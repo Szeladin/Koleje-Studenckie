@@ -4,6 +4,7 @@ using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
 using Domain.Entities;
+using WPF_Koleje_Studenckie_project_Jakub_Bak.Services;
 
 namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 {
@@ -13,10 +14,12 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
         public ICommand AddTrainCommand { get; }
         public ICommand RemoveTrainCommand { get; }
         public ICommand UpdateTrainCommand { get; }
+        public TrainHandler _trainHandler;
 
         public AdminViewModel()
         {
             Trains = App.Trains;
+            _trainHandler = new TrainHandler();
             AddTrainCommand = new RelayCommand(AddTrain);
             RemoveTrainCommand = new RelayCommand(RemoveTrain);
             UpdateTrainCommand = new RelayCommand(UpdateTrain);

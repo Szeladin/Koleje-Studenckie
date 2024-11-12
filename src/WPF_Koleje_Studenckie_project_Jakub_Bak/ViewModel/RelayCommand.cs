@@ -1,4 +1,3 @@
-using System;
 using System.Windows.Input;
 
 namespace WPF_Koleje_Studenckie_project_Jakub_Bak

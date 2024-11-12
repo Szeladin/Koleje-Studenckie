@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text.Json.Serialization;
 
 namespace Domain.Entities
 {
@@ -11,70 +10,26 @@ namespace Domain.Entities
         public int CarriageCount { get; private set; }
         public bool IsMoving { get; private set; } = false;
 
-        [JsonConstructor]
         public Train(string name, int maxSpeed, int carriageCount)
         {
             Name = name;
             MaxSpeed = maxSpeed;
             CarriageCount = carriageCount;
-            CurrentSpeed = 0;
-            IsMoving = false;
-        }
-        public void StartEngine()
-        {
-            Console.WriteLine($"{Name} engine started.");
         }
 
-        public void StopEngine()
+        public void SetIsMoving(bool isMoving)
         {
-            if (IsMoving)
-            {
-                Console.WriteLine("Cannot stop engine while train is moving.");
-                return;
-            }
-            Console.WriteLine($"{Name} engine stopped.");
+            IsMoving = isMoving;
         }
 
-        public void Accelerate(int speedIncrease)
+        public void SetCurrentSpeed(int currentSpeed)
         {
-            if (!IsMoving)
-            {
-                IsMoving = true;
-            }
-
-            CurrentSpeed = Math.Min(CurrentSpeed + speedIncrease, MaxSpeed);
-            Console.WriteLine($"{Name} is now traveling at {CurrentSpeed} km/h.");
+            CurrentSpeed = currentSpeed;
         }
 
-        public void Decelerate(int speedDecrease)
+        public void SetCarriageCount(int carriageCount)
         {
-            CurrentSpeed = Math.Max(CurrentSpeed - speedDecrease, 0);
-            Console.WriteLine($"{Name} is now traveling at {CurrentSpeed} km/h.");
-
-            if (CurrentSpeed == 0)
-            {
-                IsMoving = false;
-                Console.WriteLine($"{Name} has come to a stop.");
-            }
-        }
-
-        public void AddCarriage()
-        {
-            CarriageCount++;
-            Console.WriteLine($"Carriage added. {Name} now has {CarriageCount} carriages.");
-        }
-
-        public void RemoveCarriage()
-        {
-            if (CarriageCount > 0)
-            {
-                CarriageCount--;
-                Console.WriteLine($"Carriage removed. {Name} now has {CarriageCount} carriages.");
-            }
-            else
-            {
-                Console.WriteLine($"{Name} has no carriages to remove.");
-            }
+            CarriageCount = carriageCount;
         }
 
         public void DisplayInfo()
