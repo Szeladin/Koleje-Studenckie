@@ -30,7 +30,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak
                     foreach (var trainDto in loadedTrains)
                     {
                         var train = new Train(trainDto.Name, trainDto.MaxSpeed, trainDto.CarriageCount);
-                        train.SetIsMoving(trainDto.IsMoving);
+                        train.Movement.IsMoving = trainDto.IsMoving;
                         Trains.Add(train);
                     }
                 }
