@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using Domain.Entities;
 using System.IO;
 using System.Text.Json;
+using WPF_Koleje_Studenckie_project_Jakub_Bak.Services;
 
 namespace WPF_Koleje_Studenckie_project_Jakub_Bak
 {
@@ -23,11 +24,13 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak
             if (File.Exists(filePath))
             {
                 string json = File.ReadAllText(filePath);
-                var loadedTrains = JsonSerializer.Deserialize<ObservableCollection<Train>>(json);
+                var loadedTrains = JsonSerializer.Deserialize<ObservableCollection<TrainDTO>>(json);
                 if (loadedTrains != null)
                 {
-                    foreach (var train in loadedTrains)
+                    foreach (var trainDto in loadedTrains)
                     {
+                        var train = new Train(trainDto.Name, trainDto.MaxSpeed, trainDto.CarriageCount);
+                        train.Movement.IsMoving = trainDto.IsMoving;
                         Trains.Add(train);
                     }
                 }
