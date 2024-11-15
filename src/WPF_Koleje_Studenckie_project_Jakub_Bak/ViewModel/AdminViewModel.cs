@@ -58,7 +58,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
                 {
                     NameTextBox = { Text = SelectedTrain.Name },
                     MaxSpeedTextBox = { Text = SelectedTrain.MaxSpeed.ToString() },
-                    CarriageCountTextBox = { Text = SelectedTrain.CarriageCount.ToString() }
+                    CarriageCountTextBox = { Text = SelectedTrain.Carriage.CarriageCount.ToString() }
                 };
 
                 addTrainWindow.ShowDialog();
