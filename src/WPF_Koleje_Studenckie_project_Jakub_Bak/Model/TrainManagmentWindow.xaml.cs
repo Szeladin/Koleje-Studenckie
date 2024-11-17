@@ -3,12 +3,12 @@ using WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel;
 
 namespace WPF_Koleje_Studenckie_project_Jakub_Bak
 {
-    public partial class AdminWindow : Window
+    public partial class TrainManagementWindow : Window
     {
-        public AdminWindow()
+        public TrainManagementWindow()
         {
             InitializeComponent();
-            DataContext = new AdminViewModel();
+            DataContext = new TrainManagementViewModel();
         }
     }
 }

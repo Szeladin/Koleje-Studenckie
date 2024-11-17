@@ -1,8 +1,8 @@
 using Domain.Entities;
 using System;
 
-namespace WPF_Koleje_Studenckie_project_Jakub_Bak.Services
-{
+namespace WPF_Koleje_Studenckie_project_Jakub_Bak.Handlers
+{ 
     public class TrainMovementHandler
     {
         public void StartEngine(Train train)
@@ -35,13 +35,13 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.Services
                 StartEngine(train);
             }
 
-            train.Movement.CurrentSpeed = Math.Min(train.Movement.CurrentSpeed + speedIncrease, train.MaxSpeed);
+            train.Movement.CurrentSpeed = Math.Max(train.Movement.CurrentSpeed + speedIncrease, train.MaxSpeed);
             Console.WriteLine($"{train.Name} is now traveling at {train.Movement.CurrentSpeed} km/h.");
         }
 
         public void Decelerate(Train train, int speedDecrease)
         {
-            train.Movement.CurrentSpeed = Math.Max(train.Movement.CurrentSpeed - speedDecrease, 0);
+            train.Movement.CurrentSpeed = Math.Min(train.Movement.CurrentSpeed - speedDecrease, 0);
             if (train.Movement.CurrentSpeed == 0)
             {
                 StopEngine(train);

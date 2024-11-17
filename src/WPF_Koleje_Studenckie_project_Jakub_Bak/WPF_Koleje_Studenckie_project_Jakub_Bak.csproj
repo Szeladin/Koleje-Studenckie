@@ -14,10 +14,11 @@
 
   <ItemGroup>
     <Folder Include="Data\" />
-    <Folder Include="Services\" />
+    <Folder Include="Handlers\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="5.1.0" />
     <PackageReference Include="System.Text.Json" Version="6.0.10" />
   </ItemGroup>
 
