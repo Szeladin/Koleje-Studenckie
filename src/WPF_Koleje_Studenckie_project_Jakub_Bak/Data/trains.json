@@ -11,25 +11,14 @@
     }
   },
   {
-    "Name": "432",
-    "MaxSpeed": 4322,
+    "Name": "4321",
+    "MaxSpeed": 14322,
     "Movement": {
       "CurrentSpeed": 0,
       "IsMoving": false
     },
     "Carriage": {
-      "CarriageCount": 423
-    }
-  },
-  {
-    "Name": "123",
-    "MaxSpeed": 321,
-    "Movement": {
-      "CurrentSpeed": 0,
-      "IsMoving": false
-    },
-    "Carriage": {
-      "CarriageCount": 1321
+      "CarriageCount": 1423
     }
   },
   {
@@ -41,6 +30,17 @@
     },
     "Carriage": {
       "CarriageCount": 423
+    }
+  },
+  {
+    "Name": "323",
+    "MaxSpeed": 32,
+    "Movement": {
+      "CurrentSpeed": 0,
+      "IsMoving": false
+    },
+    "Carriage": {
+      "CarriageCount": 23
     }
   }
 ]

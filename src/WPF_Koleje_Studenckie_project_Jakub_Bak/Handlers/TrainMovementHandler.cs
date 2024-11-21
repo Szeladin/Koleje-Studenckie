@@ -19,7 +19,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.Handlers
             if (train.Movement.IsMoving)
             {
                 train.Movement.IsMoving = false;
-                train.Movement.CurrentSpeed = 0; // Reset speed when stopping
+                train.Movement.CurrentSpeed = 0; 
                 Console.WriteLine($"{train.Name} engine stopped.");
             }
             else

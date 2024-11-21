@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Input;
 using Domain.Entities;
 using WPF_Koleje_Studenckie_project_Jakub_Bak.Handlers;
-using WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel;
+using WPF_Koleje_Studenckie_project_Jakub_Bak.Utilities;
 
 namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 {
@@ -95,7 +95,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
         {
             try
             {
-                string json = JsonSerializer.Serialize(Trains, new JsonSerializerOptions { WriteIndented = true });
+                string json = JsonSerializer.Serialize(Trains, JsonOptionsProvider.GetDefaultOptions());
                 File.WriteAllText(AppViewModel.GetDataFilePath(), json);
             }
             catch (Exception ex)

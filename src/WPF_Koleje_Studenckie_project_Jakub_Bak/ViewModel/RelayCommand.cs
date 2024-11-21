@@ -1,19 +1,13 @@
 using System.Windows.Input;
 
-namespace WPF_Koleje_Studenckie_project_Jakub_Bak
+namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 {
-    public class RelayCommand : ICommand
+    public class RelayCommand(Action execute, Func<bool> canExecute = null) : ICommand
     {
-        private readonly Action _execute;
-        private readonly Func<bool> _canExecute;
+        private readonly Action _execute = execute;
+        private readonly Func<bool> _canExecute = canExecute;
 
         public event EventHandler CanExecuteChanged;
-
-        public RelayCommand(Action execute, Func<bool> canExecute = null)
-        {
-            _execute = execute;
-            _canExecute = canExecute;
-        }
 
         public bool CanExecute(object parameter) => _canExecute == null || _canExecute();
 
