@@ -24,11 +24,13 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
         }
 
         private void OpenCargoManagement()
-        { 
+        {
         }
 
         private void OpenPersonnelManagement()
         {
+            var personelManagementWindow = new PersonelManagmentWindow();
+            personelManagementWindow.Show();
         }
 
         private void OpenScheduleManagement()

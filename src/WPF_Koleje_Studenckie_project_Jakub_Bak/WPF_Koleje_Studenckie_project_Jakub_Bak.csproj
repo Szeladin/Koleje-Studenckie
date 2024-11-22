@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <Folder Include="Data\" />
-    <Folder Include="Handlers\" />
+    <Folder Include="Utilities\" />
   </ItemGroup>
 
   <ItemGroup>
