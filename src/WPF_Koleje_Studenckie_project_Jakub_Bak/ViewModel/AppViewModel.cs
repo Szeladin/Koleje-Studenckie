@@ -1,7 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using Domain.Entities;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Text.Json;
-using Domain.Entities;
 using WPF_Koleje_Studenckie_project_Jakub_Bak.DTO;
 
 namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
@@ -24,38 +24,38 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
             if (File.Exists(filePath))
             {
                 string json = File.ReadAllText(filePath);
-              
-                    var loadedTrains = JsonSerializer.Deserialize<ObservableCollection<TrainDTO>>(json);
-                    if (loadedTrains != null)
+
+                var loadedTrains = JsonSerializer.Deserialize<ObservableCollection<TrainDTO>>(json);
+                if (loadedTrains != null)
+                {
+                    foreach (var trainDto in loadedTrains)
                     {
-                        foreach (var trainDto in loadedTrains)
-                        {
-                            var train = new Train(trainDto.Name, trainDto.MaxSpeed, trainDto.Carriage.CarriageCount);
-                            train.Movement.IsMoving = trainDto.Movement.IsMoving;
-                            Trains.Add(train);
-                        }
+                        var train = new Train(trainDto.Name, trainDto.MaxSpeed, trainDto.Carriage.CarriageCount);
+                        train.Movement.IsMoving = trainDto.Movement.IsMoving;
+                        Trains.Add(train);
                     }
-                
+                }
+
             }
         }
 
-    public void LoadPersonel()
-    {
-        string filePath = GetPersonelDataFilePath();
-        if (File.Exists(filePath))
+        public void LoadPersonel()
         {
-            string json = File.ReadAllText(filePath);
-            var loadedPersonel = JsonSerializer.Deserialize<ObservableCollection<PersonelDTO>>(json);
-            if (loadedPersonel != null)
+            string filePath = GetPersonelDataFilePath();
+            if (File.Exists(filePath))
             {
-                foreach (var personelDTO in loadedPersonel)
+                string json = File.ReadAllText(filePath);
+                var loadedPersonel = JsonSerializer.Deserialize<ObservableCollection<PersonelDTO>>(json);
+                if (loadedPersonel != null)
                 {
-                    var personel = new Personel(personelDTO.Name, personelDTO.Surname, personelDTO.Position, personelDTO.Salary);
+                    foreach (var personelDTO in loadedPersonel)
+                    {
+                        var personel = new Personel(personelDTO.Name, personelDTO.Surname, personelDTO.Position, personelDTO.Salary);
                         PersonelList.Add(personel);
+                    }
                 }
             }
         }
-    }
         public static string GetDataFilePath()
         {
             string projectDirectory = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.FullName;

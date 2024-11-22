@@ -8,13 +8,13 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak
         public AdminPanelWindow()
         {
             InitializeComponent();
-            DataContext = new AdminPanelViewModel(); 
+            DataContext = new AdminPanelViewModel();
         }
 
         private void TrainManagement_Click(object sender, RoutedEventArgs e)
         {
             var viewModel = (AdminPanelViewModel)DataContext;
-            viewModel.OpenTrainManagementCommand.Execute(null); 
+            viewModel.OpenTrainManagementCommand.Execute(null);
         }
 
         private void CargoManagement_Click(object sender, RoutedEventArgs e)

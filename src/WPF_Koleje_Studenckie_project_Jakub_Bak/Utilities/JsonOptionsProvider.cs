@@ -9,7 +9,7 @@ public static class JsonOptionsProvider
         return new JsonSerializerOptions
         {
             WriteIndented = true,
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull 
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
         };
     }
 }
