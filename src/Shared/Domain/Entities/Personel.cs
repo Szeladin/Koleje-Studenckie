@@ -10,7 +10,7 @@ namespace Domain.Entities
     {
         private static int _idCounter = 0; // Static counter for unique IDs
 
-        public int Id { get; private set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Position { get; set; }

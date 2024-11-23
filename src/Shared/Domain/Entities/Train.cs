@@ -4,7 +4,7 @@
     {
         private static int _idCounter = 0; // Static counter for unique IDs
 
-        public int Id { get; private set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public int MaxSpeed { get; private set; }
         public TrainMovement Movement { get; private set; }
@@ -18,5 +18,6 @@
             Movement = new TrainMovement();
             Carriage = new TrainCarriage(initialCarriageCount);
         }
+        
     }
 }

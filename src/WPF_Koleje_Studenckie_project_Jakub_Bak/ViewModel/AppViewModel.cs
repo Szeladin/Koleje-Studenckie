@@ -2,7 +2,9 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text.Json;
+using System.Windows;
 using WPF_Koleje_Studenckie_project_Jakub_Bak.DTO;
+using WPF_Koleje_Studenckie_project_Jakub_Bak.Utilities;
 
 namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 {
@@ -17,7 +19,6 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
             LoadTrains();
             LoadPersonel();
         }
-
         public void LoadTrains()
         {
             LoadData<TrainDTO>(GetTrainDataFilePath(), trainDto =>
