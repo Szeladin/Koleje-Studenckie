@@ -6,6 +6,8 @@ using System.Windows;
 using System.Windows.Input;
 using WPF_Koleje_Studenckie_project_Jakub_Bak.Handlers;
 using WPF_Koleje_Studenckie_project_Jakub_Bak.Utilities;
+using WPF_Koleje_Studenckie_project_Jakub_Bak.DTO;
+
 
 namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 {
@@ -93,15 +95,39 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 
         private void SaveTrains()
         {
-            try
+            var trainDTOs = Trains.Select(t => new TrainDTO(
+                t.Name,
+                t.MaxSpeed,
+                ConvertToMovementDTO(t.Movement), 
+                ConvertToCarriageDTO(t.Carriage)
+            ));
+            JsonHelper.Save(trainDTOs, AppViewModel.GetTrainDataFilePath());
+        }
+
+        private MovementDTO ConvertToMovementDTO(TrainMovement movement)
+        {
+            if (movement == null)
             {
-                string json = JsonSerializer.Serialize(Trains, JsonOptionsProvider.GetDefaultOptions());
-                File.WriteAllText(AppViewModel.GetDataFilePath(), json);
+                return new MovementDTO { IsMoving = false };
             }
-            catch (Exception ex)
+
+            return new MovementDTO
             {
-                MessageBox.Show($"Error saving trains: {ex.Message}", "Save Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                IsMoving = movement.IsMoving
+            };
+        }
+
+        private CarriageDTO ConvertToCarriageDTO(TrainCarriage carriage)
+        {
+            if (carriage == null)
+            {
+                return new CarriageDTO { CarriageCount = 0 };
             }
+
+            return new CarriageDTO
+            {
+                CarriageCount = carriage.CarriageCount
+            };
         }
 
         public Train SelectedTrain { get; set; }
