@@ -93,15 +93,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 
         private void SaveTrains()
         {
-            try
-            {
-                string json = JsonSerializer.Serialize(Trains, JsonOptionsProvider.GetDefaultOptions());
-                File.WriteAllText(AppViewModel.GetTrainDataFilePath(), json);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error saving trains: {ex.Message}", "Save Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            JsonHelper.SaveToJson(Trains, AppViewModel.GetTrainDataFilePath());
         }
 
         public Train SelectedTrain { get; set; }

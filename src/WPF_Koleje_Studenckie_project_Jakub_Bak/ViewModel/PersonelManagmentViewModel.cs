@@ -94,15 +94,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 
         private void SavePersonel()
         {
-            try
-            {
-                string json = JsonSerializer.Serialize(PersonelList, JsonOptionsProvider.GetDefaultOptions());
-                File.WriteAllText(AppViewModel.GetPersonelDataFilePath(), json);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error saving personnel: {ex.Message}", "Save Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            JsonHelper.SaveToJson(PersonelList, AppViewModel.GetPersonelDataFilePath());
         }
         public Personel SelectedPersonel { get; set; }
     }

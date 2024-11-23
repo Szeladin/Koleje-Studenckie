@@ -1,6 +1,6 @@
 [
   {
-    "Id": 10,
+    "Id": 1,
     "Name": "31",
     "MaxSpeed": 1,
     "Movement": {
@@ -105,6 +105,30 @@
     },
     "Carriage": {
       "CarriageCount": 4
+    }
+  },
+  {
+    "Id": 10,
+    "Name": "32",
+    "MaxSpeed": 323,
+    "Movement": {
+      "CurrentSpeed": 0,
+      "IsMoving": false
+    },
+    "Carriage": {
+      "CarriageCount": 32
+    }
+  },
+  {
+    "Id": 11,
+    "Name": "31231",
+    "MaxSpeed": 321123,
+    "Movement": {
+      "CurrentSpeed": 0,
+      "IsMoving": false
+    },
+    "Carriage": {
+      "CarriageCount": 321312
     }
   }
 ]
