@@ -1,6 +1,13 @@
 [
-  {},
-  {},
-  {},
-  {}
+  {
+    "Name": "11",
+    "MaxSpeed": 11,
+    "Movement": {
+      "CurrentSpeed": 0,
+      "IsMoving": false
+    },
+    "Carriage": {
+      "CarriageCount": 11
+    }
+  }
 ]

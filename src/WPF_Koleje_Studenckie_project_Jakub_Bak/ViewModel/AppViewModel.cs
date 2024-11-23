@@ -16,38 +16,13 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
         {
             Trains = new ObservableCollection<Train>();
             PersonelList = new ObservableCollection<Personel>();
-            LoadData<TrainDTO>(GetTrainDataFilePath(), LoadTrain);
-            LoadData<PersonelDTO>(GetPersonelDataFilePath(), LoadPersonel);
-        }
-
-        private void LoadData<T>(string filePath, Action<T> loadAction)
-        {
-            if (File.Exists(filePath))
-            {
-                var loadedData = JsonHelper.Deserialize<ObservableCollection<T>>(filePath);
-                if (loadedData != null)
-                {
-                    foreach (var item in loadedData)
-                    {
-                        loadAction(item);
-                    }
-                }
-            }
         }
 
         private void LoadTrain(TrainDTO trainDto)
         {
-            if (trainDto == null)
-            {
-                MessageBox.Show("Train data is null.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            int carriageCount = trainDto.Carriage?.CarriageCount ?? 0;
-            var movement = trainDto.Movement ?? new MovementDTO { IsMoving = false };
-
-            var train = new Train(trainDto.Name, trainDto.MaxSpeed, carriageCount);
-            train.Movement.IsMoving = movement.IsMoving;
+            var train = new Train(trainDto.Name, trainDto.MaxSpeed, trainDto.Carriage.CarriageCount);
+            train.Movement.CurrentSpeed = trainDto.Movement.CurrentSpeed;
+            train.Movement.IsMoving = trainDto.Movement.IsMoving;
             Trains.Add(train);
         }
 

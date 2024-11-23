@@ -7,7 +7,7 @@ using System.Windows.Input;
 using WPF_Koleje_Studenckie_project_Jakub_Bak.Handlers;
 using WPF_Koleje_Studenckie_project_Jakub_Bak.Utilities;
 using WPF_Koleje_Studenckie_project_Jakub_Bak.DTO;
-
+using System.Collections.Generic;
 
 namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 {
@@ -92,44 +92,17 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
                 MessageBox.Show("Please select a train to update.", "No Train Selected", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
+        public Train SelectedTrain { get; set; }
 
         private void SaveTrains()
         {
-            var trainDTOs = Trains.Select(t => new TrainDTO(
-                t.Name,
-                t.MaxSpeed,
-                ConvertToMovementDTO(t.Movement), 
-                ConvertToCarriageDTO(t.Carriage)
-            ));
-            JsonHelper.Save(trainDTOs, AppViewModel.GetTrainDataFilePath());
-        }
-
-        private MovementDTO ConvertToMovementDTO(TrainMovement movement)
-        {
-            if (movement == null)
+            var trainDtos = new List<TrainDTO>();
+            foreach (var train in Trains)
             {
-                return new MovementDTO { IsMoving = false };
+                var trainDto = new TrainDTO(train.Name, train.MaxSpeed, new MovementDTO { CurrentSpeed = train.Movement.CurrentSpeed, IsMoving = train.Movement.IsMoving }, new CarriageDTO { CarriageCount = train.Carriage.CarriageCount });
+                trainDtos.Add(trainDto);
             }
-
-            return new MovementDTO
-            {
-                IsMoving = movement.IsMoving
-            };
+            JsonHelper.SaveToJson(AppViewModel.GetTrainDataFilePath(), trainDtos);
         }
-
-        private CarriageDTO ConvertToCarriageDTO(TrainCarriage carriage)
-        {
-            if (carriage == null)
-            {
-                return new CarriageDTO { CarriageCount = 0 };
-            }
-
-            return new CarriageDTO
-            {
-                CarriageCount = carriage.CarriageCount
-            };
-        }
-
-        public Train SelectedTrain { get; set; }
     }
 }

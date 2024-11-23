@@ -7,6 +7,7 @@ using System.Windows.Input;
 using WPF_Koleje_Studenckie_project_Jakub_Bak.Handlers;
 using WPF_Koleje_Studenckie_project_Jakub_Bak.Utilities;
 using WPF_Koleje_Studenckie_project_Jakub_Bak.DTO;
+using System.Collections.Generic;
 
 namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 {
@@ -93,11 +94,17 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
             }
         }
 
+        public Personel SelectedPersonel { get; set; }
+
         private void SavePersonel()
         {
-            var personelDTOs = PersonelList.Select(p => new PersonelDTO(p.Name, p.Surname, p.Position, p.Salary));
-            JsonHelper.Save(personelDTOs, AppViewModel.GetPersonelDataFilePath());
+            var personelDtos = new List<PersonelDTO>();
+            foreach (var personel in PersonelList)
+            {
+                var personelDto = new PersonelDTO(personel.Name, personel.Surname, personel.Position, personel.Salary);
+                personelDtos.Add(personelDto);
+            }
+            JsonHelper.SaveToJson(AppViewModel.GetPersonelDataFilePath(), personelDtos);
         }
-        public Personel SelectedPersonel { get; set; }
     }
 }
