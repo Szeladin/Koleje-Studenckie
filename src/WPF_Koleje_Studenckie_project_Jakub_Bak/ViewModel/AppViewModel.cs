@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Text.Json;
 using WPF_Koleje_Studenckie_project_Jakub_Bak.DTO;
-using System.Windows;
 
 namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 {
@@ -11,43 +10,65 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
     {
         public ObservableCollection<Train> Trains { get; private set; }
         public ObservableCollection<Personel> PersonelList { get; private set; }
-
         public AppViewModel()
         {
             Trains = new ObservableCollection<Train>();
             PersonelList = new ObservableCollection<Personel>();
+            LoadTrains();
+            LoadPersonel();
         }
 
-        private void LoadTrain(TrainDTO trainDto)
+        public void LoadTrains()
         {
-            var train = new Train(trainDto.Name, trainDto.MaxSpeed, trainDto.Carriage.CarriageCount);
-            train.Movement.CurrentSpeed = trainDto.Movement.CurrentSpeed;
-            train.Movement.IsMoving = trainDto.Movement.IsMoving;
-            Trains.Add(train);
+            LoadData<TrainDTO>(GetTrainDataFilePath(), trainDto =>
+            {
+                var train = new Train(trainDto.Name, trainDto.MaxSpeed, trainDto.Carriage?.CarriageCount ?? 0);
+                train.Movement.IsMoving = trainDto.Movement.IsMoving;
+                Trains.Add(train);
+            });
         }
 
-        private void LoadPersonel(PersonelDTO personelDto)
+        public void LoadPersonel()
         {
-            var personel = new Personel(personelDto.Name, personelDto.Surname, personelDto.Position, personelDto.Salary);
-            PersonelList.Add(personel);
+            LoadData<PersonelDTO>(GetPersonelDataFilePath(), personelDTO =>
+            {
+                var personel = new Personel(personelDTO.Name, personelDTO.Surname, personelDTO.Position, personelDTO.Salary);
+                PersonelList.Add(personel);
+            });
         }
 
-        public static string GetTrainDataFilePath()
+        private void LoadData<T>(string filePath, Action<T> loadAction) where T : IDTO
         {
-            return GetFilePath("trains.json");
+            if (File.Exists(filePath))
+            {
+                string json = File.ReadAllText(filePath);
+                var loadedData = JsonSerializer.Deserialize<ObservableCollection<T>>(json);
+                if (loadedData != null)
+                {
+                    foreach (var item in loadedData)
+                    {
+                        loadAction(item);
+                    }
+                }
+            }
         }
 
-        public static string GetPersonelDataFilePath()
-        {
-            return GetFilePath("personel.json");
-        }
-
-        private static string GetFilePath(string fileName)
+        public static string GetDataFilePath(string fileName)
         {
             string projectDirectory = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.FullName;
             string dataFolderPath = Path.Combine(projectDirectory, "Data");
             Directory.CreateDirectory(dataFolderPath);
             return Path.Combine(dataFolderPath, fileName);
+        }
+
+        public static string GetTrainDataFilePath()
+        {
+            return GetDataFilePath("trains.json");
+        }
+
+        public static string GetPersonelDataFilePath()
+        {
+            return GetDataFilePath("personel.json");
         }
     }
 }

@@ -1,7 +1,4 @@
-namespace WPF_Koleje_Studenckie_project_Jakub_Bak.DTO
+public interface IDTO
 {
-    public interface IDTO
-    {
-
-    }
-}
+    // You can define common properties or methods here if needed
+} 

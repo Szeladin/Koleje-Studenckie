@@ -8,6 +8,9 @@ namespace Domain.Entities
 {
     public class Personel
     {
+        private static int _idCounter = 0; // Static counter for unique IDs
+
+        public int Id { get; private set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Position { get; set; }
@@ -15,6 +18,7 @@ namespace Domain.Entities
 
         public Personel(string name, string surname, string position, int salary)
         {
+            Id = ++_idCounter; // Increment and assign unique ID
             Name = name;
             Surname = surname;
             Position = position;

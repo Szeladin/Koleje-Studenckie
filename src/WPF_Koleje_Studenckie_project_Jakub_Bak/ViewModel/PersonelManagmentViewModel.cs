@@ -6,8 +6,6 @@ using System.Windows;
 using System.Windows.Input;
 using WPF_Koleje_Studenckie_project_Jakub_Bak.Handlers;
 using WPF_Koleje_Studenckie_project_Jakub_Bak.Utilities;
-using WPF_Koleje_Studenckie_project_Jakub_Bak.DTO;
-using System.Collections.Generic;
 
 namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 {
@@ -94,17 +92,18 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
             }
         }
 
-        public Personel SelectedPersonel { get; set; }
-
         private void SavePersonel()
         {
-            var personelDtos = new List<PersonelDTO>();
-            foreach (var personel in PersonelList)
+            try
             {
-                var personelDto = new PersonelDTO(personel.Name, personel.Surname, personel.Position, personel.Salary);
-                personelDtos.Add(personelDto);
+                string json = JsonSerializer.Serialize(PersonelList, JsonOptionsProvider.GetDefaultOptions());
+                File.WriteAllText(AppViewModel.GetPersonelDataFilePath(), json);
             }
-            JsonHelper.SaveToJson(AppViewModel.GetPersonelDataFilePath(), personelDtos);
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error saving personnel: {ex.Message}", "Save Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
+        public Personel SelectedPersonel { get; set; }
     }
 }

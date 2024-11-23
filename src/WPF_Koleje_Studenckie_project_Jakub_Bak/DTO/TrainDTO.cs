@@ -4,6 +4,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.DTO
 {
     public class TrainDTO : IDTO
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public int MaxSpeed { get; set; }
         public MovementDTO Movement { get; set; }

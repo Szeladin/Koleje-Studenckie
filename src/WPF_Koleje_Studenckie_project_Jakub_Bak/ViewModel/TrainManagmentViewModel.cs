@@ -6,8 +6,6 @@ using System.Windows;
 using System.Windows.Input;
 using WPF_Koleje_Studenckie_project_Jakub_Bak.Handlers;
 using WPF_Koleje_Studenckie_project_Jakub_Bak.Utilities;
-using WPF_Koleje_Studenckie_project_Jakub_Bak.DTO;
-using System.Collections.Generic;
 
 namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 {
@@ -92,17 +90,20 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
                 MessageBox.Show("Please select a train to update.", "No Train Selected", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
-        public Train SelectedTrain { get; set; }
 
         private void SaveTrains()
         {
-            var trainDtos = new List<TrainDTO>();
-            foreach (var train in Trains)
+            try
             {
-                var trainDto = new TrainDTO(train.Name, train.MaxSpeed, new MovementDTO { CurrentSpeed = train.Movement.CurrentSpeed, IsMoving = train.Movement.IsMoving }, new CarriageDTO { CarriageCount = train.Carriage.CarriageCount });
-                trainDtos.Add(trainDto);
+                string json = JsonSerializer.Serialize(Trains, JsonOptionsProvider.GetDefaultOptions());
+                File.WriteAllText(AppViewModel.GetTrainDataFilePath(), json);
             }
-            JsonHelper.SaveToJson(AppViewModel.GetTrainDataFilePath(), trainDtos);
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error saving trains: {ex.Message}", "Save Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
+
+        public Train SelectedTrain { get; set; }
     }
 }
