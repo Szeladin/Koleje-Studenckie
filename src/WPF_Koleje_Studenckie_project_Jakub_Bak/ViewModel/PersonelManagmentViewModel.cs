@@ -78,10 +78,13 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 
                 if (addPersonelWindow.NewPersonel != null)
                 {
+                    var updatedPersonel = (Personel)addPersonelWindow.NewPersonel;
+                    updatedPersonel.Id = SelectedPersonel.Id; 
+
                     int index = PersonelList.IndexOf(SelectedPersonel);
                     if (index >= 0)
                     {
-                        PersonelList[index] = (Personel)addPersonelWindow.NewPersonel;
+                        PersonelList[index] = updatedPersonel;
                         SavePersonel();
                     }
                 }

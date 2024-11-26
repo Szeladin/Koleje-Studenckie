@@ -77,10 +77,13 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 
                 if (addTrainWindow.NewTrain != null)
                 {
+                    var updatedTrain = (Train)addTrainWindow.NewTrain;
+                    updatedTrain.Id = SelectedTrain.Id; 
+
                     int index = Trains.IndexOf(SelectedTrain);
                     if (index >= 0)
                     {
-                        Trains[index] = (Train)addTrainWindow.NewTrain;
+                        Trains[index] = updatedTrain;
                         SaveTrains();
                     }
                 }
