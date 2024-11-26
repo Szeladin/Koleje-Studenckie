@@ -23,7 +23,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
         {
             LoadData<TrainDTO>(GetTrainDataFilePath(), trainDto =>
             {
-                var train = new Train(trainDto.Name, trainDto.MaxSpeed, trainDto.Carriage?.CarriageCount ?? 0);
+                var train = new Train(trainDto.Id,trainDto.Name, trainDto.MaxSpeed, trainDto.Carriage?.CarriageCount ?? 0);
                 train.Movement.IsMoving = trainDto.Movement.IsMoving;
                 Trains.Add(train);
             });
@@ -31,13 +31,12 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 
         public void LoadPersonel()
         {
-            LoadData<PersonelDTO>(GetPersonelDataFilePath(), personelDTO =>
+            LoadData<PersonelDTO>(GetPersonelDataFilePath(), personelDto =>
             {
-                var personel = new Personel(personelDTO.Name, personelDTO.Surname, personelDTO.Position, personelDTO.Salary);
+                var personel = new Personel(personelDto.Id,personelDto.Name, personelDto.Surname, personelDto.Position, personelDto.Salary);
                 PersonelList.Add(personel);
             });
         }
-
         private void LoadData<T>(string filePath, Action<T> loadAction) where T : IDTO
         {
             if (File.Exists(filePath))

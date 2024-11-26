@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel;
-
+using WPF_Koleje_Studenckie_project_Jakub_Bak.Utilities;
 namespace WPF_Koleje_Studenckie_project_Jakub_Bak
 {
     public partial class AddPersonelWindow : Window
@@ -16,11 +16,12 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak
 
         public object NewPersonel { get; internal set; }
 
+
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             if (AddPersonelViewModel.ValidateInput(NameTextBox.Text, SurnameTextBox.Text, PositionTextBox.Text, SalaryTextBox.Text, out string errorMessage))
             {
-                _viewModel.AddPersonel(NameTextBox.Text, SurnameTextBox.Text, PositionTextBox.Text, int.Parse(SalaryTextBox.Text));
+                _viewModel.AddPersonel(ShortGuidHandler.GenerateUniqueShortGuid("Personel-"), NameTextBox.Text, SurnameTextBox.Text, PositionTextBox.Text, int.Parse(SalaryTextBox.Text));
                 NewPersonel = _viewModel.NewPersonel;
                 this.Close();
             }

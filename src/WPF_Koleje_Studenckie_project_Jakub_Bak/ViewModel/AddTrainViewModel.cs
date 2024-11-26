@@ -6,9 +6,9 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
     {
         public Train NewTrain { get; set; }
 
-        public void AddTrain(string name, int maxSpeed, int carriageCount)
+        public void AddTrain(string id, string name, int maxSpeed, int carriageCount)
         {
-            NewTrain = new Train(name, maxSpeed, carriageCount);
+            NewTrain = new Train(id, name, maxSpeed, carriageCount);
         }
 
         public bool ValidateInput(string name, string maxSpeedText, string carriageCountText, out string errorMessage)
