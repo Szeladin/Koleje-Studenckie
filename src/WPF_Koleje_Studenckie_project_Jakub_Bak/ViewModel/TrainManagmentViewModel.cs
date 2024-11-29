@@ -40,11 +40,12 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
             {
                 DataContext = new AddTrainViewModel()
             };
-            addTrainWindow.ShowDialog();
 
-            if (addTrainWindow.NewTrain != null)
+            bool? result = addTrainWindow.ShowDialog();
+
+            if (result == true && addTrainWindow.NewTrain != null)
             {
-                Trains.Add((Train)addTrainWindow.NewTrain);
+                Trains.Add(addTrainWindow.NewTrain);
                 SaveTrains();
             }
         }

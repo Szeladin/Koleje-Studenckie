@@ -7,7 +7,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.Utilities
 {
     public class JsonHelper
     {
-        public static void SaveToJson<T>(IEnumerable<T> data, string filePath)
+        public static void SaveToJson<IDTO>(IEnumerable<IDTO> data, string filePath)
         {
             try
             {

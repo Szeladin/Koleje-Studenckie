@@ -40,11 +40,12 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
             {
                 DataContext = new AddPersonelViewModel()
             };
-            addPersonelWindow.ShowDialog();
 
-            if (addPersonelWindow.NewPersonel != null)
+            bool? result = addPersonelWindow.ShowDialog();
+
+            if (result == true && addPersonelWindow.NewPersonel != null)
             {
-                PersonelList.Add((Personel)addPersonelWindow.NewPersonel);
+                PersonelList.Add(addPersonelWindow.NewPersonel);
                 SavePersonel();
             }
         }

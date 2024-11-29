@@ -37,12 +37,12 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
                 PersonelList.Add(personel);
             });
         }
-        private void LoadData<T>(string filePath, Action<T> loadAction) where T : IDTO
+        private void LoadData<IDTO>(string filePath, Action<IDTO> loadAction)
         {
             if (File.Exists(filePath))
             {
                 string json = File.ReadAllText(filePath);
-                var loadedData = JsonSerializer.Deserialize<ObservableCollection<T>>(json);
+                var loadedData = JsonSerializer.Deserialize<ObservableCollection<IDTO>>(json);
                 if (loadedData != null)
                 {
                     foreach (var item in loadedData)
@@ -56,6 +56,11 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
         public static string GetDataFilePath(string fileName)
         {
             string projectDirectory = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.FullName;
+            if (projectDirectory == null)
+            {
+                throw new InvalidOperationException("Unable to determine the project directory.");
+            }
+
             string dataFolderPath = Path.Combine(projectDirectory, "Data");
             Directory.CreateDirectory(dataFolderPath);
             return Path.Combine(dataFolderPath, fileName);

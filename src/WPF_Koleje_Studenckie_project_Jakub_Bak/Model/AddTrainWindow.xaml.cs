@@ -1,6 +1,7 @@
 using System.Windows;
 using WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel;
 using WPF_Koleje_Studenckie_project_Jakub_Bak.Utilities;
+using Domain.Entities;
 namespace WPF_Koleje_Studenckie_project_Jakub_Bak
 {
     public partial class AddTrainWindow : Window
@@ -14,7 +15,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak
             DataContext = _viewModel;
         }
 
-        public object NewTrain { get; internal set; }
+        public Train? NewTrain { get; internal set; }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
@@ -22,6 +23,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak
             {
                 _viewModel.AddTrain(ShortGuidHandler.GenerateUniqueShortGuid("Train-"), NameTextBox.Text, int.Parse(MaxSpeedTextBox.Text), int.Parse(CarriageCountTextBox.Text));
                 NewTrain = _viewModel.NewTrain;
+                this.DialogResult = true;
                 this.Close();
             }
             else
@@ -32,6 +34,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
+            this.DialogResult = false;
             this.Close();
         }
     }

@@ -15,7 +15,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.Utilities
                 newId = prefix + Convert.ToBase64String(Guid.NewGuid().ToByteArray())
                     .Replace("/", "_")
                     .Replace("+", "-")
-                    .Substring(0, 8); // Usunięcie końcowego '='
+                    .Substring(0, 8); 
             } while (existingIds.Contains(newId));
 
             existingIds.Add(newId);
