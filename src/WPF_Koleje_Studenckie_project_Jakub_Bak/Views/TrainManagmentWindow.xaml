@@ -21,6 +21,7 @@
                   SelectedItem="{Binding SelectedTrain, Mode=TwoWay}">
             <ListView.View>
                 <GridView>
+                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" />
                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" />
                     <GridViewColumn Header="Max Speed" DisplayMemberBinding="{Binding MaxSpeed}"/>
                     <GridViewColumn Header="Carriage Count" DisplayMemberBinding="{Binding Carriage.CarriageCount}"/>

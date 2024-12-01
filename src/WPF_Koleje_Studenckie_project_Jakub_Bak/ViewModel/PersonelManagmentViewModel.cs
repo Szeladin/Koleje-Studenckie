@@ -40,11 +40,12 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
             {
                 DataContext = new AddPersonelViewModel()
             };
-            addPersonelWindow.ShowDialog();
 
-            if (addPersonelWindow.NewPersonel != null)
+            bool? result = addPersonelWindow.ShowDialog();
+
+            if (result == true && addPersonelWindow.NewPersonel != null)
             {
-                PersonelList.Add((Personel)addPersonelWindow.NewPersonel);
+                PersonelList.Add(addPersonelWindow.NewPersonel);
                 SavePersonel();
             }
         }
@@ -78,10 +79,13 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 
                 if (addPersonelWindow.NewPersonel != null)
                 {
+                    var updatedPersonel = (Personel)addPersonelWindow.NewPersonel;
+                    updatedPersonel.Id = SelectedPersonel.Id; 
+
                     int index = PersonelList.IndexOf(SelectedPersonel);
                     if (index >= 0)
                     {
-                        PersonelList[index] = (Personel)addPersonelWindow.NewPersonel;
+                        PersonelList[index] = updatedPersonel;
                         SavePersonel();
                     }
                 }
@@ -94,15 +98,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 
         private void SavePersonel()
         {
-            try
-            {
-                string json = JsonSerializer.Serialize(PersonelList, JsonOptionsProvider.GetDefaultOptions());
-                File.WriteAllText(AppViewModel.GetPersonelDataFilePath(), json);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error saving personnel: {ex.Message}", "Save Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            JsonHelper.SaveToJson(PersonelList,FilePathProvider.GetPersonelDataFilePath());
         }
         public Personel SelectedPersonel { get; set; }
     }

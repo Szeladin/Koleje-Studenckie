@@ -2,7 +2,9 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text.Json;
+using System.Windows;
 using WPF_Koleje_Studenckie_project_Jakub_Bak.DTO;
+using WPF_Koleje_Studenckie_project_Jakub_Bak.Utilities;
 
 namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 {
@@ -10,66 +12,48 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
     {
         public ObservableCollection<Train> Trains { get; private set; }
         public ObservableCollection<Personel> PersonelList { get; private set; }
+
         public AppViewModel()
         {
-            Trains = [];
-            PersonelList = [];
+            Trains = new ObservableCollection<Train>();
+            PersonelList = new ObservableCollection<Personel>();
             LoadTrains();
             LoadPersonel();
         }
 
         public void LoadTrains()
         {
-            string filePath = GetDataFilePath();
-            if (File.Exists(filePath))
+            LoadData<TrainDTO>(FilePathProvider.GetTrainDataFilePath(), trainDto =>
             {
-                string json = File.ReadAllText(filePath);
-
-                var loadedTrains = JsonSerializer.Deserialize<ObservableCollection<TrainDTO>>(json);
-                if (loadedTrains != null)
-                {
-                    foreach (var trainDto in loadedTrains)
-                    {
-                        var train = new Train(trainDto.Name, trainDto.MaxSpeed, trainDto.Carriage.CarriageCount);
-                        train.Movement.IsMoving = trainDto.Movement.IsMoving;
-                        Trains.Add(train);
-                    }
-                }
-
-            }
+                var train = new Train(trainDto.Id, trainDto.Name, trainDto.MaxSpeed, trainDto.Carriage?.CarriageCount ?? 0);
+                train.Movement.IsMoving = trainDto.Movement.IsMoving;
+                Trains.Add(train);
+            });
         }
 
         public void LoadPersonel()
         {
-            string filePath = GetPersonelDataFilePath();
+            LoadData<PersonelDTO>(FilePathProvider.GetPersonelDataFilePath(), personelDto =>
+            {
+                var personel = new Personel(personelDto.Id, personelDto.Name, personelDto.Surname, personelDto.Position, personelDto.Salary);
+                PersonelList.Add(personel);
+            });
+        }
+
+        private void LoadData<IDTO>(string filePath, Action<IDTO> loadAction)
+        {
             if (File.Exists(filePath))
             {
                 string json = File.ReadAllText(filePath);
-                var loadedPersonel = JsonSerializer.Deserialize<ObservableCollection<PersonelDTO>>(json);
-                if (loadedPersonel != null)
+                var loadedData = JsonSerializer.Deserialize<ObservableCollection<IDTO>>(json);
+                if (loadedData != null)
                 {
-                    foreach (var personelDTO in loadedPersonel)
+                    foreach (var item in loadedData)
                     {
-                        var personel = new Personel(personelDTO.Name, personelDTO.Surname, personelDTO.Position, personelDTO.Salary);
-                        PersonelList.Add(personel);
+                        loadAction(item);
                     }
                 }
             }
-        }
-        public static string GetDataFilePath()
-        {
-            string projectDirectory = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.FullName;
-            string dataFolderPath = Path.Combine(projectDirectory, "Data");
-            Directory.CreateDirectory(dataFolderPath);
-            return Path.Combine(dataFolderPath, "trains.json");
-        }
-
-        public static string GetPersonelDataFilePath()
-        {
-            string projectDirectory = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.FullName;
-            string dataFolderPath = Path.Combine(projectDirectory, "Data");
-            Directory.CreateDirectory(dataFolderPath);
-            return Path.Combine(dataFolderPath, "personel.json");
         }
     }
 }

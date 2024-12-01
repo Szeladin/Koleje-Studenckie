@@ -40,11 +40,12 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
             {
                 DataContext = new AddTrainViewModel()
             };
-            addTrainWindow.ShowDialog();
 
-            if (addTrainWindow.NewTrain != null)
+            bool? result = addTrainWindow.ShowDialog();
+
+            if (result == true && addTrainWindow.NewTrain != null)
             {
-                Trains.Add((Train)addTrainWindow.NewTrain);
+                Trains.Add(addTrainWindow.NewTrain);
                 SaveTrains();
             }
         }
@@ -77,10 +78,13 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 
                 if (addTrainWindow.NewTrain != null)
                 {
+                    var updatedTrain = (Train)addTrainWindow.NewTrain;
+                    updatedTrain.Id = SelectedTrain.Id; 
+
                     int index = Trains.IndexOf(SelectedTrain);
                     if (index >= 0)
                     {
-                        Trains[index] = (Train)addTrainWindow.NewTrain;
+                        Trains[index] = updatedTrain;
                         SaveTrains();
                     }
                 }
@@ -93,15 +97,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 
         private void SaveTrains()
         {
-            try
-            {
-                string json = JsonSerializer.Serialize(Trains, JsonOptionsProvider.GetDefaultOptions());
-                File.WriteAllText(AppViewModel.GetDataFilePath(), json);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error saving trains: {ex.Message}", "Save Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            JsonHelper.SaveToJson(Trains, FilePathProvider.GetTrainDataFilePath());
         }
 
         public Train SelectedTrain { get; set; }
