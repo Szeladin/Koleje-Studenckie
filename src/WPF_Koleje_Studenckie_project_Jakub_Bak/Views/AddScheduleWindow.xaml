@@ -1,0 +1,35 @@
+<Window x:Class="WPF_Koleje_Studenckie_project_Jakub_Bak.AddScheduleWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Add New Schedule" Height="300" Width="400">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Content="Train ID:"/>
+        <TextBox Grid.Row="0" Grid.Column="1" x:Name="TrainIdTextBox" Margin="0,0,0,10"/>
+
+        <Label Grid.Row="1" Grid.Column="0" Content="Departure Time:"/>
+        <DatePicker Grid.Row="1" Grid.Column="1" x:Name="DepartureTimePicker" Margin="0,0,0,10"/>
+
+        <Label Grid.Row="2" Grid.Column="0" Content="Arrival Time:"/>
+        <DatePicker Grid.Row="2" Grid.Column="1" x:Name="ArrivalTimePicker" Margin="0,0,0,10"/>
+
+        <Label Grid.Row="3" Grid.Column="0" Content="Station:"/>
+        <TextBox Grid.Row="3" Grid.Column="1" x:Name="StationTextBox" Margin="0,0,0,10"/>
+
+        <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Add" Width="75" Margin="0,0,10,0" Command="{Binding SaveCommand}"/>
+            <Button Content="Cancel" Width="75" Click="CancelButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window> 

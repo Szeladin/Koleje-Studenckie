@@ -1,10 +1,7 @@
 ﻿using Domain.Entities;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
-using WPF_Koleje_Studenckie_project_Jakub_Bak.Handlers;
 using WPF_Koleje_Studenckie_project_Jakub_Bak.Utilities;
 
 namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
@@ -15,8 +12,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
         public ICommand AddTrainCommand { get; }
         public ICommand RemoveTrainCommand { get; }
         public ICommand UpdateTrainCommand { get; }
-        public TrainHandler _trainHandler;
-
+        public Train SelectedTrain { get; set; }
         public TrainManagementViewModel()
         {
             var appViewModel = (AppViewModel)Application.Current.Resources["AppViewModel"];
@@ -28,7 +24,6 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
             {
                 MessageBox.Show("AppViewModel is not initialized.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            _trainHandler = new TrainHandler();
             AddTrainCommand = new RelayCommand(AddTrain);
             RemoveTrainCommand = new RelayCommand(RemoveTrain);
             UpdateTrainCommand = new RelayCommand(UpdateTrain);
@@ -79,7 +74,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
                 if (addTrainWindow.NewTrain != null)
                 {
                     var updatedTrain = (Train)addTrainWindow.NewTrain;
-                    updatedTrain.Id = SelectedTrain.Id; 
+                    updatedTrain.Id = SelectedTrain.Id;
 
                     int index = Trains.IndexOf(SelectedTrain);
                     if (index >= 0)
@@ -99,7 +94,5 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
         {
             JsonHelper.SaveToJson(Trains, FilePathProvider.GetTrainDataFilePath());
         }
-
-        public Train SelectedTrain { get; set; }
     }
 }

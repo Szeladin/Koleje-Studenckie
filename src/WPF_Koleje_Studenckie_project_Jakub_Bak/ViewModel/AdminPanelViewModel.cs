@@ -5,14 +5,12 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
     public class AdminPanelViewModel : BaseViewModel
     {
         public ICommand OpenTrainManagementCommand { get; }
-        public ICommand OpenCargoManagementCommand { get; }
         public ICommand OpenPersonnelManagementCommand { get; }
         public ICommand OpenScheduleManagementCommand { get; }
 
         public AdminPanelViewModel()
         {
             OpenTrainManagementCommand = new RelayCommand(OpenTrainManagement);
-            OpenCargoManagementCommand = new RelayCommand(OpenCargoManagement);
             OpenPersonnelManagementCommand = new RelayCommand(OpenPersonnelManagement);
             OpenScheduleManagementCommand = new RelayCommand(OpenScheduleManagement);
         }
@@ -22,19 +20,16 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
             var trainManagementWindow = new TrainManagementWindow();
             trainManagementWindow.Show();
         }
-
-        private void OpenCargoManagement()
-        {
-        }
-
         private void OpenPersonnelManagement()
         {
-            var personelManagementWindow = new PersonelManagmentWindow();
+            var personelManagementWindow = new PersonelManagementWindow();
             personelManagementWindow.Show();
         }
 
         private void OpenScheduleManagement()
         {
+            var scheduleManagementWindow = new ScheduleManagementWindow();
+            scheduleManagementWindow.Show();
         }
     }
 }

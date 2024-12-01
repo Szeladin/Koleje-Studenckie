@@ -1,28 +1,29 @@
-using Domain.Entities;
+﻿using Domain.Entities;
 using System.Windows;
 using WPF_Koleje_Studenckie_project_Jakub_Bak.Utilities;
 using WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel;
+
 namespace WPF_Koleje_Studenckie_project_Jakub_Bak
 {
-    public partial class AddTrainWindow : Window
+    public partial class AddScheduleWindow : Window
     {
-        private readonly AddTrainViewModel _viewModel;
+        private readonly AddScheduleViewModel _viewModel;
 
-        public AddTrainWindow()
+        public AddScheduleWindow()
         {
             InitializeComponent();
-            _viewModel = new AddTrainViewModel();
+            _viewModel = new AddScheduleViewModel();
             DataContext = _viewModel;
         }
 
-        public Train? NewTrain { get; internal set; }
+        public Schedule? NewSchedule { get; internal set; }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            if (_viewModel.ValidateInput(NameTextBox.Text, MaxSpeedTextBox.Text, CarriageCountTextBox.Text, out string errorMessage))
+            if (_viewModel.ValidateInput(TrainIdTextBox.Text, DepartureTimePicker.Text, ArrivalTimePicker.Text, StationTextBox.Text, out string errorMessage))
             {
-                _viewModel.AddTrain(ShortGuidHandler.GenerateUniqueShortGuid("Train-"), NameTextBox.Text, int.Parse(MaxSpeedTextBox.Text), int.Parse(CarriageCountTextBox.Text));
-                NewTrain = _viewModel.NewTrain;
+                _viewModel.AddSchedule(ShortGuidHandler.GenerateUniqueShortGuid("Schedule-"), TrainIdTextBox.Text, DateTime.Parse(DepartureTimePicker.Text), DateTime.Parse(ArrivalTimePicker.Text), StationTextBox.Text);
+                NewSchedule = _viewModel.NewSchedule;
                 this.DialogResult = true;
                 this.Close();
             }

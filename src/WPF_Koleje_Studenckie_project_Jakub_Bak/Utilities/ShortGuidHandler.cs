@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace WPF_Koleje_Studenckie_project_Jakub_Bak.Utilities
+﻿namespace WPF_Koleje_Studenckie_project_Jakub_Bak.Utilities
 {
     public static class ShortGuidHandler
     {
@@ -15,7 +12,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.Utilities
                 newId = prefix + Convert.ToBase64String(Guid.NewGuid().ToByteArray())
                     .Replace("/", "_")
                     .Replace("+", "-")
-                    .Substring(0, 8); 
+                    .Substring(0, 8);
             } while (existingIds.Contains(newId));
 
             existingIds.Add(newId);

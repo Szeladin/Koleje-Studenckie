@@ -1,5 +1,3 @@
-using System;
-
 namespace WPF_Koleje_Studenckie_project_Jakub_Bak.Utilities
 {
     public static class FilePathProvider
@@ -13,5 +11,10 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.Utilities
         {
             return JsonHelper.GetDataFilePath("personel.json");
         }
+
+        public static string GetScheduleDataFilePath()
+        {
+            return JsonHelper.GetDataFilePath("schedules.json");
+        }
     }
-} 
+}

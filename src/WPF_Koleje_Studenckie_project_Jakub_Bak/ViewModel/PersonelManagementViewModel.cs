@@ -1,22 +1,20 @@
 ﻿using Domain.Entities;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
-using WPF_Koleje_Studenckie_project_Jakub_Bak.Handlers;
 using WPF_Koleje_Studenckie_project_Jakub_Bak.Utilities;
 
 namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 {
-    public class PersonelManagmentViewModel : BaseViewModel
+    public class PersonelManagementViewModel : BaseViewModel
     {
         public ObservableCollection<Personel> PersonelList { get; }
         public ICommand AddPersonelCommand { get; }
         public ICommand RemovePersonelCommand { get; }
         public ICommand UpdatePersonelCommand { get; }
+        public Personel SelectedPersonel { get; set; }
 
-        public PersonelManagmentViewModel()
+        public PersonelManagementViewModel()
         {
             var appViewModel = (AppViewModel)Application.Current.Resources["AppViewModel"];
             if (appViewModel != null)
@@ -27,8 +25,6 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
             {
                 MessageBox.Show("AppViewModel is not initialized.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
-            _personelHandler = new PersonelHandler();
             AddPersonelCommand = new RelayCommand(AddPersonel);
             RemovePersonelCommand = new RelayCommand(RemovePersonel);
             UpdatePersonelCommand = new RelayCommand(UpdatePersonel);
@@ -80,7 +76,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
                 if (addPersonelWindow.NewPersonel != null)
                 {
                     var updatedPersonel = (Personel)addPersonelWindow.NewPersonel;
-                    updatedPersonel.Id = SelectedPersonel.Id; 
+                    updatedPersonel.Id = SelectedPersonel.Id;
 
                     int index = PersonelList.IndexOf(SelectedPersonel);
                     if (index >= 0)
@@ -98,8 +94,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 
         private void SavePersonel()
         {
-            JsonHelper.SaveToJson(PersonelList,FilePathProvider.GetPersonelDataFilePath());
+            JsonHelper.SaveToJson(PersonelList, FilePathProvider.GetPersonelDataFilePath());
         }
-        public Personel SelectedPersonel { get; set; }
     }
 }

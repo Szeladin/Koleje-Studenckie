@@ -1,7 +1,7 @@
-﻿using System.Windows;
-using WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel;
+﻿using Domain.Entities;
+using System.Windows;
 using WPF_Koleje_Studenckie_project_Jakub_Bak.Utilities;
-using Domain.Entities;
+using WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel;
 namespace WPF_Koleje_Studenckie_project_Jakub_Bak
 {
     public partial class AddPersonelWindow : Window
