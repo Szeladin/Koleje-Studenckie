@@ -32,7 +32,19 @@
       "IsMoving": false
     },
     "Carriage": {
-      "CarriageCount": 321312
+      "CarriageCount": 321312323
+    }
+  },
+  {
+    "Id": "Train-TjFuu2j6",
+    "Name": "132",
+    "MaxSpeed": 321,
+    "Movement": {
+      "CurrentSpeed": 0,
+      "IsMoving": false
+    },
+    "Carriage": {
+      "CarriageCount": 321
     }
   }
 ]

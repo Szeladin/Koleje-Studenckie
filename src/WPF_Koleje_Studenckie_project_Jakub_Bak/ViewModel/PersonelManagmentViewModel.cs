@@ -98,7 +98,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 
         private void SavePersonel()
         {
-            JsonHelper.SaveToJson(PersonelList, AppViewModel.GetPersonelDataFilePath());
+            JsonHelper.SaveToJson(PersonelList,FilePathProvider.GetPersonelDataFilePath());
         }
         public Personel SelectedPersonel { get; set; }
     }

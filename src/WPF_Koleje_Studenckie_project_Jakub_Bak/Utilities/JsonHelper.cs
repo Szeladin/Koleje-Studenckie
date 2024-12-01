@@ -19,5 +19,13 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.Utilities
                 MessageBox.Show($"Error saving data: {ex.Message}", "Save Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        public static string GetDataFilePath(string fileName)
+        {
+            string projectDirectory = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.FullName;
+            string dataFolderPath = Path.Combine(projectDirectory, "Data");
+            Directory.CreateDirectory(dataFolderPath);
+            return Path.Combine(dataFolderPath, fileName);
+        }
     }
 }
