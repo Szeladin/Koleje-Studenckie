@@ -28,7 +28,7 @@
         <TextBox Grid.Row="3" Grid.Column="1" x:Name="StationTextBox" Margin="0,0,0,10"/>
 
         <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="Add" Width="75" Margin="0,0,10,0" Command="{Binding SaveCommand}"/>
+            <Button Content="Add" Width="75" Margin="0,0,10,0" Click="AddButton_Click"/>
             <Button Content="Cancel" Width="75" Click="CancelButton_Click"/>
         </StackPanel>
     </Grid>

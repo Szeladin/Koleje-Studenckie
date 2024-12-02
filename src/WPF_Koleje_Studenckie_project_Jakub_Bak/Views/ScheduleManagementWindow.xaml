@@ -18,17 +18,16 @@
             <Button Content="Update Schedule" Margin="5" Padding="10,5" Command="{Binding UpdateScheduleCommand}"/>
         </StackPanel>
 
-        <ListView ItemsSource="{Binding Schedules}" Grid.Row="1" Margin="10" Grid.ColumnSpan="2" 
-                  SelectedItem="{Binding SelectedSchedule, Mode=TwoWay}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="100"/>
-                    <GridViewColumn Header="Train ID" DisplayMemberBinding="{Binding TrainId}" Width="100"/>
-                    <GridViewColumn Header="Departure Time" DisplayMemberBinding="{Binding DepartureTime, StringFormat={}{0:dd/MM/yyyy HH:mm}}" Width="150"/>
-                    <GridViewColumn Header="Arrival Time" DisplayMemberBinding="{Binding ArrivalTime, StringFormat={}{0:dd/MM/yyyy HH:mm}}" Width="150"/>
-                    <GridViewColumn Header="Station" DisplayMemberBinding="{Binding Station}" Width="150"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <DataGrid ItemsSource="{Binding Schedules}" Grid.Row="1" Margin="10" Grid.ColumnSpan="2" 
+                  SelectedItem="{Binding SelectedSchedule, Mode=TwoWay}" AutoGenerateColumns="False" 
+                  CanUserSortColumns="True" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="100"/>
+                <DataGridTextColumn Header="Train ID" Binding="{Binding TrainId}" Width="100"/>
+                <DataGridTextColumn Header="Departure Time" Binding="{Binding DepartureTime, StringFormat={}{0:dd/MM/yyyy HH:mm}}" Width="150"/>
+                <DataGridTextColumn Header="Arrival Time" Binding="{Binding ArrivalTime, StringFormat={}{0:dd/MM/yyyy HH:mm}}" Width="150"/>
+                <DataGridTextColumn Header="Station" Binding="{Binding Station}" Width="150"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

@@ -13,7 +13,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
         public ObservableCollection<Schedule> Schedules { get; set; }
         public ICommand AddScheduleCommand { get; }
         public ICommand UpdateScheduleCommand { get; }
-        public ICommand DeleteScheduleCommand { get; }
+        public ICommand RemoveScheduleCommand { get; }
 
         public Schedule SelectedSchedule { get; set; }
 
@@ -30,7 +30,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
             }
             AddScheduleCommand = new RelayCommand(AddSchedule);
             UpdateScheduleCommand = new RelayCommand(UpdateSchedule);
-            DeleteScheduleCommand = new RelayCommand(DeleteSchedule);
+            RemoveScheduleCommand = new RelayCommand(RemoveSchedule);
         }
 
         private void AddSchedule()
@@ -76,7 +76,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 
         }
 
-        private void DeleteSchedule()
+        private void RemoveSchedule()
         {
             if (SelectedSchedule != null)
             {
@@ -91,7 +91,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 
         private void SaveSchedules()
         {
-            JsonHelper.SaveToJson(Schedules.ToList(), FilePathProvider.GetScheduleDataFilePath());
+            JsonHelper.SaveToJson(Schedules, FilePathProvider.GetScheduleDataFilePath());
         }
     }
 }

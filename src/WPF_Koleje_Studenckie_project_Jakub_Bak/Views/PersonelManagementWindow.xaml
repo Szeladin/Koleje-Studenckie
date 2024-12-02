@@ -18,17 +18,16 @@
             <Button Content="Update Personnel" Margin="5" Padding="10,5" Command="{Binding UpdatePersonelCommand}"/>
         </StackPanel>
 
-        <ListView ItemsSource="{Binding PersonelList}" Grid.Row="1" Margin="10" Grid.ColumnSpan="2" 
-                  SelectedItem="{Binding SelectedPersonel, Mode=TwoWay}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" />
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" />
-                    <GridViewColumn Header="Surname" DisplayMemberBinding="{Binding Surname}" />
-                    <GridViewColumn Header="Position" DisplayMemberBinding="{Binding Position}" />
-                    <GridViewColumn Header="Salary" DisplayMemberBinding="{Binding Salary}" />
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <DataGrid ItemsSource="{Binding PersonelList}" Grid.Row="1" Margin="10" Grid.ColumnSpan="2" 
+                  SelectedItem="{Binding SelectedPersonel, Mode=TwoWay}" AutoGenerateColumns="False" 
+                  CanUserSortColumns="True" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="100"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="150"/>
+                <DataGridTextColumn Header="Surname" Binding="{Binding Surname}" Width="150"/>
+                <DataGridTextColumn Header="Position" Binding="{Binding Position}" Width="150"/>
+                <DataGridTextColumn Header="Salary" Binding="{Binding Salary}" Width="100"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

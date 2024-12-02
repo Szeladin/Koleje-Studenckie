@@ -29,6 +29,11 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
                 errorMessage = "Please enter a valid date for Arrival Time.";
                 return false;
             }
+            if (departureTime >= arrivalTime)
+            {
+                errorMessage = "Departure time must be earlier than arrival time.";
+                return false;
+            }
             if (string.IsNullOrWhiteSpace(departureStation))
             {
                 errorMessage = "Please enter a departure station.";
