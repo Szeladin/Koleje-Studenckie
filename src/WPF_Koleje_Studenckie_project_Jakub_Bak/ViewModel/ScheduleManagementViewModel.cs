@@ -65,7 +65,11 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 
                 if (result == true && addScheduleWindow.NewSchedule != null)
                 {
-                    Schedules[Schedules.IndexOf(SelectedSchedule)] = addScheduleWindow.NewSchedule;
+                    var updatedSchedule = addScheduleWindow.NewSchedule;
+                    updatedSchedule.Id = SelectedSchedule.Id;
+                    int index = Schedules.IndexOf(SelectedSchedule);
+                    Schedules[index] = updatedSchedule;
+
                     SaveSchedules();
                 }
             }
@@ -73,7 +77,6 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
             {
                 MessageBox.Show("Please select a schedule to update.", "No Schedule Selected", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-
         }
 
         private void RemoveSchedule()

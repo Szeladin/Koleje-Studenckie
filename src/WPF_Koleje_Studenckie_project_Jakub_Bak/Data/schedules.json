@@ -1,14 +1,14 @@
 [
   {
-    "Id": "Schedule-zBhRwC6u",
-    "TrainId": "Id",
+    "Id": "Schedule-cHucOf_q",
+    "TrainId": "Train-cZ-6Xyxv",
     "DepartureTime": "2024-12-08T00:00:00",
     "ArrivalTime": "2024-12-28T00:00:00",
     "Station": "asdadas"
   },
   {
-    "Id": "Schedule-BGgJr-0s",
-    "TrainId": "Train-Ff6qu2ws",
+    "Id": "Schedule-3VvF6ph8",
+    "TrainId": "Train-cZ-6Xyxv",
     "DepartureTime": "2024-12-01T00:00:00",
     "ArrivalTime": "2024-12-26T00:00:00",
     "Station": "asdasdas"
