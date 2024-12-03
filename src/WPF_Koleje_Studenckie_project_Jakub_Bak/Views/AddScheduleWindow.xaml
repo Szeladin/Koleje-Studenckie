@@ -16,7 +16,13 @@
         </Grid.ColumnDefinitions>
 
         <Label Grid.Row="0" Grid.Column="0" Content="Train ID:"/>
-        <TextBox Grid.Row="0" Grid.Column="1" x:Name="TrainIdTextBox" Margin="0,0,0,10"/>
+        <ComboBox Grid.Row="0" Grid.Column="1" 
+                  x:Name="SelectedTrainIdComboBox"
+                  ItemsSource="{Binding Trains}" 
+                  DisplayMemberPath="Id" 
+                  SelectedValuePath="Id" 
+                  SelectedValue="{Binding SelectedTrainId, Mode=TwoWay}" 
+                  Margin="0,0,0,10"/>
 
         <Label Grid.Row="1" Grid.Column="0" Content="Departure Time:"/>
         <DatePicker Grid.Row="1" Grid.Column="1" x:Name="DepartureTimePicker" Margin="0,0,0,10"/>

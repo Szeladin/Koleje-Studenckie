@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using System.Windows;
+using System.Windows.Controls;
 using WPF_Koleje_Studenckie_project_Jakub_Bak.Utilities;
 using WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel;
 
@@ -20,9 +21,9 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            if (_viewModel.ValidateInput(TrainIdTextBox.Text, DepartureTimePicker.Text, ArrivalTimePicker.Text, StationTextBox.Text, out string errorMessage))
+            if (_viewModel.ValidateInput((string)SelectedTrainIdComboBox.SelectedValue, DepartureTimePicker.Text, ArrivalTimePicker.Text, StationTextBox.Text, out string errorMessage))
             {
-                _viewModel.AddSchedule(ShortGuidHandler.GenerateUniqueShortGuid("Schedule-"), TrainIdTextBox.Text, DateTime.Parse(DepartureTimePicker.Text), DateTime.Parse(ArrivalTimePicker.Text), StationTextBox.Text);
+                _viewModel.AddSchedule(ShortGuidHandler.GenerateUniqueShortGuid("Schedule-"), (string)SelectedTrainIdComboBox.SelectedValue, DateTime.Parse(DepartureTimePicker.Text), DateTime.Parse(ArrivalTimePicker.Text), StationTextBox.Text);
                 NewSchedule = _viewModel.NewSchedule;
                 this.DialogResult = true;
                 this.Close();

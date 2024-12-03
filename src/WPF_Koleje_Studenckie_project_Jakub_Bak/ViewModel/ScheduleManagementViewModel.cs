@@ -55,7 +55,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
             {
                 var addScheduleWindow = new AddScheduleWindow
                 {
-                    TrainIdTextBox = { Text = SelectedSchedule.TrainId },
+                    SelectedTrainIdComboBox = { SelectedValue = SelectedSchedule.TrainId },
                     DepartureTimePicker = { Text = SelectedSchedule.DepartureTime.ToString() },
                     ArrivalTimePicker = { Text = SelectedSchedule.ArrivalTime.ToString() },
                     StationTextBox = { Text = SelectedSchedule.Station },
