@@ -11,7 +11,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.DTO
         public CarriageDTO Carriage { get; set; }
 
         [JsonConstructor]
-        public TrainDTO(string id,string name, int maxSpeed, MovementDTO movement, CarriageDTO carriage)
+        public TrainDTO(string id, string name, int maxSpeed, MovementDTO movement, CarriageDTO carriage)
         {
             Id = id;
             Name = name;

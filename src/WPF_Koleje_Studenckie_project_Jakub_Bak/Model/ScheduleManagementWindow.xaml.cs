@@ -3,12 +3,12 @@ using WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel;
 
 namespace WPF_Koleje_Studenckie_project_Jakub_Bak
 {
-    public partial class PersonelManagmentWindow : Window
+    public partial class ScheduleManagementWindow : Window
     {
-        public PersonelManagmentWindow()
+        public ScheduleManagementWindow()
         {
             InitializeComponent();
-            DataContext = new PersonelManagmentViewModel();
+            DataContext = new ScheduleManagementViewModel();
         }
     }
 }

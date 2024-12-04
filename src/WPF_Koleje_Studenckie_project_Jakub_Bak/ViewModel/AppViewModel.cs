@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text.Json;
-using System.Windows;
 using WPF_Koleje_Studenckie_project_Jakub_Bak.DTO;
 using WPF_Koleje_Studenckie_project_Jakub_Bak.Utilities;
 
@@ -13,12 +12,16 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
         public ObservableCollection<Train> Trains { get; private set; }
         public ObservableCollection<Personel> PersonelList { get; private set; }
 
+        public ObservableCollection<Schedule> Schedules { get; private set; }
+
         public AppViewModel()
         {
-            Trains = new ObservableCollection<Train>();
-            PersonelList = new ObservableCollection<Personel>();
+            Trains = [];
+            PersonelList = [];
+            Schedules = [];
             LoadTrains();
             LoadPersonel();
+            LoadSchedule();
         }
 
         public void LoadTrains()
@@ -37,6 +40,15 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
             {
                 var personel = new Personel(personelDto.Id, personelDto.Name, personelDto.Surname, personelDto.Position, personelDto.Salary);
                 PersonelList.Add(personel);
+            });
+        }
+
+        public void LoadSchedule()
+        {
+            LoadData<ScheduleDTO>(FilePathProvider.GetScheduleDataFilePath(), scheduleDto =>
+            {
+                var schedule = new Schedule(scheduleDto.Id, scheduleDto.TrainId, scheduleDto.DepartureTime, scheduleDto.ArrivalTime, scheduleDto.Station);
+                Schedules.Add(schedule);
             });
         }
 

@@ -15,14 +15,12 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 
         private void OpenAdminPanel()
         {
-            // Logic to open AdminPanelWindow
             var adminPanelWindow = new AdminPanelWindow();
             adminPanelWindow.Show();
         }
 
         private void OpenMap()
         {
-            // Logic to open MapWindow
             //var mapWindow = new MapWindow();
             //mapWindow.Show();
         }

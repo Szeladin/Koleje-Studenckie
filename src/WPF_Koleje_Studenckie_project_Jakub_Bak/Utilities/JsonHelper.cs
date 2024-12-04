@@ -1,7 +1,6 @@
 ﻿using System.IO;
 using System.Text.Json;
 using System.Windows;
-using System.Collections.Generic;
 
 namespace WPF_Koleje_Studenckie_project_Jakub_Bak.Utilities
 {

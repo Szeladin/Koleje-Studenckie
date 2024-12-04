@@ -17,17 +17,17 @@
             <Button Content="Remove Train" Margin="5" Padding="10,5" Command="{Binding RemoveTrainCommand}"/>
             <Button Content="Update Train" Margin="5" Padding="10,5" Command="{Binding UpdateTrainCommand}"/>
         </StackPanel>
-        <ListView ItemsSource="{Binding Trains}" Grid.Row="1" Margin="10" Grid.ColumnSpan="2" 
-                  SelectedItem="{Binding SelectedTrain, Mode=TwoWay}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" />
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" />
-                    <GridViewColumn Header="Max Speed" DisplayMemberBinding="{Binding MaxSpeed}"/>
-                    <GridViewColumn Header="Carriage Count" DisplayMemberBinding="{Binding Carriage.CarriageCount}"/>
-                    <GridViewColumn Header="Is Moving" DisplayMemberBinding="{Binding Movement.IsMoving}"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+
+        <DataGrid ItemsSource="{Binding Trains}" Grid.Row="1" Margin="10" Grid.ColumnSpan="2" 
+                  SelectedItem="{Binding SelectedTrain, Mode=TwoWay}" AutoGenerateColumns="False" 
+                  CanUserSortColumns="True" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="100"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="150"/>
+                <DataGridTextColumn Header="Max Speed" Binding="{Binding MaxSpeed}" Width="100"/>
+                <DataGridTextColumn Header="Carriage Count" Binding="{Binding Carriage.CarriageCount}" Width="150"/>
+                <DataGridTextColumn Header="Is Moving" Binding="{Binding Movement.IsMoving}" Width="100"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

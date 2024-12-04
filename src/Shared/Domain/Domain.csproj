@@ -68,7 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Personel.cs" />
-    <Compile Include="Entities\Scheulde.cs" />
+    <Compile Include="Entities\Schedule.cs" />
     <Compile Include="Entities\Station.cs" />
     <Compile Include="Entities\Train.cs" />
     <Compile Include="Entities\TrainCarriage.cs" />

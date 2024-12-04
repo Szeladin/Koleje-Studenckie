@@ -6,7 +6,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
     {
         public Personel NewPersonel { get; set; }
 
-        public void AddPersonel(string id,string name, string surname, string position, int salary)
+        public void AddPersonel(string id, string name, string surname, string position, int salary)
         {
             NewPersonel = new Personel(id, name, surname, position, salary);
         }
