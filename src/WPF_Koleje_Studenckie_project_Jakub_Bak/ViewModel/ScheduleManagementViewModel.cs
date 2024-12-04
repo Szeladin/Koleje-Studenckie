@@ -83,8 +83,13 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
         {
             if (SelectedSchedule != null)
             {
-                Schedules.Remove(SelectedSchedule);
-                SaveSchedules();
+                var result = MessageBox.Show("Are you sure you want to remove the selected schedule?", "Confirm Removal", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    Schedules.Remove(SelectedSchedule);
+                    SaveSchedules();
+                }
             }
             else
             {

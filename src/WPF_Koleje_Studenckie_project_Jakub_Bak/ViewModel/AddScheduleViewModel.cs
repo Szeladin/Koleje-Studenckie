@@ -7,16 +7,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
     public class AddScheduleViewModel : BaseViewModel
     {
         public ObservableCollection<Train> Trains { get; set; }
-        public string selectedTrainId;
-        public string SelectedTrainId
-        {
-            get => selectedTrainId;
-            set
-            {
-                selectedTrainId = value;
-                OnPropertyChanged();
-            }
-        }
+
         public Schedule? NewSchedule { get; set; }
 
         public AddScheduleViewModel()

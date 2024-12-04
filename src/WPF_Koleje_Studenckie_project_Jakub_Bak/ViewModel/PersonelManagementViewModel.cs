@@ -50,8 +50,12 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
         {
             if (SelectedPersonel != null)
             {
-                PersonelList.Remove(SelectedPersonel);
-                SavePersonel();
+                var result = MessageBox.Show($"Are you sure you want to remove the personel {SelectedPersonel.Name}?", "Remove Personel", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    PersonelList.Remove(SelectedPersonel);
+                    SavePersonel();
+                }
             }
             else
             {

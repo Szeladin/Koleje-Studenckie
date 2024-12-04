@@ -49,8 +49,12 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
         {
             if (SelectedTrain != null)
             {
-                Trains.Remove(SelectedTrain);
-                SaveTrains();
+                var result = MessageBox.Show($"Are you sure you want to remove the train {SelectedTrain.Name}?", "Remove Train", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    Trains.Remove(SelectedTrain);
+                    SaveTrains();
+                }
             }
             else
             {
