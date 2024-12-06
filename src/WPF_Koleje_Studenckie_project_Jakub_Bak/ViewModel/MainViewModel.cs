@@ -21,8 +21,8 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 
         private void OpenMap()
         {
-            //var mapWindow = new MapWindow();
-            //mapWindow.Show();
+            var mapWindow = new MapWindow();
+            mapWindow.Show();
         }
     }
 }

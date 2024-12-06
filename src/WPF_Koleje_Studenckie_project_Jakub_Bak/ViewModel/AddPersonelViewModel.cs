@@ -1,14 +1,56 @@
 using Domain.Entities;
+using System.Windows;
+using System.Windows.Input;
+using WPF_Koleje_Studenckie_project_Jakub_Bak.Utilities;
 
 namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 {
     public class AddPersonelViewModel : BaseViewModel
     {
+        public event EventHandler? DialogResultChanged;
+
+        private bool? _dialogResult;
+        public bool? DialogResult
+        {
+            get => _dialogResult;
+            set
+            {
+                if (_dialogResult != value)
+                {
+                    _dialogResult = value;
+                    OnPropertyChanged();
+                    DialogResultChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+
         public Personel NewPersonel { get; set; }
 
-        public void AddPersonel(string id, string name, string surname, string position, int salary)
+        public ICommand AddCommand { get; }
+        public ICommand CancelCommand { get; }
+
+        public AddPersonelViewModel()
         {
-            NewPersonel = new Personel(id, name, surname, position, salary);
+            AddCommand = new RelayCommand(AddPersonel);
+            CancelCommand = new RelayCommand(Cancel);
+        }
+
+        private void AddPersonel()
+        {
+            if (ValidateInput(Name, Surname, Position, SalaryText, out string errorMessage))
+            {
+                NewPersonel = new Personel(ShortGuidHandler.GenerateUniqueShortGuid("Personel-"), Name, Surname, Position, int.Parse(SalaryText));
+                DialogResult = true;
+            }
+            else
+            {
+                MessageBox.Show(errorMessage, "Validation Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void Cancel()
+        {
+            DialogResult = false;
         }
 
         public static bool ValidateInput(string name, string surname, string position, string salaryText, out string errorMessage)
@@ -41,5 +83,9 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 
             return true;
         }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string Position { get; set; }
+        public string SalaryText { get; set; }
     }
 }

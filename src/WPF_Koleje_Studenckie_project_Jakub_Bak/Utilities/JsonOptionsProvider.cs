@@ -1,15 +1,17 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace WPF_Koleje_Studenckie_project_Jakub_Bak.Utilities;
-public static class JsonOptionsProvider
+namespace WPF_Koleje_Studenckie_project_Jakub_Bak.Utilities
 {
-    public static JsonSerializerOptions GetDefaultOptions()
+    public static class JsonOptionsProvider
     {
-        return new JsonSerializerOptions
+        public static JsonSerializerOptions GetDefaultOptions()
         {
-            WriteIndented = true,
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
-        };
+            return new JsonSerializerOptions
+            {
+                WriteIndented = true,
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+            };
+        }
     }
 }

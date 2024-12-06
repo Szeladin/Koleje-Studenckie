@@ -1,1 +1,23 @@
-[]
+[
+  {
+    "Id": "Schedule-h2SQHrAz",
+    "TrainId": "Train-ubDA6lcH",
+    "DepartureTime": "2024-12-06T00:00:00",
+    "ArrivalTime": "2024-12-26T00:00:00",
+    "Station": "dfssd"
+  },
+  {
+    "Id": "Schedule-LEIv2uxQ",
+    "TrainId": "Train-0AQb3YLL",
+    "DepartureTime": "2024-12-13T00:00:00",
+    "ArrivalTime": "2024-12-28T00:00:00",
+    "Station": "fsdfsdfs"
+  },
+  {
+    "Id": "Schedule-1WievSf_",
+    "TrainId": "Train-0AQb3YLL",
+    "DepartureTime": "2024-12-12T00:00:00",
+    "ArrivalTime": "2024-12-27T00:00:00",
+    "Station": "jkhgkhg"
+  }
+]

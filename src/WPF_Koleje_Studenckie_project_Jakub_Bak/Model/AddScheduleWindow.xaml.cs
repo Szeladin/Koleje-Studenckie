@@ -1,7 +1,5 @@
 ﻿using Domain.Entities;
 using System.Windows;
-using System.Windows.Controls;
-using WPF_Koleje_Studenckie_project_Jakub_Bak.Utilities;
 using WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel;
 
 namespace WPF_Koleje_Studenckie_project_Jakub_Bak
@@ -15,29 +13,16 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak
             InitializeComponent();
             _viewModel = new AddScheduleViewModel();
             DataContext = _viewModel;
-        }
-
-        public Schedule? NewSchedule { get; internal set; }
-
-        private void AddButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (_viewModel.ValidateInput((string)SelectedTrainIdComboBox.SelectedValue, DepartureTimePicker.Text, ArrivalTimePicker.Text, StationTextBox.Text, out string errorMessage))
+            _viewModel.DialogResultChanged += (s, e) =>
             {
-                _viewModel.AddSchedule(ShortGuidHandler.GenerateUniqueShortGuid("Schedule-"), (string)SelectedTrainIdComboBox.SelectedValue, DateTime.Parse(DepartureTimePicker.Text), DateTime.Parse(ArrivalTimePicker.Text), StationTextBox.Text);
-                NewSchedule = _viewModel.NewSchedule;
-                this.DialogResult = true;
-                this.Close();
-            }
-            else
-            {
-                MessageBox.Show(errorMessage, "Validation Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+                this.DialogResult = _viewModel.DialogResult;
+                if (this.DialogResult == true || this.DialogResult == false)
+                {
+                    this.Close();
+                }
+            };
         }
 
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.DialogResult = false;
-            this.Close();
-        }
+        public Schedule? NewSchedule => _viewModel.NewSchedule;
     }
 }
