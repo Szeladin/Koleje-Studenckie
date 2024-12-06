@@ -1,14 +1,41 @@
 ﻿using Domain.Entities;
+using System.Windows;
+using System.Windows.Input;
+using WPF_Koleje_Studenckie_project_Jakub_Bak.Utilities;
 
 namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 {
     public class AddTrainViewModel : BaseViewModel
     {
         public Train NewTrain { get; set; }
+        public string Name { get; set; }
+        public string MaxSpeed { get; set; }
+        public string CarriageCount { get; set; }
+        public ICommand AddCommand { get; }
+        public ICommand CancelCommand { get; }
 
-        public void AddTrain(string id, string name, int maxSpeed, int carriageCount)
+        public AddTrainViewModel()
         {
-            NewTrain = new Train(id, name, maxSpeed, carriageCount);
+            AddCommand = new RelayCommand(AddTrain);
+            CancelCommand = new RelayCommand(Cancel);
+        }
+
+        private void AddTrain()
+        {
+            if (ValidateInput(Name, MaxSpeed, CarriageCount, out string errorMessage))
+            {
+                NewTrain = new Train(ShortGuidHandler.GenerateUniqueShortGuid("Train-"), Name, int.Parse(MaxSpeed), int.Parse(CarriageCount));
+                DialogResult = true;
+            }
+            else
+            {
+                MessageBox.Show(errorMessage, "Validation Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void Cancel()
+        {
+            DialogResult = false;
         }
 
         public bool ValidateInput(string name, string maxSpeedText, string carriageCountText, out string errorMessage)

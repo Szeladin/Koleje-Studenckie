@@ -13,29 +13,16 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak
             InitializeComponent();
             _viewModel = new AddPersonelViewModel();
             DataContext = _viewModel;
-        }
-
-        public Personel? NewPersonel { get; internal set; }
-
-        private void AddButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (AddPersonelViewModel.ValidateInput(NameTextBox.Text, SurnameTextBox.Text, PositionTextBox.Text, SalaryTextBox.Text, out string errorMessage))
+            _viewModel.DialogResultChanged += (s, e) =>
             {
-                _viewModel.AddPersonel(ShortGuidHandler.GenerateUniqueShortGuid("Personel-"), NameTextBox.Text, SurnameTextBox.Text, PositionTextBox.Text, int.Parse(SalaryTextBox.Text));
-                NewPersonel = _viewModel.NewPersonel;
-                this.DialogResult = true;
-                this.Close();
-            }
-            else
-            {
-                MessageBox.Show(errorMessage, "Validation Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+                this.DialogResult = _viewModel.DialogResult;
+                if (this.DialogResult == true || this.DialogResult == false)
+                {
+                    this.Close();
+                }
+            };
         }
 
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.DialogResult = false;
-            this.Close();
-        }
+        public Personel? NewPersonel => _viewModel.NewPersonel;
     }
 }
