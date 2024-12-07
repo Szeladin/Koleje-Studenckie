@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using WPF_Koleje_Studenckie_project_Jakub_Bak.Views;
 
 namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 {
@@ -17,19 +18,19 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 
         private void OpenTrainManagement()
         {
-            var trainManagementWindow = new TrainManagementWindow();
-            trainManagementWindow.Show();
+            var trainManagement = new TrainManagement();
+            trainManagement.Show();
         }
         private void OpenPersonnelManagement()
         {
-            var personelManagementWindow = new PersonelManagementWindow();
-            personelManagementWindow.Show();
+            var personelManagement = new PersonnelManagement();
+            personelManagement.Show();
         }
 
         private void OpenScheduleManagement()
         {
-            var scheduleManagementWindow = new ScheduleManagementWindow();
-            scheduleManagementWindow.Show();
+            var scheduleManagement = new ScheduleManagement();
+            scheduleManagement.Show();
         }
     }
 }

@@ -3,7 +3,7 @@
 namespace WPF_Koleje_Studenckie_project_Jakub_Bak.DTO
 {
 
-    public class PersonelDTO : IDTO
+    public class PersonnelDTO : IDTO
     {
         public string Id { get; set; }
         public string Name { get; set; }
@@ -12,7 +12,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.DTO
         public int Salary { get; set; }
 
         [JsonConstructor]
-        public PersonelDTO(string id, string name, string surname, string position, int salary)
+        public PersonnelDTO(string id, string name, string surname, string position, int salary)
         {
             Id = id;
             Name = name;

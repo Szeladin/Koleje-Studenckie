@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "Id": "Schedule-igf4WO6K",
+    "TrainId": "Train-Ff6qu2ws",
+    "DepartureTime": "2024-12-01T00:00:00",
+    "ArrivalTime": "2024-12-18T00:00:00",
+    "Station": "312312"
+  },
+  {
+    "Id": "Schedule-4O3Btdre",
+    "TrainId": "Train-Ff6qu2ws",
+    "DepartureTime": "2024-12-01T00:00:00",
+    "ArrivalTime": "2024-12-18T00:00:00",
+    "Station": "dsdass"
+  }
+]

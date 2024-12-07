@@ -5,7 +5,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak
 {
     public partial class App : Application
     {
-        public static AppViewModel ViewModel { get; private set; }
+        public static AppViewModel? ViewModel { get; private set; }
 
         protected override void OnStartup(StartupEventArgs e)
         {

@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using WPF_Koleje_Studenckie_project_Jakub_Bak.Views;
 
 namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 {
@@ -15,8 +16,8 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 
         private void OpenAdminPanel()
         {
-            var adminPanelWindow = new AdminPanelWindow();
-            adminPanelWindow.Show();
+            var adminPanel = new AdminPanel();
+            adminPanel.Show();
         }
 
         private void OpenMap()

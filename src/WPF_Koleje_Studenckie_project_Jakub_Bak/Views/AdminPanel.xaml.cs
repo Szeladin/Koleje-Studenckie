@@ -1,11 +1,11 @@
 using System.Windows;
 using WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel;
 
-namespace WPF_Koleje_Studenckie_project_Jakub_Bak
+namespace WPF_Koleje_Studenckie_project_Jakub_Bak.Views
 {
-    public partial class AdminPanelWindow : Window
+    public partial class AdminPanel: Window
     {
-        public AdminPanelWindow()
+        public AdminPanel()
         {
             InitializeComponent();
             DataContext = new AdminPanelViewModel();

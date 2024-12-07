@@ -7,9 +7,9 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.Utilities
             return JsonHelper.GetDataFilePath("trains.json");
         }
 
-        public static string GetPersonelDataFilePath()
+        public static string GetPersonnelDataFilePath()
         {
-            return JsonHelper.GetDataFilePath("personel.json");
+            return JsonHelper.GetDataFilePath("personnel.json");
         }
 
         public static string GetScheduleDataFilePath()

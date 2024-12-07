@@ -21,7 +21,18 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.Utilities
 
         public static string GetDataFilePath(string fileName)
         {
-            string projectDirectory = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.FullName;
+            string? baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            if (baseDirectory == null)
+            {
+                throw new InvalidOperationException("Base directory cannot be null.");
+            }
+
+            string? projectDirectory = Directory.GetParent(baseDirectory)?.Parent?.Parent?.Parent?.FullName;
+            if (projectDirectory == null)
+            {
+                throw new InvalidOperationException("Project directory cannot be determined.");
+            }
+
             string dataFolderPath = Path.Combine(projectDirectory, "Data");
             Directory.CreateDirectory(dataFolderPath);
             return Path.Combine(dataFolderPath, fileName);

@@ -2,8 +2,8 @@
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
-using WPF_Koleje_Studenckie_project_Jakub_Bak.DTO;
 using WPF_Koleje_Studenckie_project_Jakub_Bak.Utilities;
+using WPF_Koleje_Studenckie_project_Jakub_Bak.Views;
 
 
 namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
@@ -35,16 +35,16 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 
         private void AddSchedule()
         {
-            var addScheduleWindow = new AddScheduleWindow
+            var addSchedule = new AddSchedule
             {
                 DataContext = new AddScheduleViewModel()
             };
 
-            bool? result = addScheduleWindow.ShowDialog();
+            bool? result = addSchedule.ShowDialog();
 
-            if (result == true && addScheduleWindow.NewSchedule != null)
+            if (result == true && addSchedule.NewSchedule != null)
             {
-                Schedules.Add(addScheduleWindow.NewSchedule);
+                Schedules.Add(addSchedule.NewSchedule);
                 SaveSchedules();
             }
         }
@@ -53,7 +53,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
         {
             if (SelectedSchedule != null)
             {
-                var addScheduleWindow = new AddScheduleWindow
+                var addSchedule = new AddSchedule
                 {
                     SelectedTrainIdComboBox = { SelectedValue = SelectedSchedule.TrainId },
                     DepartureTimePicker = { Text = SelectedSchedule.DepartureTime.ToString() },
@@ -61,11 +61,11 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
                     StationTextBox = { Text = SelectedSchedule.Station },
                 };
 
-                bool? result = addScheduleWindow.ShowDialog();
+                bool? result = addSchedule.ShowDialog();
 
-                if (result == true && addScheduleWindow.NewSchedule != null)
+                if (result == true && addSchedule.NewSchedule != null)
                 {
-                    var updatedSchedule = addScheduleWindow.NewSchedule;
+                    var updatedSchedule = addSchedule.NewSchedule;
                     updatedSchedule.Id = SelectedSchedule.Id;
                     int index = Schedules.IndexOf(SelectedSchedule);
                     Schedules[index] = updatedSchedule;

@@ -1,10 +1,21 @@
 ﻿using Domain.Entities;
+using System.Windows;
+using System.Windows.Input;
+using WPF_Koleje_Studenckie_project_Jakub_Bak.Utilities;
 
 namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 {
     public class AddTrainViewModel : BaseViewModel
     {
         public Train NewTrain { get; set; }
+        public ICommand AddTrainCommand { get; }
+        public ICommand CancelCommand { get; }
+
+        public AddTrainViewModel()
+        {
+            AddTrainCommand = new RelayCommand(AddTrain);
+            CancelCommand = new RelayCommand(Cancel);
+        }
 
         public void AddTrain(string id, string name, int maxSpeed, int carriageCount)
         {
@@ -13,27 +24,32 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 
         public bool ValidateInput(string name, string maxSpeedText, string carriageCountText, out string errorMessage)
         {
-            errorMessage = string.Empty;
-
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                errorMessage = "Please enter a name for the train.";
-                return false;
-            }
-
-            if (!int.TryParse(maxSpeedText, out int maxSpeed) || maxSpeed <= 0)
-            {
-                errorMessage = "Please enter a valid positive number for Max Speed.";
-                return false;
-            }
-
-            if (!int.TryParse(carriageCountText, out int carriageCount) || carriageCount <= 0)
-            {
-                errorMessage = "Please enter a valid positive number for Carriage Count.";
-                return false;
-            }
-
-            return true;
+            return Train.ValidateInput(name, maxSpeedText, carriageCountText, out errorMessage);
         }
+
+        private void AddTrain(object parameter)
+        {
+            var values = (object[])parameter;
+            string name = (string)values[0];
+            string maxSpeedText = (string)values[1];
+            string carriageCountText = (string)values[2];
+
+            if (ValidateInput(name, maxSpeedText, carriageCountText, out string errorMessage))
+            {
+                AddTrain(ShortGuidHandler.GenerateUniqueShortGuid("Train-"), name, int.Parse(maxSpeedText), int.Parse(carriageCountText));
+                OnRequestClose?.Invoke(this, EventArgs.Empty);
+            }
+            else
+            {
+                MessageBox.Show(errorMessage, "Validation Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void Cancel(object parameter)
+        {
+            OnRequestClose?.Invoke(this, EventArgs.Empty);
+        }
+
+        public event EventHandler? OnRequestClose;
     }
 }

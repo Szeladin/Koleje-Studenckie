@@ -4,13 +4,13 @@ using System.Windows.Controls;
 using WPF_Koleje_Studenckie_project_Jakub_Bak.Utilities;
 using WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel;
 
-namespace WPF_Koleje_Studenckie_project_Jakub_Bak
+namespace WPF_Koleje_Studenckie_project_Jakub_Bak.Views
 {
-    public partial class AddScheduleWindow : Window
+    public partial class AddSchedule : Window
     {
         private readonly AddScheduleViewModel _viewModel;
 
-        public AddScheduleWindow()
+        public AddSchedule()
         {
             InitializeComponent();
             _viewModel = new AddScheduleViewModel();

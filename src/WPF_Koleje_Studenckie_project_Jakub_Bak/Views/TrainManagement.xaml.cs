@@ -1,11 +1,11 @@
 using System.Windows;
 using WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel;
 
-namespace WPF_Koleje_Studenckie_project_Jakub_Bak
+namespace WPF_Koleje_Studenckie_project_Jakub_Bak.Views
 {
-    public partial class TrainManagementWindow : Window
+    public partial class TrainManagement : Window
     {
-        public TrainManagementWindow()
+        public TrainManagement()
         {
             InitializeComponent();
             DataContext = new TrainManagementViewModel();

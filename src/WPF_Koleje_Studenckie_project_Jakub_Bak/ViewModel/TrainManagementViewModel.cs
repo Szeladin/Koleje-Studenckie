@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 using WPF_Koleje_Studenckie_project_Jakub_Bak.Utilities;
+using WPF_Koleje_Studenckie_project_Jakub_Bak.Views;
 
 namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 {
@@ -12,7 +13,8 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
         public ICommand AddTrainCommand { get; }
         public ICommand RemoveTrainCommand { get; }
         public ICommand UpdateTrainCommand { get; }
-        public Train SelectedTrain { get; set; }
+        public Train? SelectedTrain { get; set; }
+
         public TrainManagementViewModel()
         {
             var appViewModel = (AppViewModel)Application.Current.Resources["AppViewModel"];
@@ -24,23 +26,23 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
             {
                 MessageBox.Show("AppViewModel is not initialized.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            AddTrainCommand = new RelayCommand(AddTrain);
-            RemoveTrainCommand = new RelayCommand(RemoveTrain);
-            UpdateTrainCommand = new RelayCommand(UpdateTrain);
+            AddTrainCommand = new RelayCommand(_ => AddTrain());
+            RemoveTrainCommand = new RelayCommand(_ => RemoveTrain(), _ => SelectedTrain != null);
+            UpdateTrainCommand = new RelayCommand(_ => UpdateTrain(), _ => SelectedTrain != null);
         }
 
         private void AddTrain()
         {
-            var addTrainWindow = new AddTrainWindow
+            var addTrain = new AddTrain
             {
                 DataContext = new AddTrainViewModel()
             };
 
-            bool? result = addTrainWindow.ShowDialog();
+            bool? result = addTrain.ShowDialog();
 
-            if (result == true && addTrainWindow.NewTrain != null)
+            if (result == true && addTrain.NewTrain != null)
             {
-                Trains.Add(addTrainWindow.NewTrain);
+                Trains.Add(addTrain.NewTrain);
                 SaveTrains();
             }
         }
@@ -66,18 +68,18 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
         {
             if (SelectedTrain != null)
             {
-                var addTrainWindow = new AddTrainWindow
+                var addTrain = new AddTrain
                 {
                     NameTextBox = { Text = SelectedTrain.Name },
                     MaxSpeedTextBox = { Text = SelectedTrain.MaxSpeed.ToString() },
-                    CarriageCountTextBox = { Text = SelectedTrain.Carriage.CarriageCount.ToString() }
+                    CarriageCountTextBox = { Text = SelectedTrain.CarriageCount.ToString() }
                 };
 
-                addTrainWindow.ShowDialog();
+                addTrain.ShowDialog();
 
-                if (addTrainWindow.NewTrain != null)
+                if (addTrain.NewTrain != null)
                 {
-                    var updatedTrain = (Train)addTrainWindow.NewTrain;
+                    var updatedTrain = addTrain.NewTrain;
                     updatedTrain.Id = SelectedTrain.Id;
 
                     int index = Trains.IndexOf(SelectedTrain);

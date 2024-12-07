@@ -10,17 +10,16 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
     public class AppViewModel : BaseViewModel
     {
         public ObservableCollection<Train> Trains { get; private set; }
-        public ObservableCollection<Personel> PersonelList { get; private set; }
-
+        public ObservableCollection<Personnel> PersonnelList { get; private set; }
         public ObservableCollection<Schedule> Schedules { get; private set; }
 
         public AppViewModel()
         {
-            Trains = [];
-            PersonelList = [];
-            Schedules = [];
+            Trains = new ObservableCollection<Train>();
+            PersonnelList = new ObservableCollection<Personnel>();
+            Schedules = new ObservableCollection<Schedule>();
             LoadTrains();
-            LoadPersonel();
+            LoadPersonnel();
             LoadSchedule();
         }
 
@@ -29,17 +28,16 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
             LoadData<TrainDTO>(FilePathProvider.GetTrainDataFilePath(), trainDto =>
             {
                 var train = new Train(trainDto.Id, trainDto.Name, trainDto.MaxSpeed, trainDto.Carriage?.CarriageCount ?? 0);
-                train.Movement.IsMoving = trainDto.Movement.IsMoving;
                 Trains.Add(train);
             });
         }
 
-        public void LoadPersonel()
+        public void LoadPersonnel()
         {
-            LoadData<PersonelDTO>(FilePathProvider.GetPersonelDataFilePath(), personelDto =>
+            LoadData<PersonnelDTO>(FilePathProvider.GetPersonnelDataFilePath(), personnelDto =>
             {
-                var personel = new Personel(personelDto.Id, personelDto.Name, personelDto.Surname, personelDto.Position, personelDto.Salary);
-                PersonelList.Add(personel);
+                var personnel = new Personnel(personnelDto.Id, personnelDto.Name, personnelDto.Surname, personnelDto.Position, personnelDto.Salary);
+                PersonnelList.Add(personnel);
             });
         }
 
