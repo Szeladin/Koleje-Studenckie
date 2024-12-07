@@ -7,6 +7,23 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 {
     public class AddPersonelViewModel : BaseViewModel
     {
+        public event EventHandler? DialogResultChanged;
+
+        private bool? _dialogResult;
+        public bool? DialogResult
+        {
+            get => _dialogResult;
+            set
+            {
+                if (_dialogResult != value)
+                {
+                    _dialogResult = value;
+                    OnPropertyChanged();
+                    DialogResultChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+
         public Personel NewPersonel { get; set; }
 
         public ICommand AddCommand { get; }
@@ -66,11 +83,9 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 
             return true;
         }
-
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Position { get; set; }
         public string SalaryText { get; set; }
-        public bool? DialogResult { get; set; }
     }
 }

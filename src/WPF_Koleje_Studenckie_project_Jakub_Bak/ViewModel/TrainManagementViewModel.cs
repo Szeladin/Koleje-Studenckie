@@ -31,10 +31,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 
         private void AddTrain()
         {
-            var addTrainWindow = new AddTrainWindow
-            {
-                DataContext = new AddTrainViewModel()
-            };
+            var addTrainWindow = new AddTrainWindow();
 
             bool? result = addTrainWindow.ShowDialog();
 

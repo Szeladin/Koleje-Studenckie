@@ -32,11 +32,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 
         private void AddPersonel()
         {
-            var addPersonelWindow = new AddPersonelWindow
-            {
-                DataContext = new AddPersonelViewModel()
-            };
-
+            var addPersonelWindow = new AddPersonelWindow();
             bool? result = addPersonelWindow.ShowDialog();
 
             if (result == true && addPersonelWindow.NewPersonel != null)
@@ -69,17 +65,20 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
             {
                 var addPersonelWindow = new AddPersonelWindow
                 {
-                    NameTextBox = { Text = SelectedPersonel.Name },
-                    SurnameTextBox = { Text = SelectedPersonel.Surname },
-                    PositionTextBox = { Text = SelectedPersonel.Position },
-                    SalaryTextBox = { Text = SelectedPersonel.Salary.ToString() },
+                    DataContext = new AddPersonelViewModel
+                    {
+                        Name = SelectedPersonel.Name,
+                        Surname = SelectedPersonel.Surname,
+                        Position = SelectedPersonel.Position,
+                        SalaryText = SelectedPersonel.Salary.ToString()
+                    }
                 };
 
-                addPersonelWindow.ShowDialog();
+                bool? result = addPersonelWindow.ShowDialog();
 
-                if (addPersonelWindow.NewPersonel != null)
+                if (result == true && addPersonelWindow.NewPersonel != null)
                 {
-                    var updatedPersonel = (Personel)addPersonelWindow.NewPersonel;
+                    var updatedPersonel = addPersonelWindow.NewPersonel;
                     updatedPersonel.Id = SelectedPersonel.Id;
 
                     int index = PersonelList.IndexOf(SelectedPersonel);
@@ -92,7 +91,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
             }
             else
             {
-                MessageBox.Show("Please select a Personel to update.", "No Personel Selected", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Please select a personnel to update.", "No Personnel Selected", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 

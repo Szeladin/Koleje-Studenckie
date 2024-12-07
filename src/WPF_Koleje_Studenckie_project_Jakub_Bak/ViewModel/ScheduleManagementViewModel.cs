@@ -35,11 +35,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 
         private void AddSchedule()
         {
-            var addScheduleWindow = new AddScheduleWindow
-            {
-                DataContext = new AddScheduleViewModel()
-            };
-
+            var addScheduleWindow = new AddScheduleWindow();
             bool? result = addScheduleWindow.ShowDialog();
 
             if (result == true && addScheduleWindow.NewSchedule != null)
@@ -49,16 +45,20 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
             }
         }
 
+
         private void UpdateSchedule()
         {
             if (SelectedSchedule != null)
             {
                 var addScheduleWindow = new AddScheduleWindow
                 {
-                    SelectedTrainIdComboBox = { SelectedValue = SelectedSchedule.TrainId },
-                    DepartureTimePicker = { Text = SelectedSchedule.DepartureTime.ToString() },
-                    ArrivalTimePicker = { Text = SelectedSchedule.ArrivalTime.ToString() },
-                    StationTextBox = { Text = SelectedSchedule.Station },
+                    DataContext = new AddScheduleViewModel
+                    {
+                        Train = SelectedSchedule.TrainId,
+                        DepartureTime = SelectedSchedule.DepartureTime,
+                        ArrivalTime = SelectedSchedule.ArrivalTime,
+                        Station = SelectedSchedule.Station
+                    }
                 };
 
                 bool? result = addScheduleWindow.ShowDialog();
@@ -67,10 +67,13 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
                 {
                     var updatedSchedule = addScheduleWindow.NewSchedule;
                     updatedSchedule.Id = SelectedSchedule.Id;
-                    int index = Schedules.IndexOf(SelectedSchedule);
-                    Schedules[index] = updatedSchedule;
 
-                    SaveSchedules();
+                    int index = Schedules.IndexOf(SelectedSchedule);
+                    if (index >= 0)
+                    {
+                        Schedules[index] = updatedSchedule;
+                        SaveSchedules();
+                    }
                 }
             }
             else

@@ -1,7 +1,7 @@
 using Domain.Entities;
 using System.Windows;
-using WPF_Koleje_Studenckie_project_Jakub_Bak.Utilities;
 using WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel;
+
 namespace WPF_Koleje_Studenckie_project_Jakub_Bak
 {
     public partial class AddTrainWindow : Window
@@ -22,7 +22,6 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak
                 }
             };
         }
-
         public Train? NewTrain => _viewModel.NewTrain;
     }
 }

@@ -1,4 +1,4 @@
-﻿using Domain.Entities;
+﻿﻿using Domain.Entities;
 using System.Windows;
 using System.Windows.Input;
 using WPF_Koleje_Studenckie_project_Jakub_Bak.Utilities;
@@ -7,24 +7,44 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
 {
     public class AddTrainViewModel : BaseViewModel
     {
+        public event EventHandler? DialogResultChanged;
+
+        private bool? _dialogResult;
+        public bool? DialogResult
+        {
+            get => _dialogResult;
+            set
+            {
+                if (_dialogResult != value)
+                {
+                    _dialogResult = value;
+                    OnPropertyChanged();
+                    DialogResultChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+
         public Train NewTrain { get; set; }
-        public string Name { get; set; }
-        public string MaxSpeed { get; set; }
-        public string CarriageCount { get; set; }
-        public ICommand AddCommand { get; }
+
+        public ICommand SaveCommand { get; }
         public ICommand CancelCommand { get; }
+
+        public string Name { get; set; }
+        public int MaxSpeed { get; set; }
+        public int CarriageCount { get; set; }
 
         public AddTrainViewModel()
         {
-            AddCommand = new RelayCommand(AddTrain);
+            SaveCommand = new RelayCommand(AddTrain);
             CancelCommand = new RelayCommand(Cancel);
+            NewTrain = new Train(string.Empty, string.Empty, 0, 0); 
+            Name = string.Empty;
         }
-
         private void AddTrain()
         {
             if (ValidateInput(Name, MaxSpeed, CarriageCount, out string errorMessage))
             {
-                NewTrain = new Train(ShortGuidHandler.GenerateUniqueShortGuid("Train-"), Name, int.Parse(MaxSpeed), int.Parse(CarriageCount));
+                NewTrain = new Train(ShortGuidHandler.GenerateUniqueShortGuid("Train-"), Name, MaxSpeed, CarriageCount);
                 DialogResult = true;
             }
             else
@@ -38,7 +58,7 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
             DialogResult = false;
         }
 
-        public bool ValidateInput(string name, string maxSpeedText, string carriageCountText, out string errorMessage)
+        public static bool ValidateInput(string name, int maxSpeed, int carriageCount, out string errorMessage)
         {
             errorMessage = string.Empty;
 
@@ -48,15 +68,15 @@ namespace WPF_Koleje_Studenckie_project_Jakub_Bak.ViewModel
                 return false;
             }
 
-            if (!int.TryParse(maxSpeedText, out int maxSpeed) || maxSpeed <= 0)
+            if (maxSpeed <= 0)
             {
-                errorMessage = "Please enter a valid positive number for Max Speed.";
+                errorMessage = "Please enter a valid maximum speed for the train.";
                 return false;
             }
 
-            if (!int.TryParse(carriageCountText, out int carriageCount) || carriageCount <= 0)
+            if (carriageCount <= 0)
             {
-                errorMessage = "Please enter a valid positive number for Carriage Count.";
+                errorMessage = "Please enter a valid carriage count for the train.";
                 return false;
             }
 
