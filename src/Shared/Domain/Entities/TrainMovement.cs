@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Domain.Entities
+﻿namespace Domain.Entities
 {
-    internal class TrainMovement
+    public class TrainMovement
     {
+        public int CurrentSpeed { get; set; } = 0;
+        public bool IsMoving { get; set; } = false;
     }
 }

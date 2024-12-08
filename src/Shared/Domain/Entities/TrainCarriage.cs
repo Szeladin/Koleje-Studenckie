@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Domain.Entities
+﻿namespace Domain.Entities
 {
-    internal class TrainCarriage
+    public class TrainCarriage
     {
+        public int CarriageCount { get; set; }
+
+        public TrainCarriage(int initialCarriageCount)
+        {
+            CarriageCount = initialCarriageCount;
+        }
     }
 }
