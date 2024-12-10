@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using WPF_Koleje_Studenckie_project_Jakub_Bak.DTO;
+using KolejeStudenckie.DTO;
 
 namespace KolejeStudenckie.ViewModel
 {

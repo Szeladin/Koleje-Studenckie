@@ -1,28 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using KolejeStudenckie.DTO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace KolejeStudenckie.Views
 {
-    /// <summary>
-    /// Logika interakcji dla klasy UpdatePersonnelWindow.xaml
-    /// </summary>
     public partial class UpdatePersonnelWindow : Window
     {
-        public UpdatePersonnelWindow()
+        private readonly ViewModel.UpdatePersonnelViewModel _viewModel;
+        public UpdatePersonnelWindow(PersonnelDTO personnel)
         {
             InitializeComponent();
-            DataContext = new ViewModel.UpdatePersonnelViewModel();
+            _viewModel = new ViewModel.UpdatePersonnelViewModel(personnel);
+            DataContext = _viewModel;
         }
     }
 }

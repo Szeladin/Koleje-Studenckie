@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using WPF_Koleje_Studenckie_project_Jakub_Bak.DTO;
+using KolejeStudenckie.DTO;
 
 namespace KolejeStudenckie.ViewModel
 {
@@ -69,10 +69,13 @@ namespace KolejeStudenckie.ViewModel
 
         private void OpenUpdatePersonnelWindow(object? parameter)
         {
-            var updatePersonnelWindow = new UpdatePersonnelWindow();
-            if (updatePersonnelWindow.ShowDialog() == true)
+            if (SelectedPersonnel != null)
             {
-                RefreshPersonnels();
+                var updatePersonnelWindow = new UpdatePersonnelWindow(SelectedPersonnel);
+                if (updatePersonnelWindow.ShowDialog() == true)
+                {
+                    RefreshPersonnels();
+                }
             }
         }
 

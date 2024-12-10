@@ -14,12 +14,15 @@ using System.Windows.Shapes;
 
 namespace KolejeStudenckie.Views
 {
-    public partial class ScheduleManagementWindow : Window
+    /// <summary>
+    /// Logika interakcji dla klasy AddScheduleWindow.xaml
+    /// </summary>
+    public partial class AddScheduleWindow : Window
     {
-        public ScheduleManagementWindow()
+        public AddScheduleWindow()
         {
             InitializeComponent();
-            DataContext = new ViewModel.ScheduleManagementViewModel();
+            DataContext = new ViewModel.AddScheduleViewModel();
         }
     }
 }

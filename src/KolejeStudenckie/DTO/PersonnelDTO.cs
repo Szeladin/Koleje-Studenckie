@@ -1,7 +1,7 @@
 ﻿using KolejeStudenckie.DTO.Interfaces;
 using System.Text.Json.Serialization;
 
-namespace WPF_Koleje_Studenckie_project_Jakub_Bak.DTO
+namespace KolejeStudenckie.DTO
 {
 
     public class PersonnelDTO : IDTO
