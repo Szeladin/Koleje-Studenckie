@@ -30,6 +30,9 @@ namespace KolejeStudenckie.ViewModel
 
         public TrainManagementViewModel()
         {
+            Trains = new ObservableCollection<IDTO>();
+            _selectedTrain = new TrainDTO(string.Empty, string.Empty, 0, new MovementDTO(), new CarriageDTO());
+
             OpenAddTrainWindowCommand = new RelayCommand(OpenAddTrainWindow);
             RemoveTrainCommand = new RelayCommand(RemoveTrain, CanExecuteRemoveOrUpdate);
             OpenUpdateTrainWindowCommand = new RelayCommand(OpenUpdateTrainWindow, CanExecuteRemoveOrUpdate);

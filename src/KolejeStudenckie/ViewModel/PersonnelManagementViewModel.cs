@@ -35,6 +35,8 @@ namespace KolejeStudenckie.ViewModel
 
         public PersonnelManagementViewModel()
         {
+            Personnels = new ObservableCollection<IDTO>();
+            _selectedPersonnel = new PersonnelDTO(string.Empty, string.Empty, string.Empty, string.Empty, 0);
             OpenAddPersonnelWindowCommand = new RelayCommand(OpenAddPersonnelWindow);
             RemovePersonnelCommand = new RelayCommand(RemovePersonnel, CanExecuteRemoveOrUpdate);
             OpenUpdatePersonnelWindowCommand = new RelayCommand(OpenUpdatePersonnelWindow, CanExecuteRemoveOrUpdate);

@@ -30,7 +30,7 @@ namespace KolejeStudenckie.ViewModel
             CancelCommand = new RelayCommand(Cancel);
         }
 
-        private void UpdateBindingSource(Window window, string textBoxName)
+        private static void UpdateBindingSource(Window window, string textBoxName)
         {
             var textBox = window.FindName(textBoxName) as TextBox;
             textBox?.GetBindingExpression(TextBox.TextProperty)?.UpdateSource();

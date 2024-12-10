@@ -9,6 +9,8 @@ namespace KolejeStudenckie.Utilities
 {
     public static class JsonDataHandler
     {
+        private static readonly JsonSerializerOptions _jsonSerializerOptions = new JsonSerializerOptions { WriteIndented = true };
+
         public static List<IDTO> LoadDataFromJson<IDTO>(string relativePath)
         {
             var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
@@ -35,7 +37,7 @@ namespace KolejeStudenckie.Utilities
             var projectDirectory = Path.GetFullPath(Path.Combine(baseDirectory, @"..\..\..\..\.."));
             var jsonFilePath = Path.Combine(projectDirectory, relativePath);
 
-            var jsonData = JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true });
+            var jsonData = JsonSerializer.Serialize(data, _jsonSerializerOptions);
             File.WriteAllText(jsonFilePath, jsonData);
         }
     }
