@@ -8,10 +8,21 @@ using System.Windows.Input;
 
 namespace KolejeStudenckie.ViewModel
 {
-    internal class TrainManagementViewModel
+    internal class TrainManagementViewModel : BaseViewModel
     {
         public ObservableCollection<IDTO> Trains { get; set; }
-        public TrainDTO SelectedTrain { get; set; } = new TrainDTO("", "", 0, new MovementDTO(), new CarriageDTO());
+        private TrainDTO _selectedTrain;
+        public TrainDTO SelectedTrain
+        {
+            get => _selectedTrain;
+            set
+            {
+                _selectedTrain = value;
+                OnPropertyChanged();
+                ((RelayCommand)RemoveTrainCommand).RaiseCanExecuteChanged();
+                ((RelayCommand)OpenUpdateTrainWindowCommand).RaiseCanExecuteChanged();
+            }
+        }
 
         public ICommand OpenAddTrainWindowCommand { get; }
         public ICommand RemoveTrainCommand { get; }
@@ -19,34 +30,55 @@ namespace KolejeStudenckie.ViewModel
 
         public TrainManagementViewModel()
         {
-            Trains = new ObservableCollection<IDTO>(JsonDataLoader.LoadDataFromJson<TrainDTO>("src/KolejeStudenckie/Data/trains.json"));
             OpenAddTrainWindowCommand = new RelayCommand(OpenAddTrainWindow);
-            RemoveTrainCommand = new RelayCommand(RemoveTrain);
-            OpenUpdateTrainWindowCommand = new RelayCommand(OpenUpdateTrainWindow);
+            RemoveTrainCommand = new RelayCommand(RemoveTrain, CanExecuteRemoveOrUpdate);
+            OpenUpdateTrainWindowCommand = new RelayCommand(OpenUpdateTrainWindow, CanExecuteRemoveOrUpdate);
+            RefreshTrains();
         }
 
-        private void OpenAddTrainWindow()
+        private bool CanExecuteRemoveOrUpdate(object? parameter)
+        {
+            return SelectedTrain != null;
+        }
+
+        private void OpenAddTrainWindow(object? parameter)
         {
             var addTrainWindow = new AddTrainWindow();
             if (addTrainWindow.ShowDialog() == true)
             {
-                // Implementacja dodawania pociągu
-                var newTrain = addTrainWindow.NewTrain;
-                Trains.Add(newTrain);
+                RefreshTrains();
             }
         }
 
-        private void RemoveTrain()
+        private void RemoveTrain(object? parameter)
+        {
+            var trains = JsonDataHandler.LoadDataFromJson<TrainDTO>("src/KolejeStudenckie/Data/trains.json");
+            var trainToRemove = trains.FirstOrDefault(t => t.Id == SelectedTrain.Id);
+            if (trainToRemove != null)
+            {
+                trains.Remove(trainToRemove);
+                JsonDataHandler.SaveDataToJson("src/KolejeStudenckie/Data/trains.json", trains);
+                RefreshTrains();
+            }
+        }
+
+        private void OpenUpdateTrainWindow(object? parameter)
         {
             if (SelectedTrain != null)
             {
-                Trains.Remove(SelectedTrain);
+                var updateTrainWindow = new UpdateTrainWindow(SelectedTrain);
+                if (updateTrainWindow.ShowDialog() == true)
+                {
+                    RefreshTrains();
+                }
             }
         }
 
-        private void OpenUpdateTrainWindow()
+        private void RefreshTrains()
         {
-            // Implementacja aktualizacji pociągu
+            var trains = JsonDataHandler.LoadDataFromJson<TrainDTO>("src/KolejeStudenckie/Data/trains.json");
+            Trains = new ObservableCollection<IDTO>(trains);
+            OnPropertyChanged(nameof(Trains));
         }
     }
 }

@@ -1,0 +1,31 @@
+﻿<Window x:Class="KolejeStudenckie.Views.UpdateTrainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Update Train" Height="300" Width="400">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Content="Name:"/>
+        <TextBox x:Name="NameTextBox" Text="{Binding Train.Name, UpdateSourceTrigger=Explicit}" Grid.Row="0" Grid.Column="1" Margin="0,0,0,10"/>
+
+        <Label Grid.Row="1" Grid.Column="0" Content="Max Speed:"/>
+        <TextBox x:Name="MaxSpeedTextBox" Text="{Binding Train.MaxSpeed, UpdateSourceTrigger=Explicit}" Grid.Row="1" Grid.Column="1" Margin="0,0,0,10"/>
+
+        <Label Grid.Row="2" Grid.Column="0" Content="Carriage Count:"/>
+        <TextBox x:Name="CarriageCountTextBox" Text="{Binding Train.Carriage.CarriageCount, UpdateSourceTrigger=Explicit}" Grid.Row="2" Grid.Column="1" Margin="0,0,0,10"/>
+
+        <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Update" Width="75" Margin="0,0,10,0" Command="{Binding UpdateTrainCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
+            <Button Content="Cancel" Width="75" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
+        </StackPanel>
+    </Grid>
+</Window>

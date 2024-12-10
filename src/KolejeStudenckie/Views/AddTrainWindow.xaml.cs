@@ -25,7 +25,5 @@ namespace KolejeStudenckie.Views
             InitializeComponent();
             DataContext = new ViewModel.AddTrainViewModel();
         }
-
-        public TrainDTO NewTrain => ((ViewModel.AddTrainViewModel)DataContext).NewTrain;
     }
 }

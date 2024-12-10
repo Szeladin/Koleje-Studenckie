@@ -7,9 +7,9 @@ using System.Windows;
 
 namespace KolejeStudenckie.Utilities
 {
-    public static class JsonDataLoader
+    public static class JsonDataHandler
     {
-        public static List<IDTO> LoadDataFromJson<IDTO>(string relativePath) 
+        public static List<IDTO> LoadDataFromJson<IDTO>(string relativePath)
         {
             var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
             var projectDirectory = Path.GetFullPath(Path.Combine(baseDirectory, @"..\..\..\..\.."));
@@ -27,6 +27,16 @@ namespace KolejeStudenckie.Utilities
                 MessageBox.Show(jsonFilePath);
             }
             return new List<IDTO>();
+        }
+
+        public static void SaveDataToJson<IDTO>(string relativePath, IDTO data)
+        {
+            var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            var projectDirectory = Path.GetFullPath(Path.Combine(baseDirectory, @"..\..\..\..\.."));
+            var jsonFilePath = Path.Combine(projectDirectory, relativePath);
+
+            var jsonData = JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(jsonFilePath, jsonData);
         }
     }
 }

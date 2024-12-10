@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace KolejeStudenckie.ViewModel
 {
-    internal class MainViewModel
+    internal class MainViewModel : BaseViewModel
     {
         public ICommand OpenMapPanelCommand { get; }
         public ICommand OpenAdminPanelCommand { get; }
@@ -16,19 +16,19 @@ namespace KolejeStudenckie.ViewModel
             OpenSchedulePanelCommand = new RelayCommand(OpenSchedulePanel);
         }
 
-        private void OpenMapPanel()
+        private void OpenMapPanel(object? paremeter)
         {
             var mapWindow = new Views.MapPanelWindow();
             mapWindow.Show();
         }
 
-        private void OpenAdminPanel()
+        private void OpenAdminPanel(object? paremeter)
         {
             var adminWindow = new Views.AdminPanelWindow();
             adminWindow.Show();
         }
 
-        private void OpenSchedulePanel()
+        private void OpenSchedulePanel(object? paremeter)
         {
             var scheduleWindow = new Views.SchedulePanelWindow();
             scheduleWindow.Show();

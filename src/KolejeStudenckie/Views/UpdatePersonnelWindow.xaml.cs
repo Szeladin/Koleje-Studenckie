@@ -1,5 +1,4 @@
-﻿using KolejeStudenckie.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,12 +14,15 @@ using System.Windows.Shapes;
 
 namespace KolejeStudenckie.Views
 {
-    public partial class PersonnelManagementWindow : Window
+    /// <summary>
+    /// Logika interakcji dla klasy UpdatePersonnelWindow.xaml
+    /// </summary>
+    public partial class UpdatePersonnelWindow : Window
     {
-        public PersonnelManagementWindow()
+        public UpdatePersonnelWindow()
         {
             InitializeComponent();
-            DataContext = new PersonnelManagementViewModel();
+            DataContext = new ViewModel.UpdatePersonnelViewModel();
         }
     }
 }
