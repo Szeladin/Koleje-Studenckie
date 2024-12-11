@@ -1,5 +1,5 @@
-﻿namespace Domain.Entities 
-{ 
+﻿namespace Domain.Entities
+{
     public class Train
     {
         public string Id { get; set; }
@@ -14,5 +14,5 @@
             MaxSpeed = maxSpeed;
             CarriageCount = carriageCount;
         }
-    } 
+    }
 }

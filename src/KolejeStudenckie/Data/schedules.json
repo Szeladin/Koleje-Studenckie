@@ -1,9 +1,9 @@
 [
   {
-    "Id": "Schedules-5hrmfTXI",
+    "Id": "Schedules-tUQY6PES",
     "TrainId": "Trains-dRWImn6k",
-    "DepartureTime": "2024-12-10T22:49:33.1961827+01:00",
-    "ArrivalTime": "2024-12-27T00:00:00",
-    "Station": "weqew123312"
+    "DepartureTime": "2024-12-11T21:40:00.8720894+01:00",
+    "ArrivalTime": "2024-12-11T21:40:00.8720946+01:00",
+    "Station": "2313123"
   }
 ]

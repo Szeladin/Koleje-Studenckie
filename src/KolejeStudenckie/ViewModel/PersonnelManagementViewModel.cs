@@ -1,15 +1,10 @@
 ﻿using KolejeStudenckie.Commands;
+using KolejeStudenckie.DTO;
 using KolejeStudenckie.DTO.Interfaces;
 using KolejeStudenckie.Utilities;
 using KolejeStudenckie.Views;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using KolejeStudenckie.DTO;
 
 namespace KolejeStudenckie.ViewModel
 {

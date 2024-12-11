@@ -1,5 +1,4 @@
-﻿using Domain.Entities;
-using KolejeStudenckie.DTO;
+﻿using KolejeStudenckie.DTO;
 using System.Windows;
 
 namespace KolejeStudenckie.Views
