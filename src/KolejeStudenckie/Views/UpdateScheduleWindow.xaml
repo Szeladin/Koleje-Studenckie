@@ -1,0 +1,49 @@
+﻿<Window x:Class="KolejeStudenckie.Views.UpdateScheduleWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Update Schedule" Height="300" Width="400">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Content="Train ID:"/>
+        <ComboBox Grid.Row="0" Grid.Column="1" 
+                  ItemsSource="{Binding Trains}" 
+                  DisplayMemberPath="Id" 
+                  SelectedValuePath="Id" 
+                  SelectedValue="{Binding ExistingSchedule.TrainId, Mode=TwoWay}" 
+                  Margin="0,0,0,10"/>
+
+        <Label Grid.Row="1" Grid.Column="0" Content="Departure Time:"/>
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Margin="0,0,0,10">
+            <DatePicker SelectedDate="{Binding ExistingSchedule.DepartureTime, Mode=TwoWay}" Width="120"/>
+            <materialDesign:TimePicker SelectedTime="{Binding ExistingSchedule.DepartureTime, Mode=TwoWay}" Width="80" Margin="5,0,0,0"/>
+        </StackPanel>
+
+        <Label Grid.Row="2" Grid.Column="0" Content="Arrival Time:"/>
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" Margin="0,0,0,10">
+            <DatePicker SelectedDate="{Binding ExistingSchedule.ArrivalTime, Mode=TwoWay}" Width="120"/>
+            <materialDesign:TimePicker SelectedTime="{Binding ExistingSchedule.ArrivalTime, Mode=TwoWay}" Width="80" Margin="5,0,0,0"/>
+        </StackPanel>
+
+        <Label Grid.Row="3" Grid.Column="0" Content="Station:"/>
+        <TextBox Grid.Row="3" Grid.Column="1" 
+                 Text="{Binding ExistingSchedule.Station, Mode=TwoWay}" 
+                 Margin="0,0,0,10"/>
+
+        <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Update" Width="80" Margin="0,0,10,0" Command="{Binding UpdateScheduleCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
+            <Button Content="Cancel" Width="75" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
+        </StackPanel>
+    </Grid>
+</Window>

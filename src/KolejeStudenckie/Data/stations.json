@@ -1,0 +1,23 @@
+﻿[
+  {
+    "Id": "1",
+    "Name": "Central Station",
+    "X": 100,
+    "Y": 100,
+    "TrainIds": ["Train-1", "Train-2"]
+  },
+  {
+    "Id": "2",
+    "Name": "North Station",
+    "X": 200,
+    "Y": 200,
+    "TrainIds": ["Train-3"]
+  },
+  {
+    "Id": "3",
+    "Name": "East Station",
+    "X": 300,
+    "Y": 300,
+    "TrainIds": ["Train-4", "Train-5"]
+  }
+]

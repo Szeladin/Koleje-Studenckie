@@ -1,0 +1,13 @@
+﻿<Window x:Class="KolejeStudenckie.Views.AdminPanelWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Administration Panel" Height="400" Width="600">
+    <Grid>
+        <StackPanel Margin="20">
+            <TextBlock FontSize="24" FontWeight="Bold" Text="Administration Panel" Margin="0,0,0,20"/>
+            <Button Content="Train Management" Margin="5" Command="{Binding OpenTrainManagementCommand}"/>
+            <Button Content="Personnel Management" Margin="5" Command="{Binding OpenPersonnelManagementCommand}"/>
+            <Button Content="Schedule Management" Margin="5" Command="{Binding OpenScheduleManagementCommand}"/>
+        </StackPanel>
+    </Grid>
+</Window>
