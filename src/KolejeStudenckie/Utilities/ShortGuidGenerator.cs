@@ -2,7 +2,7 @@
 {
     public static class ShortGuidHandler
     {
-        private static HashSet<string> existingIds = new HashSet<string>();
+        private static readonly HashSet<string> existingIds = new HashSet<string>();
 
         public static string GenerateUniqueShortGuid(string prefix = "")
         {

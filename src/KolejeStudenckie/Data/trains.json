@@ -1,7 +1,7 @@
 [
   {
     "Id": "Trains-dRWImn6k",
-    "Name": "eqwe",
+    "Name": "123eqwe",
     "MaxSpeed": 321312,
     "Movement": {
       "CurrentSpeed": 0,
@@ -24,27 +24,15 @@
     }
   },
   {
-    "Id": "Trains-F4q0tMGl",
-    "Name": "213312",
-    "MaxSpeed": 2133120,
+    "Id": "Trains-wX8IBIOZ",
+    "Name": "dsad",
+    "MaxSpeed": 434,
     "Movement": {
       "CurrentSpeed": 0,
       "IsMoving": false
     },
     "Carriage": {
-      "CarriageCount": 12312312
-    }
-  },
-  {
-    "Id": "Trains-SpMEU9fv",
-    "Name": "21312qweee",
-    "MaxSpeed": 213123,
-    "Movement": {
-      "CurrentSpeed": 0,
-      "IsMoving": false
-    },
-    "Carriage": {
-      "CarriageCount": 1231231
+      "CarriageCount": 4
     }
   }
 ]

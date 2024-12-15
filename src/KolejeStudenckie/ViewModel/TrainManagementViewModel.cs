@@ -4,6 +4,7 @@ using KolejeStudenckie.DTO.Interfaces;
 using KolejeStudenckie.Utilities;
 using KolejeStudenckie.Views;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 
 namespace KolejeStudenckie.ViewModel
@@ -31,7 +32,7 @@ namespace KolejeStudenckie.ViewModel
         public TrainManagementViewModel()
         {
             Trains = new ObservableCollection<IDTO>();
-            _selectedTrain = new TrainDTO(string.Empty, string.Empty, 0, new MovementDTO(), new CarriageDTO());
+            _selectedTrain = null;
 
             OpenAddTrainWindowCommand = new RelayCommand(OpenAddTrainWindow);
             RemoveTrainCommand = new RelayCommand(RemoveTrain, CanExecuteRemoveOrUpdate);
@@ -55,6 +56,16 @@ namespace KolejeStudenckie.ViewModel
 
         private void RemoveTrain(object? parameter)
         {
+            var schedules = JsonDataHandler.LoadDataFromJson<ScheduleDTO>("src/KolejeStudenckie/Data/schedules.json");
+            var hasSchedule = schedules.Any(s => s.TrainId == SelectedTrain.Id);
+
+            if (hasSchedule)
+            {
+                // Można dodać komunikat informujący użytkownika, że pociąg ma przypisane harmonogramy
+                MessageBox.Show("Nie można usunąć pociągu, ponieważ ma przypisane harmonogramy.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             var trains = JsonDataHandler.LoadDataFromJson<TrainDTO>("src/KolejeStudenckie/Data/trains.json");
             var trainToRemove = trains.FirstOrDefault(t => t.Id == SelectedTrain.Id);
             if (trainToRemove != null)

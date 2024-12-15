@@ -31,7 +31,7 @@ namespace KolejeStudenckie.ViewModel
         public ScheduleManagementViewModel()
         {
             Schedules = new ObservableCollection<IDTO>();
-            _selectedSchedule = new ScheduleDTO(string.Empty, string.Empty, DateTime.Now, DateTime.Now, string.Empty);
+            _selectedSchedule = null;
             AddScheduleCommand = new RelayCommand(AddSchedule);
             RemoveScheduleCommand = new RelayCommand(RemoveSchedule, CanExecuteRemoveOrUpdate);
             UpdateScheduleCommand = new RelayCommand(UpdateSchedule, CanExecuteRemoveOrUpdate);

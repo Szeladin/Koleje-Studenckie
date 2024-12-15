@@ -7,6 +7,7 @@ namespace KolejeStudenckie.Views
         public MapPanelWindow()
         {
             InitializeComponent();
+            DataContext = new ViewModel.MapPanelViewModel();
         }
     }
 }

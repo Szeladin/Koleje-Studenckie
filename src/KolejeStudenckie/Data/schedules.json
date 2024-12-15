@@ -1,9 +1,23 @@
 [
   {
     "Id": "Schedules-tUQY6PES",
-    "TrainId": "Trains-dRWImn6k",
+    "TrainId": "Trains-k0XPlk3C",
     "DepartureTime": "2024-12-11T21:40:00.8720894+01:00",
     "ArrivalTime": "2024-12-11T21:40:00.8720946+01:00",
     "Station": "2313123"
+  },
+  {
+    "Id": "Schedules-CC0qVo7a",
+    "TrainId": "Trains-k0XPlk3C",
+    "DepartureTime": "2024-12-11T21:59:53.1279199+01:00",
+    "ArrivalTime": "2024-12-11T16:43:00",
+    "Station": "eqwee"
+  },
+  {
+    "Id": "Schedules-W3U4xiSG",
+    "TrainId": "Trains-k0XPlk3C",
+    "DepartureTime": "2024-12-13T14:12:00",
+    "ArrivalTime": "2024-12-13T17:08:16.3253571+01:00",
+    "Station": "1"
   }
 ]
