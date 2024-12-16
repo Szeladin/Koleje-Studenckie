@@ -24,22 +24,25 @@
                   SelectedValue="{Binding NewSchedule.TrainId, Mode=TwoWay}" 
                   Margin="0,0,0,10"/>
 
-        <Label Grid.Row="1" Grid.Column="0" Content="Departure Time:"/>
-        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Margin="0,0,0,10">
-            <DatePicker SelectedDate="{Binding NewSchedule.DepartureTime, Mode=TwoWay}" Width="120"/>
-            <materialDesign:TimePicker SelectedTime="{Binding NewSchedule.DepartureTime, Mode=TwoWay}" Width="80" Margin="5,0,0,0"/>
-        </StackPanel>
+        <Label Grid.Row="1" Grid.Column="0" Content="Station:"/>
+        <ComboBox Grid.Row="1" Grid.Column="1" 
+                  ItemsSource="{Binding Stations}" 
+                  DisplayMemberPath="Name" 
+                  SelectedValuePath="Name" 
+                  SelectedValue="{Binding NewSchedule.Station, Mode=TwoWay}" 
+                  Margin="0,0,0,10"/>
 
         <Label Grid.Row="2" Grid.Column="0" Content="Arrival Time:"/>
         <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" Margin="0,0,0,10">
             <DatePicker SelectedDate="{Binding NewSchedule.ArrivalTime, Mode=TwoWay}" Width="120"/>
             <materialDesign:TimePicker SelectedTime="{Binding NewSchedule.ArrivalTime, Mode=TwoWay}" Width="80" Margin="5,0,0,0"/>
         </StackPanel>
-
-        <Label Grid.Row="3" Grid.Column="0" Content="Station:"/>
-        <TextBox Grid.Row="3" Grid.Column="1" 
-                 Text="{Binding NewSchedule.Station, Mode=TwoWay}" 
-                 Margin="0,0,0,10"/>
+        
+        <Label Grid.Row="3" Grid.Column="0" Content="Departure Time:"/>
+        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" Margin="0,0,0,10">
+            <DatePicker SelectedDate="{Binding NewSchedule.DepartureTime, Mode=TwoWay}" Width="120"/>
+            <materialDesign:TimePicker SelectedTime="{Binding NewSchedule.DepartureTime, Mode=TwoWay}" Width="80" Margin="5,0,0,0"/>
+        </StackPanel>
 
         <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Content="Add" Width="75" Margin="0,0,10,0" Command="{Binding AddScheduleCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>

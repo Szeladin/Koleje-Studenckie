@@ -21,6 +21,7 @@ namespace KolejeStudenckie.ViewModel
         }
 
         public ObservableCollection<TrainDTO> Trains { get; set; }
+        public ObservableCollection<StationDTO> Stations { get; set; }
         public ICommand UpdateScheduleCommand { get; }
         public ICommand CancelCommand { get; }
 
@@ -28,6 +29,7 @@ namespace KolejeStudenckie.ViewModel
         {
             ExistingSchedule = schedule;
             Trains = new ObservableCollection<TrainDTO>(JsonDataHandler.LoadDataFromJson<TrainDTO>("src/KolejeStudenckie/Data/trains.json"));
+            Stations = new ObservableCollection<StationDTO>(JsonDataHandler.LoadDataFromJson<StationDTO>("src/KolejeStudenckie/Data/stations.json"));
             UpdateScheduleCommand = new RelayCommand(UpdateSchedule);
             CancelCommand = new RelayCommand(Cancel);
         }

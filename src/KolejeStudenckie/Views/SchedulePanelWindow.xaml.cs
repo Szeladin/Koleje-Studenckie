@@ -7,6 +7,7 @@ namespace KolejeStudenckie.Views
         public SchedulePanelWindow()
         {
             InitializeComponent();
+            DataContext = new ViewModel.SchedulePanelViewModel();
         }
     }
 }

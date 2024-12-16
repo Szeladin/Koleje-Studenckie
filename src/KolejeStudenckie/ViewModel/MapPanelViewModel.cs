@@ -38,6 +38,7 @@ namespace KolejeStudenckie.ViewModel
             CreateStationElements();
             PopulateStationInfoList();
             StartDateTimeUpdater();
+            RefreshStationTrainList();
         }
 
         private void CreateGridLines()
@@ -82,11 +83,11 @@ namespace KolejeStudenckie.ViewModel
                 };
 
                 Canvas.SetLeft(ellipse, station.X - 15); // Przesunięcie 
-                Canvas.SetTop(ellipse, station.Y - 15); 
+                Canvas.SetTop(ellipse, station.Y - 15);
 
                 var label = new TextBlock
                 {
-                    Text = station.Id,
+                    Text = station.Name,
                     Foreground = Brushes.Black,
                     Background = Brushes.White
                 };
@@ -103,7 +104,7 @@ namespace KolejeStudenckie.ViewModel
         {
             foreach (var station in Stations)
             {
-                StationInfoList.Add($"ID: {station.Id}, Nazwa: {station.Name}, Pociągi: {string.Join(", ", station.TrainIds)}");
+                StationInfoList.Add($"Name: {station.Name}\n Trains: {string.Join(",\n ", station.TrainIds)}");
             }
         }
 
@@ -116,8 +117,37 @@ namespace KolejeStudenckie.ViewModel
             timer.Tick += (sender, args) =>
             {
                 CurrentDateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                RefreshStationTrainList();
             };
             timer.Start();
+        }
+
+        private void RefreshStationTrainList()
+        {
+            var schedules = JsonDataHandler.LoadDataFromJson<ScheduleDTO>("src/KolejeStudenckie/Data/schedules.json");
+            var trains = JsonDataHandler.LoadDataFromJson<TrainDTO>("src/KolejeStudenckie/Data/trains.json");
+            var currentTime = DateTime.Now;
+
+            foreach (var station in Stations)
+            {
+                station.TrainIds.Clear();
+                var stationSchedules = schedules.Where(s => s.Station == station.Name);
+                foreach (var schedule in stationSchedules)
+                {
+                    if (schedule.ArrivalTime <= currentTime && schedule.DepartureTime > currentTime)
+                    {
+                        var train = trains.FirstOrDefault(t => t.Id == schedule.TrainId);
+                        if (train != null)
+                        {
+                            station.TrainIds.Add(train.Id);
+                        }
+                    }
+                }
+            }
+            JsonDataHandler.SaveDataToJson("src/KolejeStudenckie/Data/stations.json", Stations);
+
+            StationInfoList.Clear();
+            PopulateStationInfoList();
         }
     }
 }
