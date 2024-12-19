@@ -7,6 +7,14 @@
         mc:Ignorable="d"
         Title="SchedulePanelWindow" Height="450" Width="800">
     <Grid>
-        
+        <ListView ItemsSource="{Binding Schedules}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Station" DisplayMemberBinding="{Binding Station}" Width="200"/>
+                    <GridViewColumn Header="Arrival Time" DisplayMemberBinding="{Binding ArrivalTime}" Width="200"/>
+                    <GridViewColumn Header="Departure Time" DisplayMemberBinding="{Binding DepartureTime}" Width="200"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>

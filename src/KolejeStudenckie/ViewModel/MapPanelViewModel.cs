@@ -12,6 +12,8 @@ namespace KolejeStudenckie.ViewModel
 {
     internal class MapPanelViewModel : BaseViewModel
     {
+        private readonly IStationService _stationService;
+
         public ObservableCollection<StationDTO> Stations { get; set; }
         public ObservableCollection<UIElement> StationElements { get; set; }
         public ObservableCollection<UIElement> GridLines { get; set; }
@@ -28,16 +30,20 @@ namespace KolejeStudenckie.ViewModel
             }
         }
 
-        public MapPanelViewModel()
+        public MapPanelViewModel(IStationService stationService)
         {
-            Stations = new ObservableCollection<StationDTO>(JsonDataHandler.LoadDataFromJson<StationDTO>("src/KolejeStudenckie/Data/stations.json"));
+            _stationService = stationService;
+
+            Stations = _stationService.GetStations();
             StationElements = new ObservableCollection<UIElement>();
             GridLines = new ObservableCollection<UIElement>();
             StationInfoList = new ObservableCollection<string>();
+
             CreateGridLines();
             CreateStationElements();
             PopulateStationInfoList();
             StartDateTimeUpdater();
+            RefreshStationTrainList();
         }
 
         private void CreateGridLines()
@@ -82,11 +88,11 @@ namespace KolejeStudenckie.ViewModel
                 };
 
                 Canvas.SetLeft(ellipse, station.X - 15); // Przesunięcie 
-                Canvas.SetTop(ellipse, station.Y - 15); 
+                Canvas.SetTop(ellipse, station.Y - 15);
 
                 var label = new TextBlock
                 {
-                    Text = station.Id,
+                    Text = station.Name,
                     Foreground = Brushes.Black,
                     Background = Brushes.White
                 };
@@ -103,7 +109,7 @@ namespace KolejeStudenckie.ViewModel
         {
             foreach (var station in Stations)
             {
-                StationInfoList.Add($"ID: {station.Id}, Nazwa: {station.Name}, Pociągi: {string.Join(", ", station.TrainIds)}");
+                StationInfoList.Add($"Name: {station.Name}\n Trains: {string.Join(",\n ", station.TrainIds)}");
             }
         }
 
@@ -116,8 +122,16 @@ namespace KolejeStudenckie.ViewModel
             timer.Tick += (sender, args) =>
             {
                 CurrentDateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                RefreshStationTrainList();
             };
             timer.Start();
+        }
+
+        private void RefreshStationTrainList()
+        {
+            _stationService.RefreshStationTrainList(Stations);
+            StationInfoList.Clear();
+            PopulateStationInfoList();
         }
     }
 }
