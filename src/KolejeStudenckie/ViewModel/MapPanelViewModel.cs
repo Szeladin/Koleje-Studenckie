@@ -12,6 +12,8 @@ namespace KolejeStudenckie.ViewModel
 {
     internal class MapPanelViewModel : BaseViewModel
     {
+        private readonly IStationService _stationService;
+
         public ObservableCollection<StationDTO> Stations { get; set; }
         public ObservableCollection<UIElement> StationElements { get; set; }
         public ObservableCollection<UIElement> GridLines { get; set; }
@@ -28,12 +30,15 @@ namespace KolejeStudenckie.ViewModel
             }
         }
 
-        public MapPanelViewModel()
+        public MapPanelViewModel(IStationService stationService)
         {
-            Stations = new ObservableCollection<StationDTO>(JsonDataHandler.LoadDataFromJson<StationDTO>("src/KolejeStudenckie/Data/stations.json"));
+            _stationService = stationService;
+
+            Stations = _stationService.GetStations();
             StationElements = new ObservableCollection<UIElement>();
             GridLines = new ObservableCollection<UIElement>();
             StationInfoList = new ObservableCollection<string>();
+
             CreateGridLines();
             CreateStationElements();
             PopulateStationInfoList();
@@ -124,28 +129,7 @@ namespace KolejeStudenckie.ViewModel
 
         private void RefreshStationTrainList()
         {
-            var schedules = JsonDataHandler.LoadDataFromJson<ScheduleDTO>("src/KolejeStudenckie/Data/schedules.json");
-            var trains = JsonDataHandler.LoadDataFromJson<TrainDTO>("src/KolejeStudenckie/Data/trains.json");
-            var currentTime = DateTime.Now;
-
-            foreach (var station in Stations)
-            {
-                station.TrainIds.Clear();
-                var stationSchedules = schedules.Where(s => s.Station == station.Name);
-                foreach (var schedule in stationSchedules)
-                {
-                    if (schedule.ArrivalTime <= currentTime && schedule.DepartureTime > currentTime)
-                    {
-                        var train = trains.FirstOrDefault(t => t.Id == schedule.TrainId);
-                        if (train != null)
-                        {
-                            station.TrainIds.Add(train.Id);
-                        }
-                    }
-                }
-            }
-            JsonDataHandler.SaveDataToJson("src/KolejeStudenckie/Data/stations.json", Stations);
-
+            _stationService.RefreshStationTrainList(Stations);
             StationInfoList.Clear();
             PopulateStationInfoList();
         }

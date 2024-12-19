@@ -1,4 +1,5 @@
 ﻿using KolejeStudenckie.DTO;
+using KolejeStudenckie.DTO.Interfaces;
 using KolejeStudenckie.Utilities;
 using System;
 using System.Collections.Generic;
@@ -11,11 +12,28 @@ namespace KolejeStudenckie.ViewModel
 {
     internal class SchedulePanelViewModel : BaseViewModel
     {
-        public ObservableCollection<ScheduleDTO> Schedules { get; set; }
+        public ObservableCollection<IDTO> Schedules { get; set; }
 
         public SchedulePanelViewModel()
         {
-            Schedules = new ObservableCollection<ScheduleDTO>(JsonDataHandler.LoadDataFromJson<ScheduleDTO>("src/KolejeStudenckie/Data/schedules.json"));
+            Schedules = new ObservableCollection<IDTO>();
+            RefreshSchedules();
+            ScheduleManagementViewModel.SchedulesChanged += OnSchedulesChanged;
+        }
+
+        private void OnSchedulesChanged(object? sender, EventArgs e)
+        {
+            RefreshSchedules();
+        }
+
+        private void RefreshSchedules()
+        {
+            Schedules.Clear();
+            var schedules = JsonDataHandler.LoadDataFromJson<ScheduleDTO>("src/KolejeStudenckie/Data/schedules.json");
+            foreach (var schedule in schedules)
+            {
+                Schedules.Add(schedule);
+            }
         }
     }
 }
