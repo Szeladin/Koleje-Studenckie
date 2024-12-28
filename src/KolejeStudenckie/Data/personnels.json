@@ -3,7 +3,16 @@
     "Id": "Personnels-p1MZmpye",
     "Name": "2332332saddasdsd",
     "Surname": "asdd",
-    "Position": "asdasd",
-    "Salary": 111110
+    "Position": "asdasddddd",
+    "Salary": 111110,
+    "LastUpdated": "2024-12-28T15:00:41.2112306+01:00"
+  },
+  {
+    "Id": "Personnels-5etLR8mT",
+    "Name": "3132",
+    "Surname": "2313",
+    "Position": "312312",
+    "Salary": 123123,
+    "LastUpdated": "2024-12-28T15:00:30.723622+01:00"
   }
 ]

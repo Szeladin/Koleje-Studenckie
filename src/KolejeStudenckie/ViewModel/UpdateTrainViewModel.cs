@@ -52,6 +52,7 @@ namespace KolejeStudenckie.ViewModel
                     existingTrain.MaxSpeed = Train.MaxSpeed;
                     existingTrain.Movement = Train.Movement;
                     existingTrain.Carriage = Train.Carriage;
+                    existingTrain.LastUpdated = DateTime.Now;
                 }
                 JsonDataHandler.SaveDataToJson("src/KolejeStudenckie/Data/trains.json", trains);
                 window.DialogResult = true;

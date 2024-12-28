@@ -10,15 +10,17 @@ namespace KolejeStudenckie.DTO
         public int MaxSpeed { get; set; }
         public MovementDTO Movement { get; set; }
         public CarriageDTO Carriage { get; set; }
+        public DateTime LastUpdated { get; set; }
 
         [JsonConstructor]
-        public TrainDTO(string id, string name, int maxSpeed, MovementDTO movement, CarriageDTO carriage)
+        public TrainDTO(string id, string name, int maxSpeed, MovementDTO movement, CarriageDTO carriage, DateTime lastupdated)
         {
             Id = id;
             Name = name;
             MaxSpeed = maxSpeed;
             Movement = movement;
             Carriage = carriage;
+            LastUpdated = lastupdated;
         }
     }
 }

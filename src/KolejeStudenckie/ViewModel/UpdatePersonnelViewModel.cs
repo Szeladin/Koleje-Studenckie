@@ -53,6 +53,7 @@ namespace KolejeStudenckie.ViewModel
                     existingPersonnel.Surname = Personnel.Surname;
                     existingPersonnel.Position = Personnel.Position;
                     existingPersonnel.Salary = Personnel.Salary;
+                    existingPersonnel.LastUpdated = DateTime.Now;
                 }
                 JsonDataHandler.SaveDataToJson("src/KolejeStudenckie/Data/personnels.json", personnels);
                 window.DialogResult = true;

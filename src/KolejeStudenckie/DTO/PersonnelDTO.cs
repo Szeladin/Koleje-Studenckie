@@ -12,14 +12,18 @@ namespace KolejeStudenckie.DTO
         public string Position { get; set; }
         public int Salary { get; set; }
 
+        public DateTime LastUpdated { get; set; }
+
+
         [JsonConstructor]
-        public PersonnelDTO(string id, string name, string surname, string position, int salary)
+        public PersonnelDTO(string id, string name, string surname, string position, int salary, DateTime lastupdated)
         {
             Id = id;
             Name = name;
             Surname = surname;
             Position = position;
             Salary = salary;
+            LastUpdated = lastupdated;
         }
     }
 }

@@ -46,6 +46,7 @@ namespace KolejeStudenckie.ViewModel
                     scheduleToUpdate.DepartureTime = ExistingSchedule.DepartureTime;
                     scheduleToUpdate.ArrivalTime = ExistingSchedule.ArrivalTime;
                     scheduleToUpdate.Station = ExistingSchedule.Station;
+                    scheduleToUpdate.LastUpdated = DateTime.Now;
                     JsonDataHandler.SaveDataToJson("src/KolejeStudenckie/Data/schedules.json", schedules);
                 }
                 window.DialogResult = true;

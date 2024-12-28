@@ -16,7 +16,7 @@ namespace KolejeStudenckie.ViewModel
         public AddTrainViewModel()
         {
             string newTrainId = ShortGuidHandler.GenerateUniqueShortGuid("Trains-");
-            NewTrain = new TrainDTO(newTrainId, "", 0, new MovementDTO(), new CarriageDTO());
+            NewTrain = new TrainDTO(newTrainId, "", 0, new MovementDTO(), new CarriageDTO(), DateTime.Now);
 
             AddTrainCommand = new RelayCommand(AddTrain);
             CancelCommand = new RelayCommand(Cancel);

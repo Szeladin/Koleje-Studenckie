@@ -27,6 +27,7 @@
                 <DataGridTextColumn Header="Max Speed" Binding="{Binding MaxSpeed}" Width="auto"/>
                 <DataGridTextColumn Header="Carriage Count" Binding="{Binding Carriage.CarriageCount}" Width="auto"/>
                 <DataGridTextColumn Header="Is Moving" Binding="{Binding Movement.IsMoving}" Width="auto"/>
+                <DataGridTextColumn Header="LastUpdated" Binding="{Binding LastUpdated, StringFormat={}{0:dd/MM/yyyy HH:mm}}" Width="auto"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

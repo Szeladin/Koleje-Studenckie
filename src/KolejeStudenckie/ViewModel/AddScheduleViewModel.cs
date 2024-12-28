@@ -18,7 +18,7 @@ namespace KolejeStudenckie.ViewModel
         public AddScheduleViewModel()
         {
             string newScheduleId = ShortGuidHandler.GenerateUniqueShortGuid("Schedules-");
-            NewSchedule = new ScheduleDTO(newScheduleId, "", DateTime.Now, DateTime.Now, "");
+            NewSchedule = new ScheduleDTO(newScheduleId, "", DateTime.Now, DateTime.Now, "",DateTime.Now);
 
             Trains = new ObservableCollection<TrainDTO>(JsonDataHandler.LoadDataFromJson<TrainDTO>("src/KolejeStudenckie/Data/trains.json"));
             Stations = new ObservableCollection<StationDTO>(JsonDataHandler.LoadDataFromJson<StationDTO>("src/KolejeStudenckie/Data/stations.json"));
