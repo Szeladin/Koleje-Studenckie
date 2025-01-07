@@ -1,23 +1,42 @@
 [
   {
-    "Id": "Schedules-tUQY6PES",
+    "Id": "Schedules-harsygpb",
     "TrainId": "Trains-k0XPlk3C",
-    "DepartureTime": "2024-12-11T21:40:00.8720894+01:00",
-    "ArrivalTime": "2024-12-11T21:40:00.8720946+01:00",
-    "Station": "2313123"
+    "DepartureTime": "2024-12-16T17:24:47.4243478+01:00",
+    "ArrivalTime": "2024-12-16T17:24:47.4243537+01:00",
+    "Station": "Central Station",
+    "LastUpdated": "2024-12-16T17:24:47.4243478+01:00"
   },
   {
-    "Id": "Schedules-CC0qVo7a",
-    "TrainId": "Trains-k0XPlk3C",
-    "DepartureTime": "2024-12-11T21:59:53.1279199+01:00",
-    "ArrivalTime": "2024-12-11T16:43:00",
-    "Station": "eqwee"
+    "Id": "Schedules-_0oTSRis",
+    "TrainId": "Trains-dRWImn6k",
+    "DepartureTime": "2024-12-17T12:28:18.1659102+01:00",
+    "ArrivalTime": "2024-12-17T12:28:18.1659113+01:00",
+    "Station": "North Station",
+    "LastUpdated": "2024-12-16T17:24:47.4243478+01:00"
   },
   {
-    "Id": "Schedules-W3U4xiSG",
-    "TrainId": "Trains-k0XPlk3C",
-    "DepartureTime": "2024-12-13T14:12:00",
-    "ArrivalTime": "2024-12-13T17:08:16.3253571+01:00",
-    "Station": "1"
+    "Id": "Schedules-vQS23ovn",
+    "TrainId": "Trains-dRWImn6k",
+    "DepartureTime": "2024-12-17T12:50:38.3604083+01:00",
+    "ArrivalTime": "2024-12-17T12:50:38.360432+01:00",
+    "Station": "Central Station",
+    "LastUpdated": "2024-12-16T17:24:47.4243478+01:00"
+  },
+  {
+    "Id": "Schedules-lDZQCxZK",
+    "TrainId": "Trains-dRWImn6k",
+    "DepartureTime": "2024-12-19T18:22:00",
+    "ArrivalTime": "2024-12-19T18:20:00",
+    "Station": "North Station",
+    "LastUpdated": "2024-12-16T17:24:47.4243478+01:00"
+  },
+  {
+    "Id": "Schedules-hCNnPqnh",
+    "TrainId": "Trains-dRWImn6k",
+    "DepartureTime": "2024-12-19T18:34:28.8943151+01:00",
+    "ArrivalTime": "2024-12-19T18:34:28.8943209+01:00",
+    "Station": "North Station",
+    "LastUpdated": "2024-12-16T17:24:47.4243478+01:00"
   }
 ]

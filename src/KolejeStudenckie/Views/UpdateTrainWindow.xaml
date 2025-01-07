@@ -8,6 +8,9 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -23,7 +26,16 @@
         <Label Grid.Row="2" Grid.Column="0" Content="Carriage Count:"/>
         <TextBox x:Name="CarriageCountTextBox" Text="{Binding Train.Carriage.CarriageCount, UpdateSourceTrigger=Explicit}" Grid.Row="2" Grid.Column="1" Margin="0,0,0,10"/>
 
-        <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
+        <Label Grid.Row="3" Grid.Column="0" Content="Personnel 1:"/>
+        <ComboBox Grid.Row="3" Grid.Column="1" ItemsSource="{Binding AvailablePersonnel}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding SelectedPersonnel[0]}" Margin="0,0,0,10"/>
+
+        <Label Grid.Row="4" Grid.Column="0" Content="Personnel 2:"/>
+        <ComboBox Grid.Row="4" Grid.Column="1" ItemsSource="{Binding AvailablePersonnel}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding SelectedPersonnel[1]}" Margin="0,0,0,10"/>
+
+        <Label Grid.Row="5" Grid.Column="0" Content="Personnel 3:"/>
+        <ComboBox Grid.Row="5" Grid.Column="1" ItemsSource="{Binding AvailablePersonnel}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding SelectedPersonnel[2]}" Margin="0,0,0,10"/>
+
+        <StackPanel Grid.Row="6" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Content="Update" Width="80" Margin="0,0,10,0" Command="{Binding UpdateTrainCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
             <Button Content="Cancel" Width="75" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
         </StackPanel>

@@ -27,6 +27,7 @@
                 <DataGridTextColumn Header="Departure Time" Binding="{Binding DepartureTime, StringFormat={}{0:dd/MM/yyyy HH:mm}}" Width="auto"/>
                 <DataGridTextColumn Header="Arrival Time" Binding="{Binding ArrivalTime, StringFormat={}{0:dd/MM/yyyy HH:mm}}" Width="auto"/>
                 <DataGridTextColumn Header="Station" Binding="{Binding Station}" Width="auto"/>
+                <DataGridTextColumn Header="LastUpdated" Binding="{Binding LastUpdated, StringFormat={}{0:dd/MM/yyyy HH:mm}}" Width="auto"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

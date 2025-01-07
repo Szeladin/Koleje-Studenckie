@@ -1,38 +1,56 @@
 [
   {
-    "Id": "Trains-dRWImn6k",
-    "Name": "123eqwe",
-    "MaxSpeed": 321312,
+    "Id": "Trains-M8_2p0fr",
+    "Name": "1",
+    "MaxSpeed": 1,
     "Movement": {
       "CurrentSpeed": 0,
       "IsMoving": false
     },
     "Carriage": {
-      "CarriageCount": 312312
-    }
+      "CarriageCount": 1
+    },
+    "LastUpdated": "2025-01-07T13:04:15.0538078+01:00",
+    "Personnel": [
+      "Personnels-oy47mymg",
+      "Personnels-6BT0RG8D",
+      "Personnels-9f_q60_G"
+    ]
   },
   {
-    "Id": "Trains-k0XPlk3C",
-    "Name": "21323",
-    "MaxSpeed": 1231231,
+    "Id": "Trains-i3fRLwc9",
+    "Name": "fsdsdfdf",
+    "MaxSpeed": 4340,
     "Movement": {
       "CurrentSpeed": 0,
       "IsMoving": false
     },
     "Carriage": {
-      "CarriageCount": 12312313
-    }
+      "CarriageCount": 423443
+    },
+    "LastUpdated": "2024-12-29T15:20:44.6939024+01:00",
+    "Personnel": [
+      "Personnels-5etLR8mT",
+      "Personnels-oy47mymg",
+      "Personnels-Xb1PvpsU"
+    ]
   },
   {
-    "Id": "Trains-wX8IBIOZ",
-    "Name": "dsad",
-    "MaxSpeed": 434,
+    "Id": "Trains-pGGk0DPy",
+    "Name": "",
+    "MaxSpeed": 0,
     "Movement": {
       "CurrentSpeed": 0,
       "IsMoving": false
     },
     "Carriage": {
-      "CarriageCount": 4
-    }
+      "CarriageCount": 0
+    },
+    "LastUpdated": "2025-01-07T13:03:40.9065332+01:00",
+    "Personnel": [
+      "Personnels-9f_q60_G",
+      "Personnels-Xb1PvpsU",
+      "Personnels-KoXu_PG0"
+    ]
   }
 ]

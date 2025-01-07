@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using KolejeStudenckie.Utilities;
+using System.Windows;
 
 namespace KolejeStudenckie.Views
 {
@@ -7,7 +8,7 @@ namespace KolejeStudenckie.Views
         public MapPanelWindow()
         {
             InitializeComponent();
-            DataContext = new ViewModel.MapPanelViewModel();
+            DataContext = new ViewModel.MapPanelViewModel(new StationService());
         }
     }
 }

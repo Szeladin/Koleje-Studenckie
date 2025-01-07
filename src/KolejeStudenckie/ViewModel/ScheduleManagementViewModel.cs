@@ -10,6 +10,7 @@ namespace KolejeStudenckie.ViewModel
 {
     internal class ScheduleManagementViewModel : BaseViewModel
     {
+        public static event EventHandler SchedulesChanged;
         public ObservableCollection<IDTO> Schedules { get; set; }
         private ScheduleDTO _selectedSchedule;
         public ScheduleDTO SelectedSchedule
@@ -49,6 +50,7 @@ namespace KolejeStudenckie.ViewModel
             if (addScheduleWindow.ShowDialog() == true)
             {
                 RefreshSchedules();
+                OnSchedulesChanged();
             }
         }
 
@@ -61,6 +63,7 @@ namespace KolejeStudenckie.ViewModel
                 schedules.Remove(scheduleToRemove);
                 JsonDataHandler.SaveDataToJson("src/KolejeStudenckie/Data/schedules.json", schedules);
                 RefreshSchedules();
+                OnSchedulesChanged();
             }
         }
 
@@ -70,6 +73,7 @@ namespace KolejeStudenckie.ViewModel
             if (updateScheduleWindow.ShowDialog() == true)
             {
                 RefreshSchedules();
+                OnSchedulesChanged();
             }
         }
 
@@ -78,6 +82,10 @@ namespace KolejeStudenckie.ViewModel
             var schedules = JsonDataHandler.LoadDataFromJson<ScheduleDTO>("src/KolejeStudenckie/Data/schedules.json");
             Schedules = new ObservableCollection<IDTO>(schedules);
             OnPropertyChanged(nameof(Schedules));
+        }
+        private void OnSchedulesChanged()
+        {
+            SchedulesChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }
