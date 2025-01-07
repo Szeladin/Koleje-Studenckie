@@ -8,13 +8,15 @@
         public DateTime ArrivalTime { get; set; }
         public string Station { get; set; }
 
-        public Schedule(string id, string trainId, DateTime departureTime, DateTime arrivalTime, string station)
+        public DateTime LastUpdated { get; set; }
+        public Schedule(string id, string trainId, DateTime departureTime, DateTime arrivalTime, string station, DateTime lastupdated)
         {
             Id = id;
             TrainId = trainId;
             DepartureTime = departureTime;
             ArrivalTime = arrivalTime;
             Station = station;
+            LastUpdated = lastupdated;
         }
     }
 }

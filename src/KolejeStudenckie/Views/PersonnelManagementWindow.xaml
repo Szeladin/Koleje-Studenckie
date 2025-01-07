@@ -27,6 +27,7 @@
                 <DataGridTextColumn Header="Surname" Binding="{Binding Surname}" Width="auto"/>
                 <DataGridTextColumn Header="Position" Binding="{Binding Position}" Width="auto"/>
                 <DataGridTextColumn Header="Salary" Binding="{Binding Salary}" Width="auto"/>
+                <DataGridTextColumn Header="LastUpdated" Binding="{Binding LastUpdated, StringFormat={}{0:dd/MM/yyyy HH:mm}}" Width="auto"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

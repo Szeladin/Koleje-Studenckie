@@ -16,7 +16,7 @@ namespace KolejeStudenckie.ViewModel
         public AddPersonnelViewModel()
         {
             string newPersonnelId = ShortGuidHandler.GenerateUniqueShortGuid("Personnels-");
-            NewPersonnel = new PersonnelDTO(newPersonnelId, "", "", "", 0);
+            NewPersonnel = new PersonnelDTO(newPersonnelId, "", "", "", 0,DateTime.Now);
 
             AddPersonnelCommand = new RelayCommand(AddPersonnel);
             CancelCommand = new RelayCommand(Cancel);
