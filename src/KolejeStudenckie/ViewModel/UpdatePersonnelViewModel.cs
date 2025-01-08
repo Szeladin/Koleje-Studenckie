@@ -1,6 +1,8 @@
-﻿using KolejeStudenckie.Commands;
+﻿using Domain.Validation;
+using KolejeStudenckie.Commands;
 using KolejeStudenckie.DTO;
 using KolejeStudenckie.Utilities;
+using KolejeStudenckie.Validation;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -23,9 +25,13 @@ namespace KolejeStudenckie.ViewModel
         public ICommand UpdatePersonnelCommand { get; }
         public ICommand CancelCommand { get; }
 
+        private readonly IValidator<PersonnelDTO> _personnelValidator;
+
         public UpdatePersonnelViewModel(PersonnelDTO personnel)
         {
             Personnel = personnel;
+            _personnelValidator = new PersonnelValidator();
+
             UpdatePersonnelCommand = new RelayCommand(UpdatePersonnel);
             CancelCommand = new RelayCommand(Cancel);
         }
@@ -44,6 +50,13 @@ namespace KolejeStudenckie.ViewModel
                 UpdateBindingSource(window, "SurnameTextBox");
                 UpdateBindingSource(window, "PositionTextBox");
                 UpdateBindingSource(window, "SalaryTextBox");
+
+                var validationResult = _personnelValidator.Validate(Personnel);
+                if (!validationResult.IsValid)
+                {
+                    MessageBox.Show(string.Join("\n", validationResult.Errors), "Validation Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
 
                 var personnels = JsonDataHandler.LoadDataFromJson<PersonnelDTO>("src/KolejeStudenckie/Data/personnels.json");
                 var existingPersonnel = personnels.FirstOrDefault(p => p.Id == Personnel.Id);
