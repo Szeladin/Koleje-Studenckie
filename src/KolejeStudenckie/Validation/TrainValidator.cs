@@ -1,5 +1,6 @@
 ﻿using Domain.Validation;
 using KolejeStudenckie.DTO;
+using KolejeStudenckie.Utilities;
 
 
 namespace KolejeStudenckie.Validation
@@ -35,6 +36,16 @@ namespace KolejeStudenckie.Validation
             }
 
             return result;
+        }
+
+        public static bool CanDeleteTrain(TrainDTO train, out List<string> scheduleIds)
+        {
+            var schedules = JsonDataHandler.LoadDataFromJson<ScheduleDTO>("src/KolejeStudenckie/Data/schedules.json");
+            scheduleIds = schedules
+                .Where(s => s.TrainId == train.Id)
+                .Select(s => s.Id)
+                .ToList();
+            return !scheduleIds.Any();
         }
     }
 }

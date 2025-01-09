@@ -1,10 +1,6 @@
 ﻿using Domain.Validation;
 using KolejeStudenckie.DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using KolejeStudenckie.Utilities;
 
 namespace KolejeStudenckie.Validation
 {
@@ -30,6 +26,18 @@ namespace KolejeStudenckie.Validation
             {
                 result.IsValid = false;
                 result.Errors.Add("Departure time must be earlier than arrival time.");
+            }
+
+            var schedules = JsonDataHandler.LoadDataFromJson<ScheduleDTO>("src/KolejeStudenckie/Data/schedules.json");
+            var overlappingSchedules = schedules
+                .Where(s => s.TrainId == schedule.TrainId && s.Id != schedule.Id)
+                .Where(s => (schedule.DepartureTime < s.ArrivalTime && schedule.ArrivalTime > s.DepartureTime))
+                .ToList();
+
+            if (overlappingSchedules.Any())
+            {
+                result.IsValid = false;
+                result.Errors.Add("Train is already assigned to another schedule during the specified time.");
             }
 
             return result;

@@ -2,6 +2,7 @@
 using KolejeStudenckie.DTO;
 using KolejeStudenckie.DTO.Interfaces;
 using KolejeStudenckie.Utilities;
+using KolejeStudenckie.Validation;
 using KolejeStudenckie.Views;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -56,23 +57,20 @@ namespace KolejeStudenckie.ViewModel
 
         private void RemoveTrain(object? parameter)
         {
-            var schedules = JsonDataHandler.LoadDataFromJson<ScheduleDTO>("src/KolejeStudenckie/Data/schedules.json");
-            var hasSchedule = schedules.Any(s => s.TrainId == SelectedTrain.Id);
-
-            if (hasSchedule)
+            if (TrainValidator.CanDeleteTrain(SelectedTrain, out List<string> scheduleIds))
             {
-                // Można dodać komunikat informujący użytkownika, że pociąg ma przypisane harmonogramy
-                MessageBox.Show("Nie można usunąć pociągu, ponieważ ma przypisane harmonogramy.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                var trains = JsonDataHandler.LoadDataFromJson<TrainDTO>("src/KolejeStudenckie/Data/trains.json");
+                var trainToRemove = trains.FirstOrDefault(t => t.Id == SelectedTrain.Id);
+                if (trainToRemove != null)
+                {
+                    trains.Remove(trainToRemove);
+                    JsonDataHandler.SaveDataToJson("src/KolejeStudenckie/Data/trains.json", trains);
+                    RefreshTrains();
+                }
             }
-
-            var trains = JsonDataHandler.LoadDataFromJson<TrainDTO>("src/KolejeStudenckie/Data/trains.json");
-            var trainToRemove = trains.FirstOrDefault(t => t.Id == SelectedTrain.Id);
-            if (trainToRemove != null)
+            else
             {
-                trains.Remove(trainToRemove);
-                JsonDataHandler.SaveDataToJson("src/KolejeStudenckie/Data/trains.json", trains);
-                RefreshTrains();
+                MessageBox.Show($"Cannot delete train assigned to schedules with IDs: {string.Join(", ", scheduleIds)}", "Deletion Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

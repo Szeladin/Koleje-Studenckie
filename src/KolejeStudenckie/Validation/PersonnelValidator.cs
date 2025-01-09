@@ -1,10 +1,6 @@
 ﻿using Domain.Validation;
 using KolejeStudenckie.DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using KolejeStudenckie.Utilities;
 
 namespace KolejeStudenckie.Validation
 {
@@ -39,6 +35,16 @@ namespace KolejeStudenckie.Validation
             }
 
             return result;
+        }
+
+        public static bool CanDeletePersonnel(PersonnelDTO personnel, out List<string> trainIds)
+        {
+            var trains = JsonDataHandler.LoadDataFromJson<TrainDTO>("src/KolejeStudenckie/Data/trains.json");
+            trainIds = trains
+                .Where(t => t.Personnel.Contains(personnel.Id))
+                .Select(t => t.Id)
+                .ToList();
+            return !trainIds.Any();
         }
     }
 }
