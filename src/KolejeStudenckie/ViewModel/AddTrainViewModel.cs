@@ -1,6 +1,8 @@
-﻿using KolejeStudenckie.Commands;
+﻿using Domain.Validation;
+using KolejeStudenckie.Commands;
 using KolejeStudenckie.DTO;
 using KolejeStudenckie.Utilities;
+using KolejeStudenckie.Validation;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
@@ -16,6 +18,8 @@ namespace KolejeStudenckie.ViewModel
         public ICommand AddTrainCommand { get; }
         public ICommand CancelCommand { get; }
 
+        private readonly IValidator<TrainDTO> _trainValidator;
+
         public AddTrainViewModel()
         {
             string newTrainId = ShortGuidHandler.GenerateUniqueShortGuid("Trains-");
@@ -23,6 +27,8 @@ namespace KolejeStudenckie.ViewModel
             NewTrain = new TrainDTO(newTrainId, "", 0, new MovementDTO(), new CarriageDTO(), DateTime.Now, SelectedPersonnel);
 
             AvailablePersonnel = new ObservableCollection<PersonnelDTO>(JsonDataHandler.LoadDataFromJson<PersonnelDTO>("src/KolejeStudenckie/Data/personnels.json"));
+
+            _trainValidator = new TrainValidator();
 
             AddTrainCommand = new RelayCommand(AddTrain);
             CancelCommand = new RelayCommand(Cancel);
@@ -32,11 +38,13 @@ namespace KolejeStudenckie.ViewModel
         {
             if (parameter is Window window)
             {
-                if (SelectedPersonnel.Distinct().Count() != 3 || SelectedPersonnel.Any(p=> string.IsNullOrEmpty(p)))
+                var validationResult = _trainValidator.Validate(NewTrain);
+                if (!validationResult.IsValid)
                 {
-                    MessageBox.Show("Train must contain 3 diffrent elements of personnel.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(string.Join("\n", validationResult.Errors), "Validation Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
+
                 var trains = JsonDataHandler.LoadDataFromJson<TrainDTO>("src/KolejeStudenckie/Data/trains.json");
                 trains.Add(NewTrain);
                 JsonDataHandler.SaveDataToJson("src/KolejeStudenckie/Data/trains.json", trains);

@@ -14,7 +14,7 @@ namespace KolejeStudenckie.DTO
         public List<string> Personnel { get; set; }
 
         [JsonConstructor]
-        public TrainDTO(string id, string name, int maxSpeed, MovementDTO movement, CarriageDTO carriage, DateTime lastupdated, List <string> personnel)
+        public TrainDTO(string id, string name, int maxSpeed, MovementDTO movement, CarriageDTO carriage, DateTime lastupdated, List<string> personnel)
         {
             Id = id;
             Name = name;

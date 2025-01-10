@@ -20,7 +20,7 @@ namespace KolejeStudenckie.DTO
             DepartureTime = departureTime;
             ArrivalTime = arrivalTime;
             Station = station;
-            LastUpdated = lastupdated;  
+            LastUpdated = lastupdated;
         }
     }
 }

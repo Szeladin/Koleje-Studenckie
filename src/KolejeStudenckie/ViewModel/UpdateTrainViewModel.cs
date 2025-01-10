@@ -1,6 +1,8 @@
-﻿using KolejeStudenckie.Commands;
+﻿using Domain.Validation;
+using KolejeStudenckie.Commands;
 using KolejeStudenckie.DTO;
 using KolejeStudenckie.Utilities;
+using KolejeStudenckie.Validation;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,11 +29,15 @@ namespace KolejeStudenckie.ViewModel
         public ICommand UpdateTrainCommand { get; }
         public ICommand CancelCommand { get; }
 
+        private readonly IValidator<TrainDTO> _trainValidator;
+
         public UpdateTrainViewModel(TrainDTO train)
         {
             Train = train;
             SelectedPersonnel = new List<string>(train.Personnel);
             AvailablePersonnel = new ObservableCollection<PersonnelDTO>(JsonDataHandler.LoadDataFromJson<PersonnelDTO>("src/KolejeStudenckie/Data/personnels.json"));
+
+            _trainValidator = new TrainValidator();
 
             UpdateTrainCommand = new RelayCommand(UpdateTrain);
             CancelCommand = new RelayCommand(Cancel);
@@ -51,9 +57,10 @@ namespace KolejeStudenckie.ViewModel
                 UpdateBindingSource(window, "MaxSpeedTextBox");
                 UpdateBindingSource(window, "CarriageCountTextBox");
 
-                if (SelectedPersonnel.Distinct().Count() != 3 || SelectedPersonnel.Any(p => string.IsNullOrEmpty(p)))
+                var validationResult = _trainValidator.Validate(Train);
+                if (!validationResult.IsValid)
                 {
-                    MessageBox.Show("Train must have three diffrent elements of personnel.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(string.Join("\n", validationResult.Errors), "Validation Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 

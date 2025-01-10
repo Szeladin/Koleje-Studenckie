@@ -1,6 +1,8 @@
-﻿using KolejeStudenckie.Commands;
+﻿using Domain.Validation;
+using KolejeStudenckie.Commands;
 using KolejeStudenckie.DTO;
 using KolejeStudenckie.Utilities;
+using KolejeStudenckie.Validation;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
@@ -25,11 +27,16 @@ namespace KolejeStudenckie.ViewModel
         public ICommand UpdateScheduleCommand { get; }
         public ICommand CancelCommand { get; }
 
+        private readonly IValidator<ScheduleDTO> _scheduleValidator;
+
         public UpdateScheduleViewModel(ScheduleDTO schedule)
         {
             ExistingSchedule = schedule;
             Trains = new ObservableCollection<TrainDTO>(JsonDataHandler.LoadDataFromJson<TrainDTO>("src/KolejeStudenckie/Data/trains.json"));
             Stations = new ObservableCollection<StationDTO>(JsonDataHandler.LoadDataFromJson<StationDTO>("src/KolejeStudenckie/Data/stations.json"));
+
+            _scheduleValidator = new ScheduleValidator();
+
             UpdateScheduleCommand = new RelayCommand(UpdateSchedule);
             CancelCommand = new RelayCommand(Cancel);
         }
@@ -38,6 +45,13 @@ namespace KolejeStudenckie.ViewModel
         {
             if (parameter is Window window)
             {
+                var validationResult = _scheduleValidator.Validate(ExistingSchedule);
+                if (!validationResult.IsValid)
+                {
+                    MessageBox.Show(string.Join("\n", validationResult.Errors), "Validation Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
                 var schedules = JsonDataHandler.LoadDataFromJson<ScheduleDTO>("src/KolejeStudenckie/Data/schedules.json");
                 var scheduleToUpdate = schedules.FirstOrDefault(s => s.Id == ExistingSchedule.Id);
                 if (scheduleToUpdate != null)
