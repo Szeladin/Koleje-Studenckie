@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using KolejeStudenckie.DTO;
+using System.IO;
 using System.Text.Json;
 using System.Windows;
 
@@ -36,6 +37,22 @@ namespace KolejeStudenckie.Utilities
 
             var jsonData = JsonSerializer.Serialize(data, _jsonSerializerOptions);
             File.WriteAllText(jsonFilePath, jsonData);
+        }
+
+        public static void ArchiveOldSchedules(string schedulesPath, string archivePath, DateTime archiveBeforeDate)
+        {
+            var schedules = LoadDataFromJson<ScheduleDTO>(schedulesPath);
+            var oldSchedules = schedules.Where(s => s.DepartureTime < archiveBeforeDate).ToList();
+
+            if (oldSchedules.Any())
+            {
+                var archiveSchedules = LoadDataFromJson<ScheduleDTO>(archivePath);
+                archiveSchedules.AddRange(oldSchedules);
+                SaveDataToJson(archivePath, archiveSchedules);
+
+                schedules.RemoveAll(s => s.DepartureTime < archiveBeforeDate);
+                SaveDataToJson(schedulesPath, schedules);
+            }
         }
     }
 }

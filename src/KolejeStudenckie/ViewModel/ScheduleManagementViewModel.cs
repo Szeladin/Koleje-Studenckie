@@ -5,6 +5,7 @@ using KolejeStudenckie.Utilities;
 using KolejeStudenckie.Views;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace KolejeStudenckie.ViewModel
 {
@@ -29,6 +30,8 @@ namespace KolejeStudenckie.ViewModel
         public ICommand RemoveScheduleCommand { get; }
         public ICommand UpdateScheduleCommand { get; }
 
+        private readonly DispatcherTimer _archiveTimer;
+
         public ScheduleManagementViewModel()
         {
             Schedules = new ObservableCollection<IDTO>();
@@ -36,7 +39,19 @@ namespace KolejeStudenckie.ViewModel
             AddScheduleCommand = new RelayCommand(AddSchedule);
             RemoveScheduleCommand = new RelayCommand(RemoveSchedule, CanExecuteRemoveOrUpdate);
             UpdateScheduleCommand = new RelayCommand(UpdateSchedule, CanExecuteRemoveOrUpdate);
+            ArchiveOldSchedules();
             RefreshSchedules();
+
+            _archiveTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromMinutes(1) 
+            };
+            _archiveTimer.Tick += (sender, args) =>
+            {
+                ArchiveOldSchedules();
+                RefreshSchedules();
+            };
+            _archiveTimer.Start();
         }
 
         private bool CanExecuteRemoveOrUpdate(object? parameter)
@@ -79,10 +94,17 @@ namespace KolejeStudenckie.ViewModel
 
         private void RefreshSchedules()
         {
+            ArchiveOldSchedules();
             var schedules = JsonDataHandler.LoadDataFromJson<ScheduleDTO>("src/KolejeStudenckie/Data/schedules.json");
             Schedules = new ObservableCollection<IDTO>(schedules);
             OnPropertyChanged(nameof(Schedules));
         }
+
+        private void ArchiveOldSchedules()
+        {
+            JsonDataHandler.ArchiveOldSchedules("src/KolejeStudenckie/Data/schedules.json", "src/KolejeStudenckie/Data/archive_schedules.json", DateTime.Now);
+        }
+
         private void OnSchedulesChanged()
         {
             SchedulesChanged?.Invoke(this, EventArgs.Empty);

@@ -22,10 +22,10 @@ namespace KolejeStudenckie.Validation
                 result.Errors.Add("Station cannot be empty.");
             }
 
-            if (schedule.DepartureTime >= schedule.ArrivalTime)
+            if (schedule.DepartureTime <= schedule.ArrivalTime)
             {
                 result.IsValid = false;
-                result.Errors.Add("Departure time must be earlier than arrival time.");
+                result.Errors.Add("Arrival time must be earlier than departure time.");
             }
 
             var schedules = JsonDataHandler.LoadDataFromJson<ScheduleDTO>("src/KolejeStudenckie/Data/schedules.json");
