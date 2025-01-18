@@ -11,9 +11,7 @@ namespace KolejeStudenckie.Utilities
 
         public static List<IDTO> LoadDataFromJson<IDTO>(string relativePath)
         {
-            var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            var projectDirectory = Path.GetFullPath(Path.Combine(baseDirectory, @"..\..\..\..\.."));
-            var jsonFilePath = Path.Combine(projectDirectory, relativePath);
+            var jsonFilePath = GetFilePath(relativePath);
 
             if (File.Exists(jsonFilePath))
             {
@@ -31,9 +29,7 @@ namespace KolejeStudenckie.Utilities
 
         public static void SaveDataToJson<IDTO>(string relativePath, IDTO data)
         {
-            var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            var projectDirectory = Path.GetFullPath(Path.Combine(baseDirectory, @"..\..\..\..\.."));
-            var jsonFilePath = Path.Combine(projectDirectory, relativePath);
+            var jsonFilePath = GetFilePath(relativePath);
 
             var jsonData = JsonSerializer.Serialize(data, _jsonSerializerOptions);
             File.WriteAllText(jsonFilePath, jsonData);
@@ -57,12 +53,17 @@ namespace KolejeStudenckie.Utilities
 
         private static async Task SaveDataToJsonAsync<IDTO>(string relativePath, IDTO data)
         {
-            var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            var projectDirectory = Path.GetFullPath(Path.Combine(baseDirectory, @"..\..\..\..\.."));
-            var jsonFilePath = Path.Combine(projectDirectory, relativePath);
+            var jsonFilePath = GetFilePath(relativePath);
 
             var jsonData = JsonSerializer.Serialize(data, _jsonSerializerOptions);
             await File.WriteAllTextAsync(jsonFilePath, jsonData);
+        }
+
+        private static string GetFilePath(string relativePath)
+        {
+            var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            var projectDirectory = Path.GetFullPath(Path.Combine(baseDirectory, @"..", "..", "..", "..", ".."));
+            return Path.Combine(projectDirectory, relativePath);
         }
     }
 }

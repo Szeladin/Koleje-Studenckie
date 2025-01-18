@@ -52,5 +52,41 @@
       "Personnels-p6GNrWDn",
       "Personnels-_dMOAznv"
     ]
+  },
+  {
+    "Id": "Trains-gaaDAB6A",
+    "Name": "1234",
+    "MaxSpeed": 1,
+    "Movement": {
+      "CurrentSpeed": 0,
+      "IsMoving": false
+    },
+    "Carriage": {
+      "CarriageCount": 1
+    },
+    "LastUpdated": "2025-01-18T15:22:38.9087785+01:00",
+    "Personnel": [
+      "Personnels-at5MODva",
+      "Personnels-p6GNrWDn",
+      "Personnels-_dMOAznv"
+    ]
+  },
+  {
+    "Id": "Trains-nfZWu6SH",
+    "Name": "pendiolino",
+    "MaxSpeed": 1,
+    "Movement": {
+      "CurrentSpeed": 0,
+      "IsMoving": false
+    },
+    "Carriage": {
+      "CarriageCount": 1
+    },
+    "LastUpdated": "2025-01-18T15:29:41.1838215+01:00",
+    "Personnel": [
+      "Personnels-at5MODva",
+      "Personnels-p6GNrWDn",
+      "Personnels-_dMOAznv"
+    ]
   }
 ]
