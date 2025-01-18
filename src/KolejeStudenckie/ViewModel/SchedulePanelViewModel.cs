@@ -23,9 +23,9 @@ namespace KolejeStudenckie.ViewModel
             {
                 Interval = TimeSpan.FromSeconds(1)
             };
-            _archiveTimer.Tick += (sender, args) =>
+            _archiveTimer.Tick += async (sender, args) =>
             {
-                ArchiveOldSchedules();
+                await ArchiveOldSchedulesAsync();
                 RefreshSchedules();
             };
             _archiveTimer.Start();
@@ -53,9 +53,9 @@ namespace KolejeStudenckie.ViewModel
             }
         }
 
-        private void ArchiveOldSchedules()
+        private async Task ArchiveOldSchedulesAsync()
         {
-            JsonDataHandler.ArchiveOldSchedules("src/KolejeStudenckie/Data/schedules.json", "src/KolejeStudenckie/Data/archive_schedules.json", DateTime.Now);
+            await JsonDataHandler.ArchiveOldSchedulesAsync("src/KolejeStudenckie/Data/schedules.json", "src/KolejeStudenckie/Data/archive_schedules.json", DateTime.Now);
         }
     }
 }

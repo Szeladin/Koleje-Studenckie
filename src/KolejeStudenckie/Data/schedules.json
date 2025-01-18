@@ -1,1 +1,10 @@
-[]
+[
+  {
+    "Id": "Schedules-QfdwpMdu",
+    "TrainId": "Trains-cPwBPvot",
+    "DepartureTime": "2025-01-18T22:51:00",
+    "ArrivalTime": "2025-01-18T15:17:09.3152416+01:00",
+    "Station": "Central Station",
+    "LastUpdated": "2025-01-18T15:17:09.3152416+01:00"
+  }
+]

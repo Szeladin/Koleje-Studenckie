@@ -78,5 +78,13 @@
     "ArrivalTime": "2025-01-16T19:50:01.830373+01:00",
     "Station": "Central Station",
     "LastUpdated": "2025-01-16T20:31:38.2427958+01:00"
+  },
+  {
+    "Id": "Schedules-TdHRpdCD",
+    "TrainId": "Trains-cPwBPvot",
+    "DepartureTime": "2025-01-18T15:00:00",
+    "ArrivalTime": "2025-01-18T06:29:00",
+    "Station": "East Station",
+    "LastUpdated": "2025-01-18T15:17:04.5763302+01:00"
   }
 ]

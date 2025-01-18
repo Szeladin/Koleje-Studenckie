@@ -39,16 +39,16 @@ namespace KolejeStudenckie.ViewModel
             AddScheduleCommand = new RelayCommand(AddSchedule);
             RemoveScheduleCommand = new RelayCommand(RemoveSchedule, CanExecuteRemoveOrUpdate);
             UpdateScheduleCommand = new RelayCommand(UpdateSchedule, CanExecuteRemoveOrUpdate);
-            ArchiveOldSchedules();
+            _ = ArchiveOldSchedulesAsync();
             RefreshSchedules();
 
             _archiveTimer = new DispatcherTimer
             {
-                Interval = TimeSpan.FromMinutes(1) 
+                Interval = TimeSpan.FromMinutes(1)
             };
-            _archiveTimer.Tick += (sender, args) =>
+            _archiveTimer.Tick += async (sender, args) =>
             {
-                ArchiveOldSchedules();
+                await ArchiveOldSchedulesAsync();
                 RefreshSchedules();
             };
             _archiveTimer.Start();
@@ -94,15 +94,15 @@ namespace KolejeStudenckie.ViewModel
 
         private void RefreshSchedules()
         {
-            ArchiveOldSchedules();
+            _ = ArchiveOldSchedulesAsync();
             var schedules = JsonDataHandler.LoadDataFromJson<ScheduleDTO>("src/KolejeStudenckie/Data/schedules.json");
             Schedules = new ObservableCollection<IDTO>(schedules);
             OnPropertyChanged(nameof(Schedules));
         }
 
-        private void ArchiveOldSchedules()
+        private async Task ArchiveOldSchedulesAsync()
         {
-            JsonDataHandler.ArchiveOldSchedules("src/KolejeStudenckie/Data/schedules.json", "src/KolejeStudenckie/Data/archive_schedules.json", DateTime.Now);
+            await JsonDataHandler.ArchiveOldSchedulesAsync("src/KolejeStudenckie/Data/schedules.json", "src/KolejeStudenckie/Data/archive_schedules.json", DateTime.Now);
         }
 
         private void OnSchedulesChanged()

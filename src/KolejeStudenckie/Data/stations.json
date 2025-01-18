@@ -3,7 +3,9 @@
     "Name": "Central Station",
     "X": 100,
     "Y": 100,
-    "TrainIds": []
+    "TrainIds": [
+      "Trains-cPwBPvot"
+    ]
   },
   {
     "Name": "North Station",
