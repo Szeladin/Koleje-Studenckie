@@ -7,7 +7,25 @@
         mc:Ignorable="d"
         Title="SchedulePanelWindow" Height="450" Width="800">
     <Grid>
-        <ListView ItemsSource="{Binding Schedules}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <ListView ItemsSource="{Binding Schedules}" Grid.Row="0">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Station" DisplayMemberBinding="{Binding Station}" Width="200"/>
+                    <GridViewColumn Header="Arrival Time" DisplayMemberBinding="{Binding ArrivalTime}" Width="200"/>
+                    <GridViewColumn Header="Departure Time" DisplayMemberBinding="{Binding DepartureTime}" Width="200"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <TextBlock Text="Archived Schedules" FontWeight="Bold" Margin="10,10,10,0" Grid.Row="1"/>
+
+        <ListView ItemsSource="{Binding ArchivedSchedules}" Grid.Row="2">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Station" DisplayMemberBinding="{Binding Station}" Width="200"/>

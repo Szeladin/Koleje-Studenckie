@@ -2,8 +2,10 @@
 using KolejeStudenckie.DTO;
 using KolejeStudenckie.DTO.Interfaces;
 using KolejeStudenckie.Utilities;
+using KolejeStudenckie.Validation;
 using KolejeStudenckie.Views;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 
 namespace KolejeStudenckie.ViewModel
@@ -54,13 +56,20 @@ namespace KolejeStudenckie.ViewModel
 
         private void RemovePersonnel(object? parameter)
         {
-            var personnels = JsonDataHandler.LoadDataFromJson<PersonnelDTO>("src/KolejeStudenckie/Data/personnels.json");
-            var personnelToRemove = personnels.FirstOrDefault(p => p.Id == SelectedPersonnel.Id);
-            if (personnelToRemove != null)
+            if (PersonnelValidator.CanDeletePersonnel(SelectedPersonnel, out List<string> trainIds))
             {
-                personnels.Remove(personnelToRemove);
-                JsonDataHandler.SaveDataToJson("src/KolejeStudenckie/Data/personnels.json", personnels);
-                RefreshPersonnels();
+                var personnels = JsonDataHandler.LoadDataFromJson<PersonnelDTO>("src/KolejeStudenckie/Data/personnels.json");
+                var personnelToRemove = personnels.FirstOrDefault(p => p.Id == SelectedPersonnel.Id);
+                if (personnelToRemove != null)
+                {
+                    personnels.Remove(personnelToRemove);
+                    JsonDataHandler.SaveDataToJson("src/KolejeStudenckie/Data/personnels.json", personnels);
+                    RefreshPersonnels();
+                }
+            }
+            else
+            {
+                MessageBox.Show($"Cannot delete personnel assigned to trains with IDs: {string.Join(", ", trainIds)}", "Deletion Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
