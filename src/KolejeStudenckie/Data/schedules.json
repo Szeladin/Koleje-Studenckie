@@ -1,1 +1,26 @@
-[]
+[
+  {
+    "Id": "Schedules-Rgv6qinc",
+    "TrainId": "Trains-iTeftaY5",
+    "DepartureTime": "2025-01-29T23:15:00",
+    "ArrivalTime": "2025-01-20T16:47:00+01:00",
+    "Station": "Central Station",
+    "LastUpdated": "2025-01-20T16:47:16.4879449+01:00"
+  },
+  {
+    "Id": "Schedules-b8mwGfVr",
+    "TrainId": "Trains-butg-FjL",
+    "DepartureTime": "2025-01-31T00:00:00",
+    "ArrivalTime": "2025-01-20T16:47:36.9588416+01:00",
+    "Station": "North Station",
+    "LastUpdated": "2025-01-20T16:47:36.9588417+01:00"
+  },
+  {
+    "Id": "Schedules-TAhwtaOw",
+    "TrainId": "Trains-kRI5KjSi",
+    "DepartureTime": "2025-01-25T00:00:00",
+    "ArrivalTime": "2025-01-20T16:47:43.9311731+01:00",
+    "Station": "North Station",
+    "LastUpdated": "2025-01-20T16:47:43.9311731+01:00"
+  }
+]

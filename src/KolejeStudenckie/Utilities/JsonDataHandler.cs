@@ -11,9 +11,7 @@ namespace KolejeStudenckie.Utilities
 
         public static List<IDTO> LoadDataFromJson<IDTO>(string relativePath)
         {
-            var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            var projectDirectory = Path.GetFullPath(Path.Combine(baseDirectory, @"..\..\..\..\.."));
-            var jsonFilePath = Path.Combine(projectDirectory, relativePath);
+            var jsonFilePath = GetFilePath(relativePath);
 
             if (File.Exists(jsonFilePath))
             {
@@ -31,15 +29,13 @@ namespace KolejeStudenckie.Utilities
 
         public static void SaveDataToJson<IDTO>(string relativePath, IDTO data)
         {
-            var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            var projectDirectory = Path.GetFullPath(Path.Combine(baseDirectory, @"..\..\..\..\.."));
-            var jsonFilePath = Path.Combine(projectDirectory, relativePath);
+            var jsonFilePath = GetFilePath(relativePath);
 
             var jsonData = JsonSerializer.Serialize(data, _jsonSerializerOptions);
             File.WriteAllText(jsonFilePath, jsonData);
         }
 
-        public static void ArchiveOldSchedules(string schedulesPath, string archivePath, DateTime archiveBeforeDate)
+        public static async Task ArchiveOldSchedulesAsync(string schedulesPath, string archivePath, DateTime archiveBeforeDate)
         {
             var schedules = LoadDataFromJson<ScheduleDTO>(schedulesPath);
             var oldSchedules = schedules.Where(s => s.DepartureTime < archiveBeforeDate).ToList();
@@ -48,11 +44,26 @@ namespace KolejeStudenckie.Utilities
             {
                 var archiveSchedules = LoadDataFromJson<ScheduleDTO>(archivePath);
                 archiveSchedules.AddRange(oldSchedules);
-                SaveDataToJson(archivePath, archiveSchedules);
+                await SaveDataToJsonAsync(archivePath, archiveSchedules);
 
                 schedules.RemoveAll(s => s.DepartureTime < archiveBeforeDate);
-                SaveDataToJson(schedulesPath, schedules);
+                await SaveDataToJsonAsync(schedulesPath, schedules);
             }
+        }
+
+        private static async Task SaveDataToJsonAsync<IDTO>(string relativePath, IDTO data)
+        {
+            var jsonFilePath = GetFilePath(relativePath);
+
+            var jsonData = JsonSerializer.Serialize(data, _jsonSerializerOptions);
+            await File.WriteAllTextAsync(jsonFilePath, jsonData);
+        }
+
+        private static string GetFilePath(string relativePath)
+        {
+            var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            var projectDirectory = Path.GetFullPath(Path.Combine(baseDirectory, @"..", "..", "..", "..", ".."));
+            return Path.Combine(projectDirectory, relativePath);
         }
     }
 }
