@@ -31,7 +31,7 @@ namespace KolejeStudenckie.Validation
             var schedules = JsonDataHandler.LoadDataFromJson<ScheduleDTO>("src/KolejeStudenckie/Data/schedules.json");
             var overlappingSchedules = schedules
                 .Where(s => s.TrainId == schedule.TrainId && s.Id != schedule.Id &&
-                            schedule.DepartureTime < s.ArrivalTime && schedule.ArrivalTime > s.DepartureTime)
+                            schedule.DepartureTime > s.ArrivalTime && schedule.ArrivalTime < s.DepartureTime)
                 .ToList();
 
             if (overlappingSchedules.Any())
